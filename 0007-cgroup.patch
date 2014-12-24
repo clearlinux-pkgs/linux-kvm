@@ -1,0 +1,106 @@
+From 7678f5fc3368f0479e81bf45da789b4fce8aef09 Mon Sep 17 00:00:00 2001
+From: Arjan van de Ven <arjan@linux.intel.com>
+Date: Fri, 28 Aug 2015 11:00:36 -0500
+Subject: [PATCH] cgroup
+
+Author:    Arjan van de Ven <arjan@linux.intel.com>
+
+Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
+Signed-off-by: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
+---
+ include/linux/cgroup-defs.h |  2 +-
+ kernel/cgroup.c             | 23 +++++++++++++----------
+ 2 files changed, 14 insertions(+), 11 deletions(-)
+
+diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
+index 93755a6..b240f8a 100644
+--- a/include/linux/cgroup-defs.h
++++ b/include/linux/cgroup-defs.h
+@@ -119,7 +119,7 @@ struct cgroup_subsys_state {
+ 
+ 	/* percpu_ref killing and RCU release */
+ 	struct rcu_head rcu_head;
+-	struct work_struct destroy_work;
++	struct delayed_work destroy_work;
+ };
+ 
+ /*
+diff --git a/kernel/cgroup.c b/kernel/cgroup.c
+index f89d929..1887506 100644
+--- a/kernel/cgroup.c
++++ b/kernel/cgroup.c
+@@ -67,7 +67,7 @@
+  * Expiring in the middle is a performance problem not a correctness one.
+  * 1 sec should be enough.
+  */
+-#define CGROUP_PIDLIST_DESTROY_DELAY	HZ
++#define CGROUP_PIDLIST_DESTROY_DELAY	round_jiffies_relative(HZ)
+ 
+ #define CGROUP_FILE_NAME_MAX		(MAX_CGROUP_TYPE_NAMELEN +	\
+ 					 MAX_CFTYPE_NAME + 2)
+@@ -4392,8 +4392,9 @@ err:
+  */
+ static void css_free_work_fn(struct work_struct *work)
+ {
++	struct delayed_work *dwork = to_delayed_work(work);
+ 	struct cgroup_subsys_state *css =
+-		container_of(work, struct cgroup_subsys_state, destroy_work);
++		container_of(dwork, struct cgroup_subsys_state, destroy_work);
+ 	struct cgroup_subsys *ss = css->ss;
+ 	struct cgroup *cgrp = css->cgroup;
+ 
+@@ -4441,14 +4442,15 @@ static void css_free_rcu_fn(struct rcu_head *rcu_head)
+ 	struct cgroup_subsys_state *css =
+ 		container_of(rcu_head, struct cgroup_subsys_state, rcu_head);
+ 
+-	INIT_WORK(&css->destroy_work, css_free_work_fn);
+-	queue_work(cgroup_destroy_wq, &css->destroy_work);
++	INIT_DELAYED_WORK(&css->destroy_work, css_free_work_fn);
++	queue_delayed_work(cgroup_destroy_wq, &css->destroy_work, CGROUP_PIDLIST_DESTROY_DELAY);
+ }
+ 
+ static void css_release_work_fn(struct work_struct *work)
+ {
++	struct delayed_work *dwork = to_delayed_work(work);
+ 	struct cgroup_subsys_state *css =
+-		container_of(work, struct cgroup_subsys_state, destroy_work);
++		container_of(dwork, struct cgroup_subsys_state, destroy_work);
+ 	struct cgroup_subsys *ss = css->ss;
+ 	struct cgroup *cgrp = css->cgroup;
+ 
+@@ -4487,8 +4489,8 @@ static void css_release(struct percpu_ref *ref)
+ 	struct cgroup_subsys_state *css =
+ 		container_of(ref, struct cgroup_subsys_state, refcnt);
+ 
+-	INIT_WORK(&css->destroy_work, css_release_work_fn);
+-	queue_work(cgroup_destroy_wq, &css->destroy_work);
++	INIT_DELAYED_WORK(&css->destroy_work, css_release_work_fn);
++	queue_delayed_work(cgroup_destroy_wq, &css->destroy_work, CGROUP_PIDLIST_DESTROY_DELAY);
+ }
+ 
+ static void init_and_link_css(struct cgroup_subsys_state *css,
+@@ -4759,8 +4761,9 @@ out_destroy:
+  */
+ static void css_killed_work_fn(struct work_struct *work)
+ {
++	struct delayed_work *dwork = to_delayed_work(work);
+ 	struct cgroup_subsys_state *css =
+-		container_of(work, struct cgroup_subsys_state, destroy_work);
++		container_of(dwork, struct cgroup_subsys_state, destroy_work);
+ 
+ 	mutex_lock(&cgroup_mutex);
+ 	offline_css(css);
+@@ -4775,8 +4778,8 @@ static void css_killed_ref_fn(struct percpu_ref *ref)
+ 	struct cgroup_subsys_state *css =
+ 		container_of(ref, struct cgroup_subsys_state, refcnt);
+ 
+-	INIT_WORK(&css->destroy_work, css_killed_work_fn);
+-	queue_work(cgroup_destroy_wq, &css->destroy_work);
++	INIT_DELAYED_WORK(&css->destroy_work, css_killed_work_fn);
++	queue_delayed_work(cgroup_destroy_wq, &css->destroy_work, CGROUP_PIDLIST_DESTROY_DELAY);
+ }
+ 
+ /**
+-- 
+2.4.3
+

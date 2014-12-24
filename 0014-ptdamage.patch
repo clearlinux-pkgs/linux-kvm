@@ -1,0 +1,28 @@
+From 885493c12745050ad20e1b1dd7b3c763a4e443f4 Mon Sep 17 00:00:00 2001
+From: Arjan van de Ven <arjan@linux.intel.com>
+Date: Wed, 26 Aug 2015 16:48:03 -0500
+Subject: [PATCH 14/14] ptdamage
+
+Signed-off-by: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
+---
+ arch/x86/kernel/cpu/perf_event_intel_pt.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/x86/kernel/cpu/perf_event_intel_pt.c b/arch/x86/kernel/cpu/perf_event_intel_pt.c
+index 183de71..f205baf 100644
+--- a/arch/x86/kernel/cpu/perf_event_intel_pt.c
++++ b/arch/x86/kernel/cpu/perf_event_intel_pt.c
+@@ -1060,6 +1060,10 @@ static __init int pt_init(void)
+ {
+ 	int ret, cpu, prior_warn = 0;
+ 
++
++	if (!test_cpu_cap(&boot_cpu_data, X86_FEATURE_INTEL_PT))
++		return -ENODEV;
++
+ 	BUILD_BUG_ON(sizeof(struct topa) > PAGE_SIZE);
+ 	get_online_cpus();
+ 	for_each_online_cpu(cpu) {
+-- 
+2.4.3
+
