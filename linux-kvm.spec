@@ -121,8 +121,8 @@ InstallKernel() {
     install -m 644 .config    ${KernelDir}/config-$KernelVer
     install -m 644 System.map ${KernelDir}/System.map-$KernelVer
     install -m 644 %{SOURCE2} ${KernelDir}/cmdline-$KernelVer
-    cp  $KernelImage ${KernelDir}/vmlinuz-$KernelVer
-    chmod 755 ${KernelDir}/vmlinuz-$KernelVer
+    cp  $KernelImage ${KernelDir}/org.clearlinux.kvm.%{version}-%{release}
+    chmod 755 ${KernelDir}/org.clearlinux.kvm.%{version}-%{release}
 
     mkdir -p %{buildroot}/usr/lib/modules/$KernelVer
     make -s ARCH=$Arch INSTALL_MOD_PATH=%{buildroot}/usr modules_install KERNELRELEASE=$KernelVer
@@ -171,6 +171,6 @@ depmod -a -b %{buildroot}/usr %{kversion}
 
 %files extra
 %dir /usr/lib/kernel
-/usr/lib/kernel/vmlinuz-%{kversion}
+/usr/lib/kernel/org.clearlinux.kvm.%{version}-%{release}
 /usr/lib/kernel/System.map-%{kversion}
 /usr/lib/kernel/cmdline-%{kversion}
