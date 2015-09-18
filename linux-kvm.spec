@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.2.0
-Release:        116
+Release:        117
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -161,11 +161,14 @@ rm -rf %{buildroot}/usr/lib/firmware
 # Recreate modules indices
 depmod -a -b %{buildroot}/usr %{kversion}
 
+ln -s org.clearlinux.kvm.%{version}-%{release}.efi %{buildroot}/usr/lib/kernel/default-kvm
+
 %files
 %dir /usr/lib/kernel
 %dir /usr/lib/modules/%{kversion}
 /usr/lib/kernel/config-%{kversion}
 /usr/lib/kernel/org.clearlinux.kvm.%{version}-%{release}.efi
+/usr/lib/kernel/default-kvm
 /usr/lib/modules/%{kversion}/kernel
 /usr/lib/modules/%{kversion}/modules.*
 
