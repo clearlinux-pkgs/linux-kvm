@@ -28,8 +28,6 @@ BuildRequires:  make >= 3.78
 BuildRequires:  openssl
 BuildRequires:  flex
 BuildRequires:  bison
-# For EFI Stub kernel
-BuildRequires:  systemd-boot
 
 # don't srip .ko files!
 %global __os_install_post %{nil}
@@ -138,42 +136,25 @@ InstallKernel() {
     rm -f %{buildroot}/usr/lib/modules/$KernelVer/modules.*.bin
 }
 
-createEFIStub() {
-
-   BZIMAGE=$1
-   CMDLINE=%{SOURCE2}
-
-   cp /usr/lib/os-release /tmp/os-release
-   OS_RELEASE=/tmp/os-release
-   sed -i 's/_ID=1/_ID=%{release}.kvm/'  $OS_RELEASE
-
-   EFISTUB=org.clearlinux.kvm.%{version}-%{release}.efi
-
-   kernel-efi-stub -r $OS_RELEASE -b $BZIMAGE -c $CMDLINE \
-       -o %{buildroot}/usr/lib/kernel/$EFISTUB
-}
-
 InstallKernel arch/x86/boot/bzImage
-createEFIStub arch/x86/boot/bzImage
 
 rm -rf %{buildroot}/usr/lib/firmware
 
 # Recreate modules indices
 depmod -a -b %{buildroot}/usr %{kversion}
 
-ln -s org.clearlinux.kvm.%{version}-%{release}.efi %{buildroot}/usr/lib/kernel/default-kvm
+ln -s org.clearlinux.kvm.%{version}-%{release} %{buildroot}/usr/lib/kernel/default-kvm
 
 %files
 %dir /usr/lib/kernel
 %dir /usr/lib/modules/%{kversion}
 /usr/lib/kernel/config-%{kversion}
-/usr/lib/kernel/org.clearlinux.kvm.%{version}-%{release}.efi
+/usr/lib/kernel/cmdline-%{kversion}
+/usr/lib/kernel/org.clearlinux.kvm.%{version}-%{release}
 /usr/lib/kernel/default-kvm
 /usr/lib/modules/%{kversion}/kernel
 /usr/lib/modules/%{kversion}/modules.*
 
 %files extra
 %dir /usr/lib/kernel
-/usr/lib/kernel/org.clearlinux.kvm.%{version}-%{release}
 /usr/lib/kernel/System.map-%{kversion}
-/usr/lib/kernel/cmdline-%{kversion}
