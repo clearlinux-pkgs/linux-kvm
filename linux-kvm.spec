@@ -50,6 +50,7 @@ patch12: 0012-No-wait-for-the-known-devices.patch
 patch13: 0013-Turn-mmput-into-an-async-function.patch
 Patch14: 0014-ptdamage.patch
 
+# kdbus
 Patch701: 701-kdbus.patch
 
 %description
@@ -57,11 +58,11 @@ The Linux kernel.
 
 %package extra
 License:        GPL-2.0
-Summary:        The Linux kernel
+Summary:        The Linux kernel kvm extra files
 Group:          kernel
 
 %description extra
-Linux kernel extra file
+Linux kernel extra files
 
 %prep
 %setup -q -n linux-4.2.3
@@ -82,6 +83,7 @@ Linux kernel extra file
 %patch13 -p1
 %patch14 -p1
 
+# kdbus
 %patch701 -p1
 
 
@@ -116,9 +118,9 @@ InstallKernel() {
     KernelDir=%{buildroot}/usr/lib/kernel
 
     mkdir   -p ${KernelDir}
-    install -m 644 .config    ${KernelDir}/config-$KernelVer
-    install -m 644 System.map ${KernelDir}/System.map-$KernelVer
-    install -m 644 %{SOURCE2} ${KernelDir}/cmdline-$KernelVer
+    install -m 644 .config    ${KernelDir}/config-${KernelVer}
+    install -m 644 System.map ${KernelDir}/System.map-${KernelVer}
+    install -m 644 %{SOURCE2} ${KernelDir}/cmdline-${KernelVer}
     cp  $KernelImage ${KernelDir}/org.clearlinux.kvm.%{version}-%{release}
     chmod 755 ${KernelDir}/org.clearlinux.kvm.%{version}-%{release}
 
@@ -128,12 +130,12 @@ InstallKernel() {
     rm -f %{buildroot}/usr/lib/modules/$KernelVer/build
     rm -f %{buildroot}/usr/lib/modules/$KernelVer/source
 
-    # Erase some modules dictionaries
+    # Erase some modules index
     for i in alias ccwmap dep ieee1394map inputmap isapnpmap ofmap pcimap seriomap symbols usbmap softdep devname
     do
-        rm -f %{buildroot}/usr/lib/modules/$KernelVer/modules.${i}*
+        rm -f %{buildroot}/usr/lib/modules/${KernelVer}/modules.${i}*
     done
-    rm -f %{buildroot}/usr/lib/modules/$KernelVer/modules.*.bin
+    rm -f %{buildroot}/usr/lib/modules/${KernelVer}/modules.*.bin
 }
 
 InstallKernel arch/x86/boot/bzImage
