@@ -50,7 +50,11 @@ patch12: 0012-No-wait-for-the-known-devices.patch
 patch13: 0013-Turn-mmput-into-an-async-function.patch
 Patch14: 0014-ptdamage.patch
 
-# kdbus
+# Security
+Patch21: CVE-2015-6937.patch
+Patch22: CVE-2015-7613.patch
+
+#1 kdbus
 Patch701: 701-kdbus.patch
 
 %description
@@ -82,6 +86,10 @@ Linux kernel extra files
 
 %patch13 -p1
 %patch14 -p1
+
+# security
+%patch21 -p1
+%patch22 -p1
 
 # kdbus
 %patch701 -p1
