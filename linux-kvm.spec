@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.2.3
+Version:        4.2.4
 Release:        124
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.3.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.4.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -43,7 +43,7 @@ Patch6:  0006-pci-probe.patch
 Patch7:  0007-cgroup.patch
 Patch8:  0008-smpboot.patch
 Patch9:  0009-perf.patch
-Patch10  0010-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
+Patch10:  0010-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
 Patch11: 0011-pci-probe-identify-known-devices.patch
 Patch12: 0012-init-no-wait-for-the-known-devices.patch
 Patch13: 0013-fork-turn-mmput-into-an-async-function.patch
@@ -68,7 +68,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.2.3
+%setup -q -n linux-4.2.4
 
 %patch1 -p1
 %patch2 -p1
