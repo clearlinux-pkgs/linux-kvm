@@ -1,7 +1,7 @@
-From a3d2be032f8ac2b27bd13d1e98ebb0fc817c3984 Mon Sep 17 00:00:00 2001
+From bfc928e06cc3281c30c21d29f875711bae93fd7a Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:19:26 -0600
-Subject: [PATCH 02/14] Skip synchronize_rcu() on single CPU systems
+Subject: [PATCH 02/14] cpuidle: skip synchronize_rcu() on single CPU systems
 
 synchronize_rcu() is pretty expensive, and on single CPU systems we don't need
 it in this specific case, so skip it.

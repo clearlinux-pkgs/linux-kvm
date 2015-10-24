@@ -1,4 +1,4 @@
-From d6616ddf0627bf09e356b24752d32dd4ffd80b78 Mon Sep 17 00:00:00 2001
+From 1f8954e734bb175b17caf32301b22d7010e9ba14 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 17:28:14 -0600
 Subject: [PATCH 08/14] smpboot
@@ -25,10 +25,10 @@ index b1f3ed9c..22d56fe 100644
  	pr_debug("Deasserting INIT\n");
  
 diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index 7437b41..c6f2c49 100644
+index dc9af7a..570a09a 100644
 --- a/arch/x86/kernel/tsc.c
 +++ b/arch/x86/kernel/tsc.c
-@@ -1241,6 +1241,9 @@ unsigned long calibrate_delay_is_known(void)
+@@ -1244,6 +1244,9 @@ unsigned long calibrate_delay_is_known(void)
  	if (!tsc_disabled && !cpu_has(&cpu_data(cpu), X86_FEATURE_CONSTANT_TSC))
  		return 0;
  

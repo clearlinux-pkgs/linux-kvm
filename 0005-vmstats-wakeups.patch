@@ -1,7 +1,7 @@
-From 099b3db3f29f78630b309bc40e9fd7a95c8521c0 Mon Sep 17 00:00:00 2001
+From faef55e273e68be18f898e07a3dc7c5f6b214547 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:47:20 -0600
-Subject: [PATCH 05/14] wakeups
+Subject: [PATCH 05/14] vmstats: wakeups
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 

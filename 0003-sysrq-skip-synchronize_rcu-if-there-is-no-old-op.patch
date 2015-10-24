@@ -1,7 +1,7 @@
-From b6909532c25f171d6640a37f05a078bc477af24a Mon Sep 17 00:00:00 2001
+From 1d3b3c7992e92ff16fd5b95c6f02d6ffe15898d5 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:25:16 -0600
-Subject: [PATCH 03/14] sysrq: Skip synchronize_rcu() if there is no old op
+Subject: [PATCH 03/14] sysrq: skip synchronize_rcu() if there is no old op
 
 synchronize_rcu() is expensive. Currently it is called as part of the sysrq
 registration/unregistration, which happens during boot several times.

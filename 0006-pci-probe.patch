@@ -1,7 +1,7 @@
-From 1daffb179c34cb72d9d3c3370383fab68b891235 Mon Sep 17 00:00:00 2001
+From 5465efdf0f49f1fd9490f106ad71e4125eaa7a84 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:53:08 -0600
-Subject: [PATCH 06/14] probe
+Subject: [PATCH 06/14] pci: probe
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -11,7 +11,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 41 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index b978bbf..07702f4 100644
+index f6ae0d0..67b635c 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
 @@ -178,6 +178,11 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
@@ -58,7 +58,7 @@ index b978bbf..07702f4 100644
  }
  
  static void pci_read_bridge_io(struct pci_bus *child)
-@@ -1124,6 +1132,28 @@ static void pci_msi_setup_pci_dev(struct pci_dev *dev)
+@@ -1124,6 +1132,28 @@ void pci_msi_setup_pci_dev(struct pci_dev *dev)
  		pci_msix_clear_and_set_ctrl(dev, PCI_MSIX_FLAGS_ENABLE, 0);
  }
  

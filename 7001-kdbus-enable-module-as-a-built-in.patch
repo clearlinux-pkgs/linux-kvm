@@ -1,3 +1,195 @@
+From 329e5ef70e1e9f435e2ff987d22ea8b9edc1a1ea Mon Sep 17 00:00:00 2001
+From: Dimitri John Ledkov <dimitri.j.ledkov@intel.com>
+Date: Thu, 10 Sep 2015 18:02:10 +0100
+Subject: [PATCH] kdbus: enable module as a built in.
+
+Author:    Dimitri John Ledkov <dimitri.j.ledkov@intel.com>
+
+Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
+---
+ Documentation/Makefile                           |    2 +-
+ Documentation/ioctl/ioctl-number.txt             |    1 +
+ Documentation/kdbus/.gitignore                   |    2 +
+ Documentation/kdbus/Makefile                     |   44 +
+ Documentation/kdbus/kdbus.bus.xml                |  344 ++++
+ Documentation/kdbus/kdbus.connection.xml         | 1244 ++++++++++++
+ Documentation/kdbus/kdbus.endpoint.xml           |  429 +++++
+ Documentation/kdbus/kdbus.fs.xml                 |  124 ++
+ Documentation/kdbus/kdbus.item.xml               |  839 ++++++++
+ Documentation/kdbus/kdbus.match.xml              |  555 ++++++
+ Documentation/kdbus/kdbus.message.xml            | 1276 +++++++++++++
+ Documentation/kdbus/kdbus.name.xml               |  711 +++++++
+ Documentation/kdbus/kdbus.policy.xml             |  406 ++++
+ Documentation/kdbus/kdbus.pool.xml               |  326 ++++
+ Documentation/kdbus/kdbus.xml                    | 1012 ++++++++++
+ Documentation/kdbus/stylesheet.xsl               |   16 +
+ MAINTAINERS                                      |   13 +
+ Makefile                                         |    1 +
+ include/uapi/linux/Kbuild                        |    1 +
+ include/uapi/linux/kdbus.h                       |  984 ++++++++++
+ include/uapi/linux/magic.h                       |    2 +
+ init/Kconfig                                     |   13 +
+ ipc/Makefile                                     |    2 +-
+ ipc/kdbus/Makefile                               |   33 +
+ ipc/kdbus/bus.c                                  |  514 +++++
+ ipc/kdbus/bus.h                                  |  101 +
+ ipc/kdbus/connection.c                           | 2227 ++++++++++++++++++++++
+ ipc/kdbus/connection.h                           |  260 +++
+ ipc/kdbus/domain.c                               |  296 +++
+ ipc/kdbus/domain.h                               |   77 +
+ ipc/kdbus/endpoint.c                             |  303 +++
+ ipc/kdbus/endpoint.h                             |   70 +
+ ipc/kdbus/fs.c                                   |  508 +++++
+ ipc/kdbus/fs.h                                   |   28 +
+ ipc/kdbus/handle.c                               |  691 +++++++
+ ipc/kdbus/handle.h                               |  103 +
+ ipc/kdbus/item.c                                 |  293 +++
+ ipc/kdbus/item.h                                 |   61 +
+ ipc/kdbus/limits.h                               |   61 +
+ ipc/kdbus/main.c                                 |  114 ++
+ ipc/kdbus/match.c                                |  546 ++++++
+ ipc/kdbus/match.h                                |   35 +
+ ipc/kdbus/message.c                              | 1040 ++++++++++
+ ipc/kdbus/message.h                              |  120 ++
+ ipc/kdbus/metadata.c                             | 1347 +++++++++++++
+ ipc/kdbus/metadata.h                             |   86 +
+ ipc/kdbus/names.c                                |  854 +++++++++
+ ipc/kdbus/names.h                                |  105 +
+ ipc/kdbus/node.c                                 |  897 +++++++++
+ ipc/kdbus/node.h                                 |   86 +
+ ipc/kdbus/notify.c                               |  204 ++
+ ipc/kdbus/notify.h                               |   30 +
+ ipc/kdbus/policy.c                               |  489 +++++
+ ipc/kdbus/policy.h                               |   51 +
+ ipc/kdbus/pool.c                                 |  728 +++++++
+ ipc/kdbus/pool.h                                 |   46 +
+ ipc/kdbus/queue.c                                |  363 ++++
+ ipc/kdbus/queue.h                                |   84 +
+ ipc/kdbus/reply.c                                |  252 +++
+ ipc/kdbus/reply.h                                |   68 +
+ ipc/kdbus/util.c                                 |  156 ++
+ ipc/kdbus/util.h                                 |   73 +
+ samples/Kconfig                                  |    7 +
+ samples/Makefile                                 |    3 +-
+ samples/kdbus/.gitignore                         |    1 +
+ samples/kdbus/Makefile                           |    9 +
+ samples/kdbus/kdbus-api.h                        |  114 ++
+ samples/kdbus/kdbus-workers.c                    | 1346 +++++++++++++
+ tools/testing/selftests/Makefile                 |    1 +
+ tools/testing/selftests/kdbus/.gitignore         |    1 +
+ tools/testing/selftests/kdbus/Makefile           |   49 +
+ tools/testing/selftests/kdbus/kdbus-enum.c       |   94 +
+ tools/testing/selftests/kdbus/kdbus-enum.h       |   15 +
+ tools/testing/selftests/kdbus/kdbus-test.c       |  905 +++++++++
+ tools/testing/selftests/kdbus/kdbus-test.h       |   84 +
+ tools/testing/selftests/kdbus/kdbus-util.c       | 1612 ++++++++++++++++
+ tools/testing/selftests/kdbus/kdbus-util.h       |  218 +++
+ tools/testing/selftests/kdbus/test-activator.c   |  318 +++
+ tools/testing/selftests/kdbus/test-benchmark.c   |  451 +++++
+ tools/testing/selftests/kdbus/test-bus.c         |  175 ++
+ tools/testing/selftests/kdbus/test-chat.c        |  124 ++
+ tools/testing/selftests/kdbus/test-connection.c  |  597 ++++++
+ tools/testing/selftests/kdbus/test-daemon.c      |   65 +
+ tools/testing/selftests/kdbus/test-endpoint.c    |  352 ++++
+ tools/testing/selftests/kdbus/test-fd.c          |  789 ++++++++
+ tools/testing/selftests/kdbus/test-free.c        |   64 +
+ tools/testing/selftests/kdbus/test-match.c       |  441 +++++
+ tools/testing/selftests/kdbus/test-message.c     |  734 +++++++
+ tools/testing/selftests/kdbus/test-metadata-ns.c |  500 +++++
+ tools/testing/selftests/kdbus/test-monitor.c     |  176 ++
+ tools/testing/selftests/kdbus/test-names.c       |  272 +++
+ tools/testing/selftests/kdbus/test-policy-ns.c   |  632 ++++++
+ tools/testing/selftests/kdbus/test-policy-priv.c | 1285 +++++++++++++
+ tools/testing/selftests/kdbus/test-policy.c      |   80 +
+ tools/testing/selftests/kdbus/test-sync.c        |  369 ++++
+ tools/testing/selftests/kdbus/test-timeout.c     |   99 +
+ 96 files changed, 33726 insertions(+), 3 deletions(-)
+ create mode 100644 Documentation/kdbus/.gitignore
+ create mode 100644 Documentation/kdbus/Makefile
+ create mode 100644 Documentation/kdbus/kdbus.bus.xml
+ create mode 100644 Documentation/kdbus/kdbus.connection.xml
+ create mode 100644 Documentation/kdbus/kdbus.endpoint.xml
+ create mode 100644 Documentation/kdbus/kdbus.fs.xml
+ create mode 100644 Documentation/kdbus/kdbus.item.xml
+ create mode 100644 Documentation/kdbus/kdbus.match.xml
+ create mode 100644 Documentation/kdbus/kdbus.message.xml
+ create mode 100644 Documentation/kdbus/kdbus.name.xml
+ create mode 100644 Documentation/kdbus/kdbus.policy.xml
+ create mode 100644 Documentation/kdbus/kdbus.pool.xml
+ create mode 100644 Documentation/kdbus/kdbus.xml
+ create mode 100644 Documentation/kdbus/stylesheet.xsl
+ create mode 100644 include/uapi/linux/kdbus.h
+ create mode 100644 ipc/kdbus/Makefile
+ create mode 100644 ipc/kdbus/bus.c
+ create mode 100644 ipc/kdbus/bus.h
+ create mode 100644 ipc/kdbus/connection.c
+ create mode 100644 ipc/kdbus/connection.h
+ create mode 100644 ipc/kdbus/domain.c
+ create mode 100644 ipc/kdbus/domain.h
+ create mode 100644 ipc/kdbus/endpoint.c
+ create mode 100644 ipc/kdbus/endpoint.h
+ create mode 100644 ipc/kdbus/fs.c
+ create mode 100644 ipc/kdbus/fs.h
+ create mode 100644 ipc/kdbus/handle.c
+ create mode 100644 ipc/kdbus/handle.h
+ create mode 100644 ipc/kdbus/item.c
+ create mode 100644 ipc/kdbus/item.h
+ create mode 100644 ipc/kdbus/limits.h
+ create mode 100644 ipc/kdbus/main.c
+ create mode 100644 ipc/kdbus/match.c
+ create mode 100644 ipc/kdbus/match.h
+ create mode 100644 ipc/kdbus/message.c
+ create mode 100644 ipc/kdbus/message.h
+ create mode 100644 ipc/kdbus/metadata.c
+ create mode 100644 ipc/kdbus/metadata.h
+ create mode 100644 ipc/kdbus/names.c
+ create mode 100644 ipc/kdbus/names.h
+ create mode 100644 ipc/kdbus/node.c
+ create mode 100644 ipc/kdbus/node.h
+ create mode 100644 ipc/kdbus/notify.c
+ create mode 100644 ipc/kdbus/notify.h
+ create mode 100644 ipc/kdbus/policy.c
+ create mode 100644 ipc/kdbus/policy.h
+ create mode 100644 ipc/kdbus/pool.c
+ create mode 100644 ipc/kdbus/pool.h
+ create mode 100644 ipc/kdbus/queue.c
+ create mode 100644 ipc/kdbus/queue.h
+ create mode 100644 ipc/kdbus/reply.c
+ create mode 100644 ipc/kdbus/reply.h
+ create mode 100644 ipc/kdbus/util.c
+ create mode 100644 ipc/kdbus/util.h
+ create mode 100644 samples/kdbus/.gitignore
+ create mode 100644 samples/kdbus/Makefile
+ create mode 100644 samples/kdbus/kdbus-api.h
+ create mode 100644 samples/kdbus/kdbus-workers.c
+ create mode 100644 tools/testing/selftests/kdbus/.gitignore
+ create mode 100644 tools/testing/selftests/kdbus/Makefile
+ create mode 100644 tools/testing/selftests/kdbus/kdbus-enum.c
+ create mode 100644 tools/testing/selftests/kdbus/kdbus-enum.h
+ create mode 100644 tools/testing/selftests/kdbus/kdbus-test.c
+ create mode 100644 tools/testing/selftests/kdbus/kdbus-test.h
+ create mode 100644 tools/testing/selftests/kdbus/kdbus-util.c
+ create mode 100644 tools/testing/selftests/kdbus/kdbus-util.h
+ create mode 100644 tools/testing/selftests/kdbus/test-activator.c
+ create mode 100644 tools/testing/selftests/kdbus/test-benchmark.c
+ create mode 100644 tools/testing/selftests/kdbus/test-bus.c
+ create mode 100644 tools/testing/selftests/kdbus/test-chat.c
+ create mode 100644 tools/testing/selftests/kdbus/test-connection.c
+ create mode 100644 tools/testing/selftests/kdbus/test-daemon.c
+ create mode 100644 tools/testing/selftests/kdbus/test-endpoint.c
+ create mode 100644 tools/testing/selftests/kdbus/test-fd.c
+ create mode 100644 tools/testing/selftests/kdbus/test-free.c
+ create mode 100644 tools/testing/selftests/kdbus/test-match.c
+ create mode 100644 tools/testing/selftests/kdbus/test-message.c
+ create mode 100644 tools/testing/selftests/kdbus/test-metadata-ns.c
+ create mode 100644 tools/testing/selftests/kdbus/test-monitor.c
+ create mode 100644 tools/testing/selftests/kdbus/test-names.c
+ create mode 100644 tools/testing/selftests/kdbus/test-policy-ns.c
+ create mode 100644 tools/testing/selftests/kdbus/test-policy-priv.c
+ create mode 100644 tools/testing/selftests/kdbus/test-policy.c
+ create mode 100644 tools/testing/selftests/kdbus/test-sync.c
+ create mode 100644 tools/testing/selftests/kdbus/test-timeout.c
+
 diff --git a/Documentation/Makefile b/Documentation/Makefile
 index bc05482..e2127a7 100644
 --- a/Documentation/Makefile
@@ -9,7 +201,7 @@ index bc05482..e2127a7 100644
  	networking pcmcia prctl ptp spi timers vDSO video4linux \
  	watchdog
 diff --git a/Documentation/ioctl/ioctl-number.txt b/Documentation/ioctl/ioctl-number.txt
-index 51f4221..ec7c81b 100644
+index 611c522..1e166ad 100644
 --- a/Documentation/ioctl/ioctl-number.txt
 +++ b/Documentation/ioctl/ioctl-number.txt
 @@ -292,6 +292,7 @@ Code  Seq#(hex)	Include File		Comments
@@ -7433,10 +7625,10 @@ index 0000000..52565ea
 +	</template>
 +</stylesheet>
 diff --git a/MAINTAINERS b/MAINTAINERS
-index d8afd29..02f7668 100644
+index b60e2b2..313ad40 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -5585,6 +5585,19 @@ S:	Maintained
+@@ -5807,6 +5807,19 @@ S:	Maintained
  F:	Documentation/kbuild/kconfig-language.txt
  F:	scripts/kconfig/
  
@@ -7457,10 +7649,10 @@ index d8afd29..02f7668 100644
  M:	Vivek Goyal <vgoyal@redhat.com>
  M:	Haren Myneni <hbabu@us.ibm.com>
 diff --git a/Makefile b/Makefile
-index f5c8983..a1c8d57 100644
+index a952801..e34e8e5 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1343,6 +1343,7 @@ $(help-board-dirs): help-%:
+@@ -1346,6 +1346,7 @@ $(help-board-dirs): help-%:
  %docs: scripts_basic FORCE
  	$(Q)$(MAKE) $(build)=scripts build_docproc
  	$(Q)$(MAKE) $(build)=Documentation/DocBook $@
@@ -7469,10 +7661,10 @@ index f5c8983..a1c8d57 100644
  else # KBUILD_EXTMOD
  
 diff --git a/include/uapi/linux/Kbuild b/include/uapi/linux/Kbuild
-index 1a0006a..4842a98 100644
+index 1ff9942..67a4c60 100644
 --- a/include/uapi/linux/Kbuild
 +++ b/include/uapi/linux/Kbuild
-@@ -215,6 +215,7 @@ header-y += ixjuser.h
+@@ -216,6 +216,7 @@ header-y += ixjuser.h
  header-y += jffs2.h
  header-y += joystick.h
  header-y += kcmp.h
@@ -8482,7 +8674,7 @@ index 7b1425a..ce2ac5a 100644
 +
  #endif /* __LINUX_MAGIC_H__ */
 diff --git a/init/Kconfig b/init/Kconfig
-index dc24dec..9388071 100644
+index af09b4f..9ffd773 100644
 --- a/init/Kconfig
 +++ b/init/Kconfig
 @@ -261,6 +261,19 @@ config POSIX_MQUEUE_SYSCTL
@@ -23673,12 +23865,12 @@ index 0000000..5a6dfdc
 +
 +#endif /* libc sanity check */
 diff --git a/tools/testing/selftests/Makefile b/tools/testing/selftests/Makefile
-index 95abddc..b57100c 100644
+index 24ae9e8..3af31af 100644
 --- a/tools/testing/selftests/Makefile
 +++ b/tools/testing/selftests/Makefile
-@@ -5,6 +5,7 @@ TARGETS += exec
- TARGETS += firmware
+@@ -6,6 +6,7 @@ TARGETS += firmware
  TARGETS += ftrace
+ TARGETS += futex
  TARGETS += kcmp
 +TARGETS += kdbus
  TARGETS += memfd
@@ -34347,3 +34539,6 @@ index 0000000..cfd1930
 +
 +	return TEST_OK;
 +}
+-- 
+2.4.3
+

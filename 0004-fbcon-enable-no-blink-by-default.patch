@@ -1,7 +1,7 @@
-From 400d629b82d02739ff6586d07d9468518e04cd4c Mon Sep 17 00:00:00 2001
+From 8147c7c7d68e6c2581741f6fc19ab5c7386a900c Mon Sep 17 00:00:00 2001
 From: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
 Date: Mon, 13 Apr 2015 11:26:36 -0500
-Subject: [PATCH 04/14] enable no blink by default
+Subject: [PATCH 04/14] fbcon: enable no blink by default
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 ---
