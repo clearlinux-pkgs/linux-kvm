@@ -35,27 +35,26 @@ BuildRequires:  bison
 %define __strip /bin/true
 
 Patch1:  0001-msleep.patch
-patch2:  0002-Skip-synchronize_rcu-on-single-CPU-systems.patch
-patch3:  0003-sysrq-Skip-synchronize_rcu-if-there-is-no-old-op.patch
-patch4:  0004-enable-no-blink-by-default.patch
-patch5:  0005-wakeups.patch
-patch6:  0006-probe.patch
-patch7:  0007-cgroup.patch
-patch8:  0008-smpboot.patch
-patch9:  0009-perf.patch
-patch10: 0010-tweak-the-scheduler-to-favor-CPU-0.patch
-patch11: 0011-probe2.patch
-patch12: 0012-No-wait-for-the-known-devices.patch
-
-patch13: 0013-Turn-mmput-into-an-async-function.patch
-Patch14: 0014-ptdamage.patch
+Patch2:  0002-cpuidle-skip-synchronize_rcu-on-single-CPU-systems.patch
+Patch3:  0003-sysrq-skip-synchronize_rcu-if-there-is-no-old-op.patch
+Patch4:  0004-fbcon-enable-no-blink-by-default.patch
+Patch5:  0005-vmstats-wakeups.patch
+Patch6:  0006-pci-probe.patch
+Patch7:  0007-cgroup.patch
+Patch8:  0008-smpboot.patch
+Patch9:  0009-perf.patch
+Patch10  0010-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
+Patch11: 0011-pci-probe-identify-known-devices.patch
+Patch12: 0012-init-no-wait-for-the-known-devices.patch
+Patch13: 0013-fork-turn-mmput-into-an-async-function.patch
+Patch14: 0014-perf-ptdamage.patch
 
 # Security
 Patch21: CVE-2015-6937.patch
 Patch22: CVE-2015-7613.patch
 
 #1 kdbus
-Patch701: 701-kdbus.patch
+Patch701: 7001-kdbus-enable-module-as-a-built-in.patch
 
 %description
 The Linux kernel.
