@@ -51,7 +51,6 @@ Patch14: 0014-perf-ptdamage.patch
 
 # Security
 Patch21: CVE-2015-6937.patch
-Patch22: CVE-2015-7613.patch
 
 #1 kdbus
 Patch701: 7001-kdbus-enable-module-as-a-built-in.patch
@@ -88,7 +87,6 @@ Linux kernel extra files
 
 # security
 %patch21 -p1
-%patch22 -p1
 
 # kdbus
 %patch701 -p1
