@@ -1,7 +1,7 @@
-From 5465efdf0f49f1fd9490f106ad71e4125eaa7a84 Mon Sep 17 00:00:00 2001
+From 8245dca39e004238e9009e96218b67332b53e5ed Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:53:08 -0600
-Subject: [PATCH 06/14] pci: probe
+Subject: [PATCH 06/18] pci: probe
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -11,7 +11,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 41 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index f6ae0d0..67b635c 100644
+index 8361d27..0da2072 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
 @@ -178,6 +178,11 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
@@ -43,22 +43,21 @@ index f6ae0d0..67b635c 100644
  	for (pos = 0; pos < howmany; pos++) {
  		struct resource *res = &dev->resource[pos];
  		reg = PCI_BASE_ADDRESS_0 + (pos << 2);
-@@ -324,12 +330,14 @@ static void pci_read_bases(struct pci_dev *dev, unsigned int howmany, int rom)
+@@ -324,11 +330,13 @@ static void pci_read_bases(struct pci_dev *dev, unsigned int howmany, int rom)
  
  	if (rom) {
  		struct resource *res = &dev->resource[PCI_ROM_RESOURCE];
 +		printk("rom path\n");
  		dev->rom_base_reg = rom;
  		res->flags = IORESOURCE_MEM | IORESOURCE_PREFETCH |
- 				IORESOURCE_READONLY | IORESOURCE_CACHEABLE |
- 				IORESOURCE_SIZEALIGN;
+ 				IORESOURCE_READONLY | IORESOURCE_SIZEALIGN;
  		__pci_read_base(dev, pci_bar_mem32, res, rom);
  	}
 +	printk("pci_read_bases end\n");
  }
  
  static void pci_read_bridge_io(struct pci_bus *child)
-@@ -1124,6 +1132,28 @@ void pci_msi_setup_pci_dev(struct pci_dev *dev)
+@@ -1158,6 +1166,28 @@ void pci_msi_setup_pci_dev(struct pci_dev *dev)
  		pci_msix_clear_and_set_ctrl(dev, PCI_MSIX_FLAGS_ENABLE, 0);
  }
  
@@ -87,7 +86,7 @@ index f6ae0d0..67b635c 100644
  /**
   * pci_setup_device - fill in class and map information of a device
   * @dev: the device structure to fill
-@@ -1142,6 +1172,9 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1175,6 +1205,9 @@ int pci_setup_device(struct pci_dev *dev)
  	int pos = 0;
  	struct pci_bus_region region;
  	struct resource *res;
@@ -97,7 +96,7 @@ index f6ae0d0..67b635c 100644
  
  	if (pci_read_config_byte(dev, PCI_HEADER_TYPE, &hdr_type))
  		return -EIO;
-@@ -1191,7 +1224,11 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1221,7 +1254,11 @@ int pci_setup_device(struct pci_dev *dev)
  		if (class == PCI_CLASS_BRIDGE_PCI)
  			goto bad;
  		pci_read_irq(dev);
@@ -110,8 +109,8 @@ index f6ae0d0..67b635c 100644
  		pci_read_config_word(dev, PCI_SUBSYSTEM_VENDOR_ID, &dev->subsystem_vendor);
  		pci_read_config_word(dev, PCI_SUBSYSTEM_ID, &dev->subsystem_device);
  
-@@ -1276,6 +1313,8 @@ int pci_setup_device(struct pci_dev *dev)
- 		dev->class = PCI_CLASS_NOT_DEFINED;
+@@ -1306,6 +1343,8 @@ int pci_setup_device(struct pci_dev *dev)
+ 		dev->class = PCI_CLASS_NOT_DEFINED << 8;
  	}
  
 +	printk("pci_setup_device end\n");

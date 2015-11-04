@@ -1,7 +1,7 @@
-From e4af066f7d460370761cb6552e63b1b5be5ee56e Mon Sep 17 00:00:00 2001
+From de82d089ca22a66e8a38dd05780d620750464c8f Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
-Date: Wed, 11 Feb 2015 17:34:17 -0600
-Subject: [PATCH 09/14] perf
+Date: Wed, 4 Nov 2015 15:17:10 -0600
+Subject: [PATCH 09/18] perf
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -11,14 +11,14 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/x86/kernel/cpu/perf_event_intel.c b/arch/x86/kernel/cpu/perf_event_intel.c
-index 1b09c42..63e9599 100644
+index f63360b..e49cb5a 100644
 --- a/arch/x86/kernel/cpu/perf_event_intel.c
 +++ b/arch/x86/kernel/cpu/perf_event_intel.c
-@@ -3341,7 +3341,7 @@ __init int intel_pmu_init(void)
+@@ -3604,7 +3604,7 @@ __init int intel_pmu_init(void)
  	 */
  	if (x86_pmu.extra_regs) {
  		for (er = x86_pmu.extra_regs; er->msr; er++) {
--			er->extra_msr_access = check_msr(er->msr, 0x1ffUL);
+-			er->extra_msr_access = check_msr(er->msr, 0x11UL);
 +			er->extra_msr_access = false;
  			/* Disable LBR select mapping */
  			if ((er->idx == EXTRA_REG_LBR) && !er->extra_msr_access)

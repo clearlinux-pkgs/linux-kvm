@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.2.5
+Version:        4.3.0
 Release:        127
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.2.5.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.3.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -25,7 +25,7 @@ BuildRequires:  elfutils
 BuildRequires:  elfutils-dev
 BuildRequires:  kmod
 BuildRequires:  make >= 3.78
-BuildRequires:  openssl
+BuildRequires:  openssl-dev
 BuildRequires:  flex
 BuildRequires:  bison
 
@@ -54,8 +54,6 @@ Patch15: 0015-cpuidle-x86-increase-forced-cut-off-for-polling-to-2.patch
 Patch16: 0016-cpuidle-menu-use-interactivity_req-to-disable-pollin.patch
 Patch17: 0017-cpuidle-menu-smooth-out-measured_us-calculation.patch
 
-# Security
-Patch21: CVE-2015-6937.patch
 
 #1 kdbus
 Patch701: 7001-kdbus-enable-module-as-a-built-in.patch
@@ -72,7 +70,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.2.5
+%setup -q -n linux-4.3
 
 %patch1 -p1
 %patch2 -p1
@@ -95,8 +93,6 @@ Linux kernel extra files
 %patch16 -p1
 %patch17 -p1
 
-# security
-%patch21 -p1
 
 # kdbus
 %patch701 -p1
