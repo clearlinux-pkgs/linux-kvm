@@ -49,6 +49,11 @@ Patch12: 0012-init-no-wait-for-the-known-devices.patch
 Patch13: 0013-fork-turn-mmput-into-an-async-function.patch
 Patch14: 0014-perf-ptdamage.patch
 
+#cpuidle: small improvements & fixes for menu governor
+Patch15: 0015-cpuidle-x86-increase-forced-cut-off-for-polling-to-2.patch
+Patch16: 0016-cpuidle-menu-use-interactivity_req-to-disable-pollin.patch
+Patch17: 0017-cpuidle-menu-smooth-out-measured_us-calculation.patch
+
 # Security
 Patch21: CVE-2015-6937.patch
 
@@ -84,6 +89,11 @@ Linux kernel extra files
 
 %patch13 -p1
 %patch14 -p1
+
+#cpuidle: small improvements & fixes for menu governor
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
 
 # security
 %patch21 -p1
