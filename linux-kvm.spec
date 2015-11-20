@@ -54,6 +54,8 @@ Patch15: 0015-cpuidle-x86-increase-forced-cut-off-for-polling-to-2.patch
 Patch16: 0016-cpuidle-menu-use-interactivity_req-to-disable-pollin.patch
 Patch17: 0017-cpuidle-menu-smooth-out-measured_us-calculation.patch
 
+Patch18: 0018-init-do_mounts-recreate-dev-root.patch
+
 
 #1 kdbus
 Patch701: 7001-kdbus-enable-module-as-a-built-in.patch
@@ -93,6 +95,7 @@ Linux kernel extra files
 %patch16 -p1
 %patch17 -p1
 
+%patch18 -p1
 
 # kdbus
 %patch701 -p1
