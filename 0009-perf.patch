@@ -1,7 +1,7 @@
-From de82d089ca22a66e8a38dd05780d620750464c8f Mon Sep 17 00:00:00 2001
+From 67c0859c9f0489cfaa27e69eae3ea9a4e6f5ad72 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 4 Nov 2015 15:17:10 -0600
-Subject: [PATCH 09/18] perf
+Subject: [PATCH 09/19] perf
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -11,7 +11,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/x86/kernel/cpu/perf_event_intel.c b/arch/x86/kernel/cpu/perf_event_intel.c
-index f63360b..e49cb5a 100644
+index e2a4300..1abd753 100644
 --- a/arch/x86/kernel/cpu/perf_event_intel.c
 +++ b/arch/x86/kernel/cpu/perf_event_intel.c
 @@ -3604,7 +3604,7 @@ __init int intel_pmu_init(void)
