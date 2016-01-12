@@ -74,7 +74,10 @@ Linux kernel extra files
 %prep
 %setup -q -n linux-4.4
 
-%patch1 -p1
+# Use when needed
+# Added a warning to msleep (our local patch) to catch where it is used
+# not all uses are bug
+#%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
