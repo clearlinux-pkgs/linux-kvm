@@ -60,6 +60,9 @@ Patch18: 0018-init-do_mounts-recreate-dev-root.patch
 #1 kdbus
 Patch701: 7001-kdbus-enable-module-as-a-built-in.patch
 
+# Security
+Patch9001: cve-2016-0728.patch
+
 %description
 The Linux kernel.
 
@@ -103,6 +106,8 @@ Linux kernel extra files
 # kdbus
 %patch701 -p1
 
+# Security
+%patch9001 -p1
 
 cp %{SOURCE1} .
 
