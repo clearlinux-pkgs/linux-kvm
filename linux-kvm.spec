@@ -57,10 +57,6 @@ Patch17: 0017-cpuidle-menu-smooth-out-measured_us-calculation.patch
 Patch18: 0018-init-do_mounts-recreate-dev-root.patch
 
 
-#1 kdbus
-Patch701: 7001-kdbus-enable-module-as-a-built-in.patch
-
-
 %description
 The Linux kernel.
 
@@ -100,10 +96,6 @@ Linux kernel extra files
 %patch17 -p1
 
 %patch18 -p1
-
-# kdbus
-%patch701 -p1
-
 
 cp %{SOURCE1} .
 
