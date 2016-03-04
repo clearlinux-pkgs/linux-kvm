@@ -1,7 +1,7 @@
-From c890a8e0c8f61c303f7caa05253bb099b817b432 Mon Sep 17 00:00:00 2001
+From dc8f434fe72232d81ca9eb5716ccd4ca5defc94e Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Fri, 28 Aug 2015 11:00:36 -0500
-Subject: [PATCH 07/19] cgroup
+Subject: [PATCH] cgroup
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -9,24 +9,24 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
 Signed-off-by: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
 ---
  include/linux/cgroup-defs.h |  2 +-
- kernel/cgroup.c             | 23 +++++++++++++----------
- 2 files changed, 14 insertions(+), 11 deletions(-)
+ kernel/cgroup.c             | 24 ++++++++++++++----------
+ 2 files changed, 15 insertions(+), 11 deletions(-)
 
 diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
-index 06b77f9d..8ecd945 100644
+index 8e30fae..4c60bf2 100644
 --- a/include/linux/cgroup-defs.h
 +++ b/include/linux/cgroup-defs.h
-@@ -135,7 +135,7 @@ struct cgroup_subsys_state {
+@@ -141,7 +141,7 @@ struct cgroup_subsys_state {
  
  	/* percpu_ref killing and RCU release */
  	struct rcu_head rcu_head;
 -	struct work_struct destroy_work;
-+	struct delayed_work destroy_work;
++	struct delayed_work_struct destroy_work;
  };
  
  /*
 diff --git a/kernel/cgroup.c b/kernel/cgroup.c
-index 470f653..34330158 100644
+index fb1ecfd..b49c670 100644
 --- a/kernel/cgroup.c
 +++ b/kernel/cgroup.c
 @@ -66,7 +66,7 @@
@@ -38,7 +38,7 @@ index 470f653..34330158 100644
  
  #define CGROUP_FILE_NAME_MAX		(MAX_CGROUP_TYPE_NAMELEN +	\
  					 MAX_CFTYPE_NAME + 2)
-@@ -4671,8 +4671,9 @@ static struct cftype cgroup_legacy_base_files[] = {
+@@ -4672,8 +4672,9 @@ static struct cftype cgroup_legacy_base_files[] = {
   */
  static void css_free_work_fn(struct work_struct *work)
  {
@@ -49,7 +49,7 @@ index 470f653..34330158 100644
  	struct cgroup_subsys *ss = css->ss;
  	struct cgroup *cgrp = css->cgroup;
  
-@@ -4720,14 +4721,15 @@ static void css_free_rcu_fn(struct rcu_head *rcu_head)
+@@ -4721,14 +4722,15 @@ static void css_free_rcu_fn(struct rcu_head *rcu_head)
  	struct cgroup_subsys_state *css =
  		container_of(rcu_head, struct cgroup_subsys_state, rcu_head);
  
@@ -68,7 +68,7 @@ index 470f653..34330158 100644
  	struct cgroup_subsys *ss = css->ss;
  	struct cgroup *cgrp = css->cgroup;
  
-@@ -4766,8 +4768,8 @@ static void css_release(struct percpu_ref *ref)
+@@ -4767,8 +4769,9 @@ static void css_release(struct percpu_ref *ref)
  	struct cgroup_subsys_state *css =
  		container_of(ref, struct cgroup_subsys_state, refcnt);
  
@@ -76,10 +76,11 @@ index 470f653..34330158 100644
 -	queue_work(cgroup_destroy_wq, &css->destroy_work);
 +	INIT_DELAYED_WORK(&css->destroy_work, css_release_work_fn);
 +	queue_delayed_work(cgroup_destroy_wq, &css->destroy_work, CGROUP_PIDLIST_DESTROY_DELAY);
++
  }
  
  static void init_and_link_css(struct cgroup_subsys_state *css,
-@@ -5032,8 +5034,9 @@ out_destroy:
+@@ -5038,8 +5041,9 @@ out_destroy:
   */
  static void css_killed_work_fn(struct work_struct *work)
  {
@@ -89,18 +90,18 @@ index 470f653..34330158 100644
 +		container_of(dwork, struct cgroup_subsys_state, destroy_work);
  
  	mutex_lock(&cgroup_mutex);
- 	offline_css(css);
-@@ -5048,8 +5051,8 @@ static void css_killed_ref_fn(struct percpu_ref *ref)
- 	struct cgroup_subsys_state *css =
+ 
+@@ -5060,8 +5064,8 @@ static void css_killed_ref_fn(struct percpu_ref *ref)
  		container_of(ref, struct cgroup_subsys_state, refcnt);
  
--	INIT_WORK(&css->destroy_work, css_killed_work_fn);
--	queue_work(cgroup_destroy_wq, &css->destroy_work);
-+	INIT_DELAYED_WORK(&css->destroy_work, css_killed_work_fn);
-+	queue_delayed_work(cgroup_destroy_wq, &css->destroy_work, CGROUP_PIDLIST_DESTROY_DELAY);
+ 	if (atomic_dec_and_test(&css->online_cnt)) {
+-		INIT_WORK(&css->destroy_work, css_killed_work_fn);
+-		queue_work(cgroup_destroy_wq, &css->destroy_work);
++		INIT_DELAYED_WORK(&css->destroy_work, css_killed_work_fn);
++		queue_delayed_work(cgroup_destroy_wq, &css->destroy_work, CGROUP_PIDLIST_DESTROY_DELAY);
+ 	}
  }
  
- /**
 -- 
 2.4.3
 
