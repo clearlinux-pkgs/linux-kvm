@@ -1,4 +1,4 @@
-From dc8f434fe72232d81ca9eb5716ccd4ca5defc94e Mon Sep 17 00:00:00 2001
+From 71396fa13e864278d9edd3f60fc7eb06a6973f02 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Fri, 28 Aug 2015 11:00:36 -0500
 Subject: [PATCH] cgroup
@@ -13,7 +13,7 @@ Signed-off-by: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
  2 files changed, 15 insertions(+), 11 deletions(-)
 
 diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
-index 8e30fae..4c60bf2 100644
+index 8e30fae..10cc307 100644
 --- a/include/linux/cgroup-defs.h
 +++ b/include/linux/cgroup-defs.h
 @@ -141,7 +141,7 @@ struct cgroup_subsys_state {
@@ -21,7 +21,7 @@ index 8e30fae..4c60bf2 100644
  	/* percpu_ref killing and RCU release */
  	struct rcu_head rcu_head;
 -	struct work_struct destroy_work;
-+	struct delayed_work_struct destroy_work;
++	struct delayed_work destroy_work;
  };
  
  /*
