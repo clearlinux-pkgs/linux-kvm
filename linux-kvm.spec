@@ -47,7 +47,6 @@ Patch10:  0010-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
 Patch11: 0011-pci-probe-identify-known-devices.patch
 Patch12: 0012-init-no-wait-for-the-known-devices.patch
 Patch13: 0013-fork-turn-mmput-into-an-async-function.patch
-Patch14: 0014-perf-ptdamage.patch
 
 #cpuidle: small improvements & fixes for menu governor
 Patch15: 0015-cpuidle-x86-increase-forced-cut-off-for-polling-to-2.patch
@@ -88,7 +87,6 @@ Linux kernel extra files
 %patch12 -p1
 
 %patch13 -p1
-%patch14 -p1
 
 #cpuidle: small improvements & fixes for menu governor
 %patch15 -p1
