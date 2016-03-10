@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.4.4
+Version:        4.4.5
 Release:        146
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.4.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.5.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -69,7 +69,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.4.4
+%setup -q -n linux-4.4.5
 
 # Use when needed
 # Added a warning to msleep (our local patch) to catch where it is used
