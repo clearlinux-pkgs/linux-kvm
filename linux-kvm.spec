@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.4.5
+Version:        4.5
 Release:        147
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.5.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.5.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -49,12 +49,7 @@ Patch12: 0012-init-no-wait-for-the-known-devices.patch
 Patch13: 0013-fork-turn-mmput-into-an-async-function.patch
 Patch14: ksm-wakeups.patch
 
-#cpuidle: small improvements & fixes for menu governor
-Patch15: 0015-cpuidle-x86-increase-forced-cut-off-for-polling-to-2.patch
-Patch16: 0016-cpuidle-menu-use-interactivity_req-to-disable-pollin.patch
-Patch17: 0017-cpuidle-menu-smooth-out-measured_us-calculation.patch
-
-Patch18: 0018-init-do_mounts-recreate-dev-root.patch
+Patch15: 0015-init-do_mounts-recreate-dev-root.patch
 
 
 %description
@@ -69,7 +64,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.4.5
+%setup -q -n linux-4.5
 
 # Use when needed
 # Added a warning to msleep (our local patch) to catch where it is used
@@ -90,12 +85,7 @@ Linux kernel extra files
 %patch13 -p1
 %patch14 -p1
 
-#cpuidle: small improvements & fixes for menu governor
 %patch15 -p1
-%patch16 -p1
-%patch17 -p1
-
-%patch18 -p1
 
 cp %{SOURCE1} .
 
