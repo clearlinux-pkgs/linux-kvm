@@ -1,0 +1,30 @@
+
+
+From bad332d886be80066a08a7413b18be15fe574869 Mon Sep 17 00:00:00 2001
+From: Chao Peng <chao.p.peng@linux.intel.com>
+Date: Wed, 13 May 2015 15:04:13 +0800
+Subject: [PATCH] KVM: x86: Add hypercall KVM_HC_RETURN_MEM
+
+To give guest a simple interface to return unused memory to host.
+
+Signed-off-by: Chao Peng <chao.p.peng@linux.intel.com>
+---
+ arch/x86/kvm/x86.c            | 14 ++++++++++++++
+ include/uapi/linux/kvm_para.h |  1 +
+ 2 files changed, 15 insertions(+)
+
+diff --git a/include/uapi/linux/kvm_para.h b/include/uapi/linux/kvm_para.h
+index bf6cd7d..d140787 100644
+--- a/include/uapi/linux/kvm_para.h
++++ b/include/uapi/linux/kvm_para.h
+@@ -23,6 +23,7 @@
+ #define KVM_HC_MIPS_GET_CLOCK_FREQ	6
+ #define KVM_HC_MIPS_EXIT_VM		7
+ #define KVM_HC_MIPS_CONSOLE_OUTPUT	8
++#define KVM_HC_RETURN_MEM 		9
+ 
+ /*
+  * hypercalls use architecture specific
+-- 
+1.9.1
+

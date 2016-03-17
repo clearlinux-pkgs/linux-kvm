@@ -1,0 +1,84 @@
+--- linux-4.3/fs/drop_caches.c.org	2015-11-21 11:17:48.320116452 -0500
++++ linux-4.3/fs/drop_caches.c	2015-11-21 11:27:25.150905075 -0500
+@@ -8,10 +8,12 @@
+ #include <linux/writeback.h>
+ #include <linux/sysctl.h>
+ #include <linux/gfp.h>
++#include <linux/swap.h>
+ #include "internal.h"
+ 
+ /* A global variable is a bit ugly, but it keeps the code simple */
+ int sysctl_drop_caches;
++int sysctl_shrink_caches_mb;
+ 
+ static void drop_pagecache_sb(struct super_block *sb, void *unused)
+ {
+@@ -67,3 +69,22 @@
+ 	}
+ 	return 0;
+ }
++
++int shrink_caches_sysctl_handler(struct ctl_table *table, int write,
++	void __user *buffer, size_t *length, loff_t *ppos)
++{
++	int ret;
++
++	ret = proc_dointvec(table, write, buffer, length, ppos);
++	if (ret)
++		return ret;
++	if (write)
++		shrink_all_memory(1024 * 1024 / PAGE_SIZE * sysctl_shrink_caches_mb);
++
++	/*
++	 * Now that a bunch of memory is freed, empty the per cpu caches as well
++	 */
++	lru_add_drain_all();
++
++	return 0;
++}
+--- linux-4.3/include/linux/mm.h.org	2015-11-21 11:18:00.564963371 -0500
++++ linux-4.3/include/linux/mm.h	2015-11-21 11:21:49.323103500 -0500
+@@ -2201,6 +2201,9 @@
+ extern int sysctl_drop_caches;
+ int drop_caches_sysctl_handler(struct ctl_table *, int,
+ 					void __user *, size_t *, loff_t *);
++extern int sysctl_shrink_caches_mb;
++int shrink_caches_sysctl_handler(struct ctl_table *, int,
++					void __user *, size_t *, loff_t *);
+ #endif
+ 
+ void drop_slab(void);
+--- linux-4.3/kernel/sysctl.c.org	2015-11-21 11:18:12.264817102 -0500
++++ linux-4.3/kernel/sysctl.c	2015-11-21 11:25:23.651424028 -0500
+@@ -1323,6 +1323,13 @@
+ 		.extra1		= &one,
+ 		.extra2		= &four,
+ 	},
++	{
++		.procname	= "shrink_caches_mb",
++		.data		= &sysctl_shrink_caches_mb,
++		.maxlen		= sizeof(int),
++		.mode		= 0644,
++		.proc_handler	= shrink_caches_sysctl_handler,
++	},
+ #ifdef CONFIG_COMPACTION
+ 	{
+ 		.procname	= "compact_memory",
+--- linux-4.3/mm/vmscan.c.org	2015-11-21 11:17:22.312441593 -0500
++++ linux-4.3/mm/vmscan.c	2015-11-21 11:17:35.081281961 -0500
+@@ -3534,7 +3534,6 @@
+ 	wake_up_interruptible(&pgdat->kswapd_wait);
+ }
+ 
+-#ifdef CONFIG_HIBERNATION
+ /*
+  * Try to free `nr_to_reclaim' of memory, system-wide, and return the number of
+  * freed pages.
+@@ -3572,7 +3571,6 @@
+ 
+ 	return nr_reclaimed;
+ }
+-#endif /* CONFIG_HIBERNATION */
+ 
+ /* It's optimal to keep kswapds on the same CPUs as their memory, but
+    not required for correctness.  So if the last cpu in a node goes
