@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.5
-Release:        151
+Release:        152
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -51,9 +51,9 @@ Patch14: ksm-wakeups.patch
 
 Patch15: 0015-init-do_mounts-recreate-dev-root.patch
 
-Patch20: 0001-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
-Patch21: return_memory_to_host.patch
-Patch22: shrink_caches.patch
+#Patch20: 0001-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
+#Patch21: return_memory_to_host.patch
+#Patch22: shrink_caches.patch
 
 
 %description
@@ -91,9 +91,9 @@ Linux kernel extra files
 
 %patch15 -p1
 
-%patch20 -p1
-%patch21 -p1
-%patch22 -p1
+#%patch20 -p1
+#%patch21 -p1
+#%patch22 -p1
 
 cp %{SOURCE1} .
 
