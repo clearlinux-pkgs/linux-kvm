@@ -1,7 +1,18 @@
+From f52f6daa6e70ff07319a9d35b0c7bf5c1dbb82b5 Mon Sep 17 00:00:00 2001
+From: Arjan van de Ven <arjan@linux.intel.com>
+Date: Wed, 30 Mar 2016 05:33:42 -0600
+Subject: [PATCH 18/19] mm: page_alloc: return memory to host
 
---- linux-4.3/mm/page_alloc.c.org	2015-11-15 11:21:45.071441772 -0500
-+++ linux-4.3/mm/page_alloc.c	2015-11-15 11:44:10.144626044 -0500
-@@ -62,6 +62,7 @@
+memshrinker in the kvm kernel
+---
+ mm/page_alloc.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+index 838ca8bb..8803657 100644
+--- a/mm/page_alloc.c
++++ b/mm/page_alloc.c
+@@ -63,6 +63,7 @@
  #include <linux/sched/rt.h>
  #include <linux/page_owner.h>
  #include <linux/kthread.h>
@@ -9,7 +20,7 @@
  
  #include <asm/sections.h>
  #include <asm/tlbflush.h>
-@@ -570,6 +571,28 @@
+@@ -574,6 +575,28 @@ static inline void set_page_order(struct page *page, unsigned int order)
  	__SetPageBuddy(page);
  }
  
@@ -25,7 +36,7 @@
 +		return;
 +	}
 +	have_hypercall = 1;
-+	
++
 +	if (order < 6)
 +		return;
 +
@@ -38,7 +49,7 @@
  static inline void rmv_page_order(struct page *page)
  {
  	__ClearPageBuddy(page);
-@@ -699,6 +721,7 @@
+@@ -703,6 +726,7 @@ static inline void __free_one_page(struct page *page,
  		page = page + (combined_idx - page_idx);
  		page_idx = combined_idx;
  		order++;
@@ -46,3 +57,6 @@
  	}
  	set_page_order(page, order);
  
+-- 
+2.4.3
+

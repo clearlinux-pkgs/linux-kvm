@@ -1,5 +1,20 @@
---- linux-4.3/fs/drop_caches.c.org	2015-11-21 11:17:48.320116452 -0500
-+++ linux-4.3/fs/drop_caches.c	2015-11-21 11:27:25.150905075 -0500
+From 346381fe2ea4178f1725ed4f7398ffbb919cf5e5 Mon Sep 17 00:00:00 2001
+From: Arjan van de Ven <arjan@linux.intel.com>
+Date: Wed, 30 Mar 2016 05:44:00 -0600
+Subject: [PATCH 19/19] mm: shrink caches
+
+memshrinker in the kvm kernel
+---
+ fs/drop_caches.c   | 21 +++++++++++++++++++++
+ include/linux/mm.h |  3 +++
+ kernel/sysctl.c    |  7 +++++++
+ mm/vmscan.c        |  2 --
+ 4 files changed, 31 insertions(+), 2 deletions(-)
+
+diff --git a/fs/drop_caches.c b/fs/drop_caches.c
+index d72d52b..91d506e 100644
+--- a/fs/drop_caches.c
++++ b/fs/drop_caches.c
 @@ -8,10 +8,12 @@
  #include <linux/writeback.h>
  #include <linux/sysctl.h>
@@ -13,7 +28,7 @@
  
  static void drop_pagecache_sb(struct super_block *sb, void *unused)
  {
-@@ -67,3 +69,22 @@
+@@ -67,3 +69,22 @@ int drop_caches_sysctl_handler(struct ctl_table *table, int write,
  	}
  	return 0;
  }
@@ -36,9 +51,11 @@
 +
 +	return 0;
 +}
---- linux-4.3/include/linux/mm.h.org	2015-11-21 11:18:00.564963371 -0500
-+++ linux-4.3/include/linux/mm.h	2015-11-21 11:21:49.323103500 -0500
-@@ -2201,6 +2201,9 @@
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 516e149..0efb950 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -2223,6 +2223,9 @@ static inline int in_gate_area(struct mm_struct *mm, unsigned long addr)
  extern int sysctl_drop_caches;
  int drop_caches_sysctl_handler(struct ctl_table *, int,
  					void __user *, size_t *, loff_t *);
@@ -48,9 +65,11 @@
  #endif
  
  void drop_slab(void);
---- linux-4.3/kernel/sysctl.c.org	2015-11-21 11:18:12.264817102 -0500
-+++ linux-4.3/kernel/sysctl.c	2015-11-21 11:25:23.651424028 -0500
-@@ -1323,6 +1323,13 @@
+diff --git a/kernel/sysctl.c b/kernel/sysctl.c
+index 97715fd..e6d1d4d 100644
+--- a/kernel/sysctl.c
++++ b/kernel/sysctl.c
+@@ -1356,6 +1356,13 @@ static struct ctl_table vm_table[] = {
  		.extra1		= &one,
  		.extra2		= &four,
  	},
@@ -64,9 +83,11 @@
  #ifdef CONFIG_COMPACTION
  	{
  		.procname	= "compact_memory",
---- linux-4.3/mm/vmscan.c.org	2015-11-21 11:17:22.312441593 -0500
-+++ linux-4.3/mm/vmscan.c	2015-11-21 11:17:35.081281961 -0500
-@@ -3534,7 +3534,6 @@
+diff --git a/mm/vmscan.c b/mm/vmscan.c
+index 71b1c29..09c6539 100644
+--- a/mm/vmscan.c
++++ b/mm/vmscan.c
+@@ -3556,7 +3556,6 @@ void wakeup_kswapd(struct zone *zone, int order, enum zone_type classzone_idx)
  	wake_up_interruptible(&pgdat->kswapd_wait);
  }
  
@@ -74,7 +95,7 @@
  /*
   * Try to free `nr_to_reclaim' of memory, system-wide, and return the number of
   * freed pages.
-@@ -3572,7 +3571,6 @@
+@@ -3594,7 +3593,6 @@ unsigned long shrink_all_memory(unsigned long nr_to_reclaim)
  
  	return nr_reclaimed;
  }
@@ -82,3 +103,6 @@
  
  /* It's optimal to keep kswapds on the same CPUs as their memory, but
     not required for correctness.  So if the last cpu in a node goes
+-- 
+2.4.3
+

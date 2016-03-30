@@ -1,4 +1,4 @@
-From 74cc607ae710ccb65c0161e95f8e9f5803269a16 Mon Sep 17 00:00:00 2001
+From 33a8250210874eceb255388efab5e2842b37f091 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 17:28:14 -0600
 Subject: [PATCH 08/19] smpboot
@@ -12,7 +12,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  2 files changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
-index fbabe4f..245b57c 100644
+index 24d57f7..6bafd5e 100644
 --- a/arch/x86/kernel/smpboot.c
 +++ b/arch/x86/kernel/smpboot.c
 @@ -605,7 +605,7 @@ wakeup_secondary_cpu_via_init(int phys_apicid, unsigned long start_eip)
@@ -25,10 +25,10 @@ index fbabe4f..245b57c 100644
  	pr_debug("Deasserting INIT\n");
  
 diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index c7c4d9c..8913f79 100644
+index 3d743da..894d5b7 100644
 --- a/arch/x86/kernel/tsc.c
 +++ b/arch/x86/kernel/tsc.c
-@@ -1253,6 +1253,9 @@ unsigned long calibrate_delay_is_known(void)
+@@ -1251,6 +1251,9 @@ unsigned long calibrate_delay_is_known(void)
  	if (!tsc_disabled && !cpu_has(&cpu_data(cpu), X86_FEATURE_CONSTANT_TSC))
  		return 0;
  

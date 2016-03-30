@@ -34,7 +34,7 @@ BuildRequires:  bison
 %define debug_package %{nil}
 %define __strip /bin/true
 
-Patch1:  0001-msleep.patch
+Patch1:  0001-msleep-warning.patch
 Patch2:  0002-cpuidle-skip-synchronize_rcu-on-single-CPU-systems.patch
 Patch3:  0003-sysrq-skip-synchronize_rcu-if-there-is-no-old-op.patch
 Patch4:  0004-fbcon-enable-no-blink-by-default.patch
@@ -43,18 +43,17 @@ Patch6:  0006-pci-probe.patch
 Patch7:  0007-cgroup.patch
 Patch8:  0008-smpboot.patch
 Patch9:  0009-perf.patch
-Patch10:  0010-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
+Patch10: 0010-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
 Patch11: 0011-pci-probe-identify-known-devices.patch
 Patch12: 0012-init-no-wait-for-the-known-devices.patch
 Patch13: 0013-fork-turn-mmput-into-an-async-function.patch
-Patch14: ksm-wakeups.patch
-
+Patch14: 0014-ksm-wakeups.patch
 Patch15: 0015-init-do_mounts-recreate-dev-root.patch
+Patch16: 0016-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 
-#Patch20: 0001-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
-#Patch21: return_memory_to_host.patch
-#Patch22: shrink_caches.patch
-
+#Patch17: 0017-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
+#Patch18: 0018-mm-page_alloc-return-memory-to-host.patch
+#Patch19: 0019-mm-shrink-caches.patch
 
 %description
 The Linux kernel.
@@ -85,15 +84,14 @@ Linux kernel extra files
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
-
 %patch13 -p1
 %patch14 -p1
-
 %patch15 -p1
+%patch16 -p1
 
-#%patch20 -p1
-#%patch21 -p1
-#%patch22 -p1
+#%patch17 -p1
+#%patch18 -p1
+#%patch19 -p1
 
 cp %{SOURCE1} .
 
