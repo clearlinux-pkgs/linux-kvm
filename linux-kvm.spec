@@ -52,8 +52,8 @@ Patch15: 0015-init-do_mounts-recreate-dev-root.patch
 Patch16: 0016-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 
 #Patch17: 0017-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
-#Patch18: 0018-mm-page_alloc-return-memory-to-host.patch
-#Patch19: 0019-mm-shrink-caches.patch
+#Patch18: 0018-mm-shrink-caches.patch
+#Patch19: 0019-mm-page_alloc-return-memory-to-host.patch
 
 %description
 The Linux kernel.

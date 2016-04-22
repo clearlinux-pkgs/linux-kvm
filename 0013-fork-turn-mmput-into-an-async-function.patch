@@ -1,4 +1,4 @@
-From b0ae7c43930002d665670a9a16273ff25dc7a1c7 Mon Sep 17 00:00:00 2001
+From 5f1f0554e20ed9a465baa002fd0edde322e042e5 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Sat, 14 Feb 2015 10:05:23 -0600
 Subject: [PATCH 13/19] fork: turn mmput into an async function
@@ -89,5 +89,5 @@ index 2e391c7..24d4125 100644
  EXPORT_SYMBOL_GPL(mmput);
  
 -- 
-2.4.3
+2.4.11
 

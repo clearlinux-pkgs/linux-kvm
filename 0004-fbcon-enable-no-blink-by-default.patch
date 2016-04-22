@@ -1,4 +1,4 @@
-From 1003b2ed027d3f24052df31a33c5c350e13d485a Mon Sep 17 00:00:00 2001
+From fa75757c265e74e7697ef2026dc1692b95e0bc36 Mon Sep 17 00:00:00 2001
 From: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
 Date: Mon, 13 Apr 2015 11:26:36 -0500
 Subject: [PATCH 04/19] fbcon: enable no blink by default
@@ -22,5 +22,5 @@ index 6e92917..b974448 100644
  #define divides(a, b)	((!(a) || (b)%(a)) ? 0 : 1)
  
 -- 
-2.4.3
+2.4.11
 

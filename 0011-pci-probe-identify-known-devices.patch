@@ -1,4 +1,4 @@
-From 95dc43c8e69afcd7b818ba7478a6d1d3a9b53fed Mon Sep 17 00:00:00 2001
+From 6c2f245d1c79fbec9e152b2bfabf0e8126178aff Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Sat, 14 Feb 2015 09:49:41 -0600
 Subject: [PATCH 11/19] pci: probe: identify known devices
@@ -12,7 +12,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 156 insertions(+)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index da9c248..0b9f11f 100644
+index 8aa53e7..9ac0c38 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
 @@ -162,6 +162,160 @@ static inline unsigned long decode_bar(struct pci_dev *dev, u32 bar)
@@ -176,7 +176,7 @@ index da9c248..0b9f11f 100644
  /**
   * pci_read_base - read a PCI BAR
   * @dev: the PCI device
-@@ -181,6 +335,8 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
+@@ -184,6 +338,8 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
  
  	mask = type ? PCI_ROM_ADDRESS_MASK : ~0;
  
@@ -186,5 +186,5 @@ index da9c248..0b9f11f 100644
  	res->name = pci_name(dev);
  
 -- 
-2.4.3
+2.4.11
 

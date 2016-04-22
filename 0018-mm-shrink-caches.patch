@@ -1,7 +1,7 @@
-From 346381fe2ea4178f1725ed4f7398ffbb919cf5e5 Mon Sep 17 00:00:00 2001
+From 1b6206ccf74d9b379373a2772d2fe14519c3d946 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 30 Mar 2016 05:44:00 -0600
-Subject: [PATCH 19/19] mm: shrink caches
+Subject: [PATCH 18/19] mm: shrink caches
 
 memshrinker in the kvm kernel
 ---
@@ -104,5 +104,5 @@ index 71b1c29..09c6539 100644
  /* It's optimal to keep kswapds on the same CPUs as their memory, but
     not required for correctness.  So if the last cpu in a node goes
 -- 
-2.4.3
+2.4.11
 
