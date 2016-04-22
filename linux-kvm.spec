@@ -55,6 +55,13 @@ Patch16: 0016-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 #Patch18: 0018-mm-shrink-caches.patch
 #Patch19: 0019-mm-page_alloc-return-memory-to-host.patch
 
+# Aufs
+Patch2001: 2001-aufs4-kbuild.patch
+Patch2002: 2002-aufs-base.patch
+Patch2003: 2003-aufs-mmap.patch
+Patch2004: 2004-aufs-standalone.patch
+Patch2005: 2005-aufs-driver-and-docs.patch
+
 %description
 The Linux kernel.
 
@@ -92,6 +99,13 @@ Linux kernel extra files
 #%patch17 -p1
 #%patch18 -p1
 #%patch19 -p1
+
+# Aufs
+%patch2001 -p1
+%patch2002 -p1
+%patch2003 -p1
+%patch2004 -p1
+%patch2005 -p1
 
 cp %{SOURCE1} .
 
