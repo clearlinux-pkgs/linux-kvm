@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.5.2
-Release:        159
+Release:        160
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -62,6 +62,11 @@ Patch2003: 2003-aufs-mmap.patch
 Patch2004: 2004-aufs-standalone.patch
 Patch2005: 2005-aufs-driver-and-docs.patch
 
+# Temporal patch set
+# gcc 6 patch set
+Patch9001: 9001-perf-pmu-Fix-misleadingly-indented-assignment-whites.patch
+Patch9002: 9002-perf-tools-Fix-unused-variables-x86_-32-64-_regoffse.patch
+
 %description
 The Linux kernel.
 
@@ -106,6 +111,11 @@ Linux kernel extra files
 %patch2003 -p1
 %patch2004 -p1
 %patch2005 -p1
+
+# Temporal patch set
+# gcc 6 patch set
+%patch9001 -p1
+%patch9002 -p1
 
 cp %{SOURCE1} .
 
