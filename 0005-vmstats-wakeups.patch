@@ -1,4 +1,4 @@
-From 97bc2e0273723280f57d336f92a1ca38c417bd85 Mon Sep 17 00:00:00 2001
+From f4576d9ca11f6e4aa65109370da6c8e8cab548b5 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:47:20 -0600
 Subject: [PATCH 05/19] vmstats: wakeups
@@ -24,5 +24,5 @@ index 084c672..42b079e 100644
  
  static void vmstat_update(struct work_struct *w)
 -- 
-2.4.11
+2.8.1
 

@@ -1,4 +1,4 @@
-From 6c2f245d1c79fbec9e152b2bfabf0e8126178aff Mon Sep 17 00:00:00 2001
+From 221ae68d38c733a540d7a917ac14677c80c1e5fc Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Sat, 14 Feb 2015 09:49:41 -0600
 Subject: [PATCH 11/19] pci: probe: identify known devices
@@ -186,5 +186,5 @@ index 8aa53e7..9ac0c38 100644
  	res->name = pci_name(dev);
  
 -- 
-2.4.11
+2.8.1
 

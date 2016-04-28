@@ -1,4 +1,4 @@
-From 3c828426d37783758b428501f235a780ce9a6aa1 Mon Sep 17 00:00:00 2001
+From a5b5b94de9c35c096f9f3b7df6fe37bb5e35be15 Mon Sep 17 00:00:00 2001
 From: Chao Peng <chao.p.peng@linux.intel.com>
 Date: Wed, 13 May 2015 15:04:13 +0800
 Subject: [PATCH 17/19] KVM: x86: Add hypercall KVM_HC_RETURN_MEM
@@ -12,7 +12,7 @@ Signed-off-by: Chao Peng <chao.p.peng@linux.intel.com>
  2 files changed, 15 insertions(+)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index d47d231..b45e057 100644
+index eca5bd9..424d208 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
 @@ -45,6 +45,7 @@
@@ -63,5 +63,5 @@ index bf6cd7d..edbba71 100644
  /*
   * hypercalls use architecture specific
 -- 
-2.4.11
+2.8.1
 

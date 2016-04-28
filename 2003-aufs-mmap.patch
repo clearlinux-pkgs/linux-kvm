@@ -1,4 +1,4 @@
-From a169bbef3a736792af3c8a414581c063e543b948 Mon Sep 17 00:00:00 2001
+From dd7c39dedbf4bd21e616c5aea4baf4e97df8e8b8 Mon Sep 17 00:00:00 2001
 From: "J. R. Okajima" <hooanon05g@gmail.com>
 Date: Wed, 23 Mar 2016 20:35:26 +0900
 Subject: [PATCH 2003/2005] aufs mmap
@@ -412,5 +412,5 @@ index 0000000..b323b8a
 +}
 +#endif /* !CONFIG_MMU */
 -- 
-2.4.11
+2.8.1
 
