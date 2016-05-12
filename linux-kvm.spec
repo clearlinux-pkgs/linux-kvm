@@ -34,33 +34,36 @@ BuildRequires:  bison
 %define debug_package %{nil}
 %define __strip /bin/true
 
-Patch1:  0001-msleep-warning.patch
-Patch2:  0002-cpuidle-skip-synchronize_rcu-on-single-CPU-systems.patch
-Patch3:  0003-sysrq-skip-synchronize_rcu-if-there-is-no-old-op.patch
-Patch4:  0004-fbcon-enable-no-blink-by-default.patch
-Patch5:  0005-vmstats-wakeups.patch
-Patch6:  0006-pci-probe.patch
-Patch7:  0007-cgroup.patch
-Patch8:  0008-smpboot.patch
-Patch9:  0009-perf.patch
-Patch10: 0010-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
-Patch11: 0011-pci-probe-identify-known-devices.patch
-Patch12: 0012-init-no-wait-for-the-known-devices.patch
-Patch13: 0013-fork-turn-mmput-into-an-async-function.patch
-Patch14: 0014-ksm-wakeups.patch
-Patch15: 0015-init-do_mounts-recreate-dev-root.patch
-Patch16: 0016-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+# Serie    00XX: mainline, CVE, bugfixes patches
 
-#Patch17: 0017-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
-#Patch18: 0018-mm-shrink-caches.patch
-#Patch19: 0019-mm-page_alloc-return-memory-to-host.patch
+# Serie    01XX: Clear Linux patches
+#Patch0101: 0101-msleep-warning.patch
+Patch0102: 0102-cpuidle-skip-synchronize_rcu-on-single-CPU-systems.patch
+Patch0103: 0103-sysrq-skip-synchronize_rcu-if-there-is-no-old-op.patch
+Patch0104: 0104-fbcon-enable-no-blink-by-default.patch
+Patch0105: 0105-vmstats-wakeups.patch
+Patch0106: 0106-pci-probe.patch
+Patch0107: 0107-cgroup.patch
+Patch0108: 0108-smpboot.patch
+Patch0109: 0109-perf.patch
+Patch0110: 0110-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
+Patch0111: 0111-pci-probe-identify-known-devices.patch
+Patch0112: 0112-init-no-wait-for-the-known-devices.patch
+Patch0113: 0113-fork-turn-mmput-into-an-async-function.patch
+Patch0114: 0114-ksm-wakeups.patch
+Patch0115: 0115-init-do_mounts-recreate-dev-root.patch
+Patch0116: 0116-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+#Patch0117: 0117-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
+#Patch0118: 0118-mm-shrink-caches.patch
+#Patch0119: 0119-mm-page_alloc-return-memory-to-host.patch
 
-# Aufs
-Patch2001: 2001-aufs4-kbuild.patch
-Patch2002: 2002-aufs-base.patch
-Patch2003: 2003-aufs-mmap.patch
-Patch2004: 2004-aufs-standalone.patch
-Patch2005: 2005-aufs-driver-and-docs.patch
+# Serie    XYYY: Extra features modules
+# AUFS
+Patch1001: 1001-aufs4-kbuild.patch
+Patch1002: 1002-aufs-base.patch
+Patch1003: 1003-aufs-mmap.patch
+Patch1004: 1004-aufs-standalone.patch
+Patch1005: 1005-aufs-driver-and-docs.patch
 
 %description
 The Linux kernel.
@@ -76,36 +79,39 @@ Linux kernel extra files
 %prep
 %setup -q -n linux-4.5.3
 
+# Serie    00XX: mainline, CVE, bugfixes patches
+
+# Serie    01XX: Clear Linux patches
 # Use when needed
 # Added a warning to msleep (our local patch) to catch where it is used
 # not all uses are bug
-#%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
+#%patch0101 -p1
+%patch0102 -p1
+%patch0103 -p1
+%patch0104 -p1
+%patch0105 -p1
+%patch0106 -p1
+%patch0107 -p1
+%patch0108 -p1
+%patch0109 -p1
+%patch0110 -p1
+%patch0111 -p1
+%patch0112 -p1
+%patch0113 -p1
+%patch0114 -p1
+%patch0115 -p1
+%patch0116 -p1
+#%patch0117 -p1
+#%patch0118 -p1
+#%patch0119 -p1
 
-#%patch17 -p1
-#%patch18 -p1
-#%patch19 -p1
-
-# Aufs
-%patch2001 -p1
-%patch2002 -p1
-%patch2003 -p1
-%patch2004 -p1
-%patch2005 -p1
+# Serie    XYYY: Extra features modules
+# AUFS
+%patch1001 -p1
+%patch1002 -p1
+%patch1003 -p1
+%patch1004 -p1
+%patch1005 -p1
 
 cp %{SOURCE1} .
 
