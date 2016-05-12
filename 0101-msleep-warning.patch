@@ -1,7 +1,7 @@
-From 988629362ada4b905279b891dd51760a11b45934 Mon Sep 17 00:00:00 2001
+From 20fb56ffb81d1fe335f11e552c7b9c304f61f059 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 30 Mar 2016 04:45:28 -0600
-Subject: [PATCH 01/19] msleep warning
+Subject: [PATCH 101/119] msleep warning
 
 ---
  arch/x86/kernel/alternative.c |  4 ++++
@@ -39,10 +39,10 @@ index 25f9093..b9e858a 100644
  		free_init_pages("SMP alternatives",
  				(unsigned long)__smp_locks,
 diff --git a/drivers/acpi/bus.c b/drivers/acpi/bus.c
-index 891c42d..2487765 100644
+index f9081b7..a08f5bf 100644
 --- a/drivers/acpi/bus.c
 +++ b/drivers/acpi/bus.c
-@@ -1067,6 +1067,8 @@ static int __init acpi_bus_init(void)
+@@ -1070,6 +1070,8 @@ static int __init acpi_bus_init(void)
  struct kobject *acpi_kobj;
  EXPORT_SYMBOL_GPL(acpi_kobj);
  
@@ -51,7 +51,7 @@ index 891c42d..2487765 100644
  static int __init acpi_init(void)
  {
  	int result;
-@@ -1076,6 +1078,8 @@ static int __init acpi_init(void)
+@@ -1079,6 +1081,8 @@ static int __init acpi_init(void)
  		return -ENODEV;
  	}
  
@@ -60,7 +60,7 @@ index 891c42d..2487765 100644
  	acpi_kobj = kobject_create_and_add("acpi", firmware_kobj);
  	if (!acpi_kobj) {
  		printk(KERN_WARNING "%s: kset create error\n", __func__);
-@@ -1086,6 +1090,7 @@ static int __init acpi_init(void)
+@@ -1089,6 +1093,7 @@ static int __init acpi_init(void)
  	result = acpi_bus_init();
  	if (result) {
  		disable_acpi();
@@ -68,7 +68,7 @@ index 891c42d..2487765 100644
  		return result;
  	}
  
-@@ -1096,6 +1101,7 @@ static int __init acpi_init(void)
+@@ -1099,6 +1104,7 @@ static int __init acpi_init(void)
  	acpi_sleep_proc_init();
  	acpi_wakeup_device_init();
  	acpi_debugger_init();
@@ -190,7 +190,7 @@ index bbc5d11..2509755 100644
  		timeout = schedule_timeout_uninterruptible(timeout);
  }
 diff --git a/net/netlink/af_netlink.c b/net/netlink/af_netlink.c
-index f1ffb34..0448c26 100644
+index d2bc03f..789121f 100644
 --- a/net/netlink/af_netlink.c
 +++ b/net/netlink/af_netlink.c
 @@ -1223,7 +1223,7 @@ static int netlink_create(struct net *net, struct socket *sock, int protocol,
@@ -203,5 +203,5 @@ index f1ffb34..0448c26 100644
  		request_module("net-pf-%d-proto-%d", PF_NETLINK, protocol);
  		netlink_lock_table();
 -- 
-2.8.1
+2.8.2
 

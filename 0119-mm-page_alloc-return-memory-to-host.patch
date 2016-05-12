@@ -1,7 +1,7 @@
-From 7d3d9b2d3d8197c5f37eb1007d0c1176700f8492 Mon Sep 17 00:00:00 2001
+From a6100ad7696567e54d4f0dca7c0980626d2b82c8 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 30 Mar 2016 05:33:42 -0600
-Subject: [PATCH 19/19] mm: page_alloc: return memory to host
+Subject: [PATCH 119/119] mm: page_alloc: return memory to host
 
 memshrinker in the kvm kernel
 ---
@@ -9,7 +9,7 @@ memshrinker in the kvm kernel
  1 file changed, 25 insertions(+)
 
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 9d9044e..f5cdabf 100644
+index 629ce64..1ffeba5 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -63,6 +63,8 @@
@@ -59,5 +59,5 @@ index 9d9044e..f5cdabf 100644
  	if (max_order < MAX_ORDER) {
  		/* If we are here, it means order is >= pageblock_order.
 -- 
-2.8.1
+2.8.2
 

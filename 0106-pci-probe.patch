@@ -1,7 +1,7 @@
-From 76a9576dd0c83b178502ed369db2ba9a7ba89fc8 Mon Sep 17 00:00:00 2001
+From 83d6bc2b152e7afba9f70814edbf0fabfe3c6e04 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:53:08 -0600
-Subject: [PATCH 06/19] pci: probe
+Subject: [PATCH 106/119] pci: probe
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -119,5 +119,5 @@ index 6b0056e..8aa53e7 100644
  	return 0;
  }
 -- 
-2.8.1
+2.8.2
 

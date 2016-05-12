@@ -1,7 +1,7 @@
-From 567f251c7873642381a4449ba8ee04de82be0dee Mon Sep 17 00:00:00 2001
+From a2645981d594676ef46fba569f283dac09be1f61 Mon Sep 17 00:00:00 2001
 From: "J. R. Okajima" <hooanon05g@gmail.com>
 Date: Wed, 23 Mar 2016 20:35:26 +0900
-Subject: [PATCH 2001/2005] aufs4 kbuild
+Subject: [PATCH 1001/1005] aufs4 kbuild
 
 ---
  fs/Kconfig                | 1 +
@@ -43,5 +43,5 @@ index ebd10e6..32152e7 100644
  header-y += auto_fs.h
  header-y += auxvec.h
 -- 
-2.8.1
+2.8.2
 

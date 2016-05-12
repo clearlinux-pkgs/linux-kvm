@@ -1,7 +1,7 @@
-From dd7c39dedbf4bd21e616c5aea4baf4e97df8e8b8 Mon Sep 17 00:00:00 2001
+From b40228945fff6222c4c6cad54fc149b23f6ca280 Mon Sep 17 00:00:00 2001
 From: "J. R. Okajima" <hooanon05g@gmail.com>
 Date: Wed, 23 Mar 2016 20:35:26 +0900
-Subject: [PATCH 2003/2005] aufs mmap
+Subject: [PATCH 1003/1005] aufs mmap
 
 ---
  fs/proc/base.c           |  2 +-
@@ -21,10 +21,10 @@ Subject: [PATCH 2003/2005] aufs mmap
  create mode 100644 mm/prfile.c
 
 diff --git a/fs/proc/base.c b/fs/proc/base.c
-index 4f764c2..229de5e 100644
+index 45f2162..498074d 100644
 --- a/fs/proc/base.c
 +++ b/fs/proc/base.c
-@@ -1933,7 +1933,7 @@ static int map_files_get_link(struct dentry *dentry, struct path *path)
+@@ -1934,7 +1934,7 @@ static int map_files_get_link(struct dentry *dentry, struct path *path)
  	down_read(&mm->mmap_sem);
  	vma = find_exact_vma(mm, vm_start, vm_end);
  	if (vma && vma->vm_file) {
@@ -50,7 +50,7 @@ index f8595e8..cb8eda0 100644
  		ino = inode->i_ino;
  	}
 diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
-index fa95ab2..d440354 100644
+index 9d2f3e0..6c4f2fb 100644
 --- a/fs/proc/task_mmu.c
 +++ b/fs/proc/task_mmu.c
 @@ -298,7 +298,10 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma, int is_pid)
@@ -65,7 +65,7 @@ index fa95ab2..d440354 100644
  		dev = inode->i_sb->s_dev;
  		ino = inode->i_ino;
  		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
-@@ -1576,7 +1579,7 @@ static int show_numa_map(struct seq_file *m, void *v, int is_pid)
+@@ -1603,7 +1606,7 @@ static int show_numa_map(struct seq_file *m, void *v, int is_pid)
  	struct proc_maps_private *proc_priv = &numa_priv->proc_maps;
  	struct vm_area_struct *vma = v;
  	struct numa_maps *md = &numa_priv->md;
@@ -91,10 +91,10 @@ index faacb0c..17b43be 100644
  		ino = inode->i_ino;
  		pgoff = (loff_t)vma->vm_pgoff << PAGE_SHIFT;
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 0efb950..7c4ddb3 100644
+index ed0c342..f1d44c6 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -1217,6 +1217,28 @@ static inline int fixup_user_fault(struct task_struct *tsk,
+@@ -1221,6 +1221,28 @@ static inline int fixup_user_fault(struct task_struct *tsk,
  }
  #endif
  
@@ -183,10 +183,10 @@ index da7a35d..f800f87 100644
  	if (page->mapping != inode->i_mapping) {
  		unlock_page(page);
 diff --git a/mm/memory.c b/mm/memory.c
-index 8132787..3f7de66 100644
+index 3345dcf..869aa2c 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -2042,7 +2042,7 @@ static inline int wp_page_reuse(struct mm_struct *mm,
+@@ -2082,7 +2082,7 @@ static inline int wp_page_reuse(struct mm_struct *mm,
  		}
  
  		if (!page_mkwrite)
@@ -412,5 +412,5 @@ index 0000000..b323b8a
 +}
 +#endif /* !CONFIG_MMU */
 -- 
-2.8.1
+2.8.2
 

@@ -1,7 +1,7 @@
-From de1f9f9c97ca49494ec25b8eae2c70c826764fbc Mon Sep 17 00:00:00 2001
+From b310366e4107b739226f2a612e92f75bf52458ac Mon Sep 17 00:00:00 2001
 From: "J. R. Okajima" <hooanon05g@gmail.com>
 Date: Wed, 23 Mar 2016 20:35:26 +0900
-Subject: [PATCH 2004/2005] aufs standalone
+Subject: [PATCH 1004/1005] aufs standalone
 
 ---
  fs/dcache.c              |  1 +
@@ -390,5 +390,5 @@ index e8ffd92..51fa026 100644
  int security_mmap_addr(unsigned long addr)
  {
 -- 
-2.8.1
+2.8.2
 

@@ -1,7 +1,7 @@
-From f4096733ccc2bd66e20566a35c811f2a9af2983b Mon Sep 17 00:00:00 2001
+From 0d67d6028e75553e2848eff944a36755a7161fd1 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Sat, 14 Feb 2015 10:05:23 -0600
-Subject: [PATCH 13/19] fork: turn mmput into an async function
+Subject: [PATCH 113/119] fork: turn mmput into an async function
 
 mmput() is part of the process exit() path as well as many
 other parts of the kernel.  The actual work (when count
@@ -89,5 +89,5 @@ index 2e391c7..24d4125 100644
  EXPORT_SYMBOL_GPL(mmput);
  
 -- 
-2.8.1
+2.8.2
 

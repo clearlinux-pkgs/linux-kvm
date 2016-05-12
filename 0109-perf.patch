@@ -1,7 +1,7 @@
-From e5006a067d10b9c5e8be67e78304a3c90ac37ac8 Mon Sep 17 00:00:00 2001
+From 0128af8f4210d16d8a63e4052818ccf5d36fffaa Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 4 Nov 2015 15:17:10 -0600
-Subject: [PATCH 09/19] perf
+Subject: [PATCH 109/119] perf
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -24,5 +24,5 @@ index 760aec1..e547b71 100644
  			if ((er->idx == EXTRA_REG_LBR) && !er->extra_msr_access)
  				x86_pmu.lbr_sel_map = NULL;
 -- 
-2.8.1
+2.8.2
 

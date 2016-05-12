@@ -1,7 +1,7 @@
-From d2bee20b8c86aaf1d12627de1bd5aaaa87d23068 Mon Sep 17 00:00:00 2001
+From 0f60f3acdd47e9053ded2a4281f38d0fff851c33 Mon Sep 17 00:00:00 2001
 From: "J. R. Okajima" <hooanon05g@gmail.com>
 Date: Wed, 23 Mar 2016 20:35:26 +0900
-Subject: [PATCH 2002/2005] aufs base
+Subject: [PATCH 1002/1005] aufs base
 
 ---
  MAINTAINERS            | 13 +++++++++++++
@@ -16,7 +16,7 @@ Subject: [PATCH 2002/2005] aufs base
  9 files changed, 77 insertions(+), 7 deletions(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 5a389bc..852feda 100644
+index 77e4c10..8574e63 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -2082,6 +2082,19 @@ F:	include/linux/audit.h
@@ -40,10 +40,10 @@ index 5a389bc..852feda 100644
  M:	Miguel Ojeda Sandonis <miguel.ojeda.sandonis@gmail.com>
  W:	http://miguelojeda.es/auxdisplay.htm
 diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 423f4ca..0b816b2 100644
+index 80cf8ad..ba9e4a7 100644
 --- a/drivers/block/loop.c
 +++ b/drivers/block/loop.c
-@@ -706,6 +706,24 @@ static inline int is_loop_device(struct file *file)
+@@ -712,6 +712,24 @@ static inline int is_loop_device(struct file *file)
  	return i && S_ISBLK(i->i_mode) && MAJOR(i->i_rdev) == LOOP_MAJOR;
  }
  
@@ -225,5 +225,5 @@ index da2751d..2e0fca6 100644
 +			 unsigned int flags);
  #endif
 -- 
-2.8.1
+2.8.2
 
