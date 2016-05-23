@@ -1,4 +1,4 @@
-From ca700d1e0a56198faba931863681c0df7acae1a4 Mon Sep 17 00:00:00 2001
+From 17c32ad6be73c0b515b9eecbe420b3c6a7d21126 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:47:20 -0600
 Subject: [PATCH 105/119] vmstats: wakeups
@@ -11,10 +11,10 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/mm/vmstat.c b/mm/vmstat.c
-index 084c672..42b079e 100644
+index 5e43004..123ac65 100644
 --- a/mm/vmstat.c
 +++ b/mm/vmstat.c
-@@ -1386,7 +1386,7 @@ static const struct file_operations proc_vmstat_file_operations = {
+@@ -1375,7 +1375,7 @@ static const struct file_operations proc_vmstat_file_operations = {
  #ifdef CONFIG_SMP
  static struct workqueue_struct *vmstat_wq;
  static DEFINE_PER_CPU(struct delayed_work, vmstat_work);

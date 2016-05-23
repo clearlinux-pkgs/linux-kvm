@@ -59,7 +59,7 @@ Patch0116: 0116-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 
 # Serie    XYYY: Extra features modules
 # AUFS
-Patch1001: 1001-aufs4-kbuild.patch
+Patch1001: 1001-aufs-kbuild.patch
 Patch1002: 1002-aufs-base.patch
 Patch1003: 1003-aufs-mmap.patch
 Patch1004: 1004-aufs-standalone.patch

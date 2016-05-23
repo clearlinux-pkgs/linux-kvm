@@ -1,4 +1,4 @@
-From a6db1ca4658a7052b3a59ba36a847785dc7032bf Mon Sep 17 00:00:00 2001
+From f4646f5eb924ec1950a2cb0d82ac87c6af068393 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 30 Mar 2016 05:44:00 -0600
 Subject: [PATCH 118/119] mm: shrink caches
@@ -52,10 +52,10 @@ index d72d52b..91d506e 100644
 +	return 0;
 +}
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index a6c240e..ed0c342 100644
+index 8f468e0..f3a8d15 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -2227,6 +2227,9 @@ static inline int in_gate_area(struct mm_struct *mm, unsigned long addr)
+@@ -2275,6 +2275,9 @@ static inline int in_gate_area(struct mm_struct *mm, unsigned long addr)
  extern int sysctl_drop_caches;
  int drop_caches_sysctl_handler(struct ctl_table *, int,
  					void __user *, size_t *, loff_t *);
@@ -66,10 +66,10 @@ index a6c240e..ed0c342 100644
  
  void drop_slab(void);
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index 97715fd..e6d1d4d 100644
+index 725587f..7148323 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
-@@ -1356,6 +1356,13 @@ static struct ctl_table vm_table[] = {
+@@ -1368,6 +1368,13 @@ static struct ctl_table vm_table[] = {
  		.extra1		= &one,
  		.extra2		= &four,
  	},
@@ -84,10 +84,10 @@ index 97715fd..e6d1d4d 100644
  	{
  		.procname	= "compact_memory",
 diff --git a/mm/vmscan.c b/mm/vmscan.c
-index c712b01..4ea8fc2 100644
+index 142cb61..5fbf9a9 100644
 --- a/mm/vmscan.c
 +++ b/mm/vmscan.c
-@@ -3556,7 +3556,6 @@ void wakeup_kswapd(struct zone *zone, int order, enum zone_type classzone_idx)
+@@ -3496,7 +3496,6 @@ void wakeup_kswapd(struct zone *zone, int order, enum zone_type classzone_idx)
  	wake_up_interruptible(&pgdat->kswapd_wait);
  }
  
@@ -95,7 +95,7 @@ index c712b01..4ea8fc2 100644
  /*
   * Try to free `nr_to_reclaim' of memory, system-wide, and return the number of
   * freed pages.
-@@ -3594,7 +3593,6 @@ unsigned long shrink_all_memory(unsigned long nr_to_reclaim)
+@@ -3534,7 +3533,6 @@ unsigned long shrink_all_memory(unsigned long nr_to_reclaim)
  
  	return nr_reclaimed;
  }

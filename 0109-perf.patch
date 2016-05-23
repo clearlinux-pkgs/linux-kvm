@@ -1,4 +1,4 @@
-From 0128af8f4210d16d8a63e4052818ccf5d36fffaa Mon Sep 17 00:00:00 2001
+From a19dc1036deac21aa7ef2cdbc9a84bc303218984 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 4 Nov 2015 15:17:10 -0600
 Subject: [PATCH 109/119] perf
@@ -7,14 +7,14 @@ Author:    Arjan van de Ven <arjan@linux.intel.com>
 
 Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
 ---
- arch/x86/kernel/cpu/perf_event_intel.c | 2 +-
+ arch/x86/events/intel/core.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/x86/kernel/cpu/perf_event_intel.c b/arch/x86/kernel/cpu/perf_event_intel.c
-index 760aec1..e547b71 100644
---- a/arch/x86/kernel/cpu/perf_event_intel.c
-+++ b/arch/x86/kernel/cpu/perf_event_intel.c
-@@ -3731,7 +3731,7 @@ __init int intel_pmu_init(void)
+diff --git a/arch/x86/events/intel/core.c b/arch/x86/events/intel/core.c
+index 5210eaa..e071140 100644
+--- a/arch/x86/events/intel/core.c
++++ b/arch/x86/events/intel/core.c
+@@ -3734,7 +3734,7 @@ __init int intel_pmu_init(void)
  	 */
  	if (x86_pmu.extra_regs) {
  		for (er = x86_pmu.extra_regs; er->msr; er++) {

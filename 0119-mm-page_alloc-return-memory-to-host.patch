@@ -1,4 +1,4 @@
-From a6100ad7696567e54d4f0dca7c0980626d2b82c8 Mon Sep 17 00:00:00 2001
+From af1d21a60d7ace6741a686f95950dd25ba4f7803 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 30 Mar 2016 05:33:42 -0600
 Subject: [PATCH 119/119] mm: page_alloc: return memory to host
@@ -9,7 +9,7 @@ memshrinker in the kvm kernel
  1 file changed, 25 insertions(+)
 
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index 629ce64..1ffeba5 100644
+index c1069ef..3094e84 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -63,6 +63,8 @@
@@ -21,7 +21,7 @@ index 629ce64..1ffeba5 100644
  
  #include <asm/sections.h>
  #include <asm/tlbflush.h>
-@@ -574,6 +576,28 @@ static inline void set_page_order(struct page *page, unsigned int order)
+@@ -606,6 +608,28 @@ static inline void set_page_order(struct page *page, unsigned int order)
  	__SetPageBuddy(page);
  }
  
@@ -50,7 +50,7 @@ index 629ce64..1ffeba5 100644
  static inline void rmv_page_order(struct page *page)
  {
  	__ClearPageBuddy(page);
-@@ -697,6 +721,7 @@ continue_merging:
+@@ -729,6 +753,7 @@ continue_merging:
  		page = page + (combined_idx - page_idx);
  		page_idx = combined_idx;
  		order++;

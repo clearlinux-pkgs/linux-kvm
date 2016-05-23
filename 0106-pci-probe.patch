@@ -1,4 +1,4 @@
-From 83d6bc2b152e7afba9f70814edbf0fabfe3c6e04 Mon Sep 17 00:00:00 2001
+From d74e7be795a26948a248abd4b3e083196fac8940 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:53:08 -0600
 Subject: [PATCH 106/119] pci: probe
@@ -11,7 +11,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 41 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index 6b0056e..8aa53e7 100644
+index 8004f67..2c95091 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
 @@ -184,6 +184,11 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
@@ -57,7 +57,7 @@ index 6b0056e..8aa53e7 100644
  }
  
  static void pci_read_bridge_io(struct pci_bus *child)
-@@ -1161,6 +1169,28 @@ static void pci_msi_setup_pci_dev(struct pci_dev *dev)
+@@ -1181,6 +1189,28 @@ static void pci_msi_setup_pci_dev(struct pci_dev *dev)
  		pci_msix_clear_and_set_ctrl(dev, PCI_MSIX_FLAGS_ENABLE, 0);
  }
  
@@ -86,7 +86,7 @@ index 6b0056e..8aa53e7 100644
  /**
   * pci_setup_device - fill in class and map information of a device
   * @dev: the device structure to fill
-@@ -1179,6 +1209,9 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1199,6 +1229,9 @@ int pci_setup_device(struct pci_dev *dev)
  	int pos = 0;
  	struct pci_bus_region region;
  	struct resource *res;
@@ -96,7 +96,7 @@ index 6b0056e..8aa53e7 100644
  
  	if (pci_read_config_byte(dev, PCI_HEADER_TYPE, &hdr_type))
  		return -EIO;
-@@ -1233,7 +1266,11 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1253,7 +1286,11 @@ int pci_setup_device(struct pci_dev *dev)
  		if (class == PCI_CLASS_BRIDGE_PCI)
  			goto bad;
  		pci_read_irq(dev);
@@ -109,7 +109,7 @@ index 6b0056e..8aa53e7 100644
  		pci_read_config_word(dev, PCI_SUBSYSTEM_VENDOR_ID, &dev->subsystem_vendor);
  		pci_read_config_word(dev, PCI_SUBSYSTEM_ID, &dev->subsystem_device);
  
-@@ -1318,6 +1355,8 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1338,6 +1375,8 @@ int pci_setup_device(struct pci_dev *dev)
  		dev->class = PCI_CLASS_NOT_DEFINED << 8;
  	}
  

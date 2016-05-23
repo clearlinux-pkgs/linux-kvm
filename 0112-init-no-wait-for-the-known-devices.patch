@@ -1,4 +1,4 @@
-From 42353d9fe1ebb0c8a948f0d6968b2b05c5c775ce Mon Sep 17 00:00:00 2001
+From f543281603111ba40ccfe48a312c91f5b64290b3 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Mon, 22 Jun 2015 09:33:33 -0500
 Subject: [PATCH 112/119] init: no wait for the known devices

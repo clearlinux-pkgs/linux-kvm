@@ -1,4 +1,4 @@
-From b8f8d2b564f649f80135e88b31137d3b8fcd7f5c Mon Sep 17 00:00:00 2001
+From c357e4fd3140bd357700e8b89db28ac27d498a1d Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:25:16 -0600
 Subject: [PATCH 103/119] sysrq: skip synchronize_rcu() if there is no old op
