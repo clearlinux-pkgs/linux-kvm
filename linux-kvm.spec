@@ -87,7 +87,7 @@ Linux kernel extra files
 %patch0001 -p1
 %patch0002 -p1
 %patch0003 -p1
-%patch0004 -p1
+#%patch0004 -p1 # No x86 arch
 
 # Serie    01XX: Clear Linux patches
 # Use when needed
