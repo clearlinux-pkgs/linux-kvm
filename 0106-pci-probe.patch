@@ -1,63 +1,63 @@
-From d74e7be795a26948a248abd4b3e083196fac8940 Mon Sep 17 00:00:00 2001
+From a2c0245f93d0c789428eac72b5d8e60490671498 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:53:08 -0600
-Subject: [PATCH 106/119] pci: probe
+Subject: [PATCH 106/117] pci: probe
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
 Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
 ---
- drivers/pci/probe.c | 43 +++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 41 insertions(+), 2 deletions(-)
+ drivers/pci/probe.c | 43 ++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 40 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index 8004f67..2c95091 100644
+index bf8405f..441aee0 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
-@@ -184,6 +184,11 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
+@@ -181,6 +181,10 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
  
  	mask = type ? PCI_ROM_ADDRESS_MASK : ~0;
  
-+
 +	res->name = pci_name(dev);
 +
-+	printk("Starting probe for %s\n", res->name);
++	printk("clr: Starting probe for %s\n", res->name);
 +
  	/* No printks while decoding is disabled! */
  	if (!dev->mmio_always_on) {
  		pci_read_config_word(dev, PCI_COMMAND, &orig_cmd);
-@@ -193,7 +198,6 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
+@@ -190,8 +194,6 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
  		}
  	}
  
 -	res->name = pci_name(dev);
- 
+-
  	pci_read_config_dword(dev, pos, &l);
  	pci_write_config_dword(dev, pos, l | mask);
-@@ -322,6 +326,8 @@ static void pci_read_bases(struct pci_dev *dev, unsigned int howmany, int rom)
- {
- 	unsigned int pos, reg;
+ 	pci_read_config_dword(dev, pos, &sz);
+@@ -322,6 +324,8 @@ static void pci_read_bases(struct pci_dev *dev, unsigned int howmany, int rom)
+ 	if (dev->non_compliant_bars)
+ 		return;
  
-+	printk("pci_read_bases start\n");
++	printk("clr: pci_read_bases start\n");
 +
  	for (pos = 0; pos < howmany; pos++) {
  		struct resource *res = &dev->resource[pos];
  		reg = PCI_BASE_ADDRESS_0 + (pos << 2);
-@@ -330,11 +336,13 @@ static void pci_read_bases(struct pci_dev *dev, unsigned int howmany, int rom)
+@@ -330,11 +334,13 @@ static void pci_read_bases(struct pci_dev *dev, unsigned int howmany, int rom)
  
  	if (rom) {
  		struct resource *res = &dev->resource[PCI_ROM_RESOURCE];
-+		printk("rom path\n");
++		printk("clr: rom path\n");
  		dev->rom_base_reg = rom;
  		res->flags = IORESOURCE_MEM | IORESOURCE_PREFETCH |
  				IORESOURCE_READONLY | IORESOURCE_SIZEALIGN;
  		__pci_read_base(dev, pci_bar_mem32, res, rom);
  	}
-+	printk("pci_read_bases end\n");
++	printk("clr: pci_read_bases end\n");
  }
  
  static void pci_read_bridge_io(struct pci_bus *child)
-@@ -1181,6 +1189,28 @@ static void pci_msi_setup_pci_dev(struct pci_dev *dev)
+@@ -1181,6 +1187,28 @@ static void pci_msi_setup_pci_dev(struct pci_dev *dev)
  		pci_msix_clear_and_set_ctrl(dev, PCI_MSIX_FLAGS_ENABLE, 0);
  }
  
@@ -86,17 +86,17 @@ index 8004f67..2c95091 100644
  /**
   * pci_setup_device - fill in class and map information of a device
   * @dev: the device structure to fill
-@@ -1199,6 +1229,9 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1199,6 +1227,9 @@ int pci_setup_device(struct pci_dev *dev)
  	int pos = 0;
  	struct pci_bus_region region;
  	struct resource *res;
 +	int maxbar;
 +
-+	printk("pci_setup_device start\n");
++	printk("clr: pci_setup_device start\n");
  
  	if (pci_read_config_byte(dev, PCI_HEADER_TYPE, &hdr_type))
  		return -EIO;
-@@ -1253,7 +1286,11 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1253,7 +1284,11 @@ int pci_setup_device(struct pci_dev *dev)
  		if (class == PCI_CLASS_BRIDGE_PCI)
  			goto bad;
  		pci_read_irq(dev);
@@ -109,15 +109,15 @@ index 8004f67..2c95091 100644
  		pci_read_config_word(dev, PCI_SUBSYSTEM_VENDOR_ID, &dev->subsystem_vendor);
  		pci_read_config_word(dev, PCI_SUBSYSTEM_ID, &dev->subsystem_device);
  
-@@ -1338,6 +1375,8 @@ int pci_setup_device(struct pci_dev *dev)
+@@ -1338,6 +1373,8 @@ int pci_setup_device(struct pci_dev *dev)
  		dev->class = PCI_CLASS_NOT_DEFINED << 8;
  	}
  
-+	printk("pci_setup_device end\n");
++	printk("clr: pci_setup_device end\n");
 +
  	/* We found a fine healthy device, go go go... */
  	return 0;
  }
 -- 
-2.8.2
+2.9.0
 

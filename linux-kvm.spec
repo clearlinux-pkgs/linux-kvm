@@ -27,22 +27,21 @@ BuildRequires:  openssl-dev
 BuildRequires:  flex
 BuildRequires:  bison
 
-# don't srip .ko files!
+# don't strip .ko files!
 %global __os_install_post %{nil}
 %define debug_package %{nil}
 %define __strip /bin/true
 
 # Serie    00XX: mainline, CVE, bugfixes patches
-
+Patch0001: 0001-crypto-testmgr-Add-a-flag-allowing-the-self-tests-to.patch
 Patch0002: cve-2016-4440.patch
 Patch0003: cve-2016-4470.patch
 Patch0004: cve-2016-5829.patch
 Patch0005: cve-2016-5828.nopatch
 Patch0006: cve-2016-5243.patch
 Patch0007: cve-2016-5244.patch
-Patch0008: 0008-posix_acl-Add-set_posix_acl.patch
+Patch0008: cve-2016-1237_requires.patch
 Patch0009: cve-2016-1237.patch
-
 
 # Serie    01XX: Clear Linux patches
 #Patch0101: 0101-msleep-warning.patch
@@ -52,7 +51,7 @@ Patch0104: 0104-fbcon-enable-no-blink-by-default.patch
 Patch0105: 0105-vmstats-wakeups.patch
 Patch0106: 0106-pci-probe.patch
 Patch0107: 0107-cgroup.patch
-Patch0108: 0108-smpboot.patch
+Patch0108: 0108-smpboot-reuse-timer-calibration.patch
 Patch0109: 0109-perf.patch
 Patch0110: 0110-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
 Patch0111: 0111-pci-probe-identify-known-devices.patch
