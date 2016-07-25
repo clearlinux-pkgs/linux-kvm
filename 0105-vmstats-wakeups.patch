@@ -20,9 +20,9 @@ index 5e43004..123ac65 100644
  static DEFINE_PER_CPU(struct delayed_work, vmstat_work);
 -int sysctl_stat_interval __read_mostly = HZ;
 +int sysctl_stat_interval __read_mostly = 8 * HZ;
- static cpumask_var_t cpu_stat_off;
  
- static void vmstat_update(struct work_struct *w)
+ #ifdef CONFIG_PROC_FS
+ static void refresh_vm_stats(struct work_struct *work)
 -- 
 2.8.2
 

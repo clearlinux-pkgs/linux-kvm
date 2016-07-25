@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.6.4
+Version:        4.7.0
 Release:        176
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.6.4.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.7.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -33,15 +33,6 @@ BuildRequires:  bison
 %define __strip /bin/true
 
 # Serie    00XX: mainline, CVE, bugfixes patches
-Patch0001: 0001-crypto-testmgr-Add-a-flag-allowing-the-self-tests-to.patch
-Patch0002: cve-2016-4440.patch
-Patch0003: cve-2016-4470.patch
-Patch0004: cve-2016-5829.patch
-Patch0005: cve-2016-5828.nopatch
-Patch0006: cve-2016-5243.patch
-Patch0007: cve-2016-5244.patch
-Patch0008: cve-2016-1237_requires.patch
-Patch0009: cve-2016-1237.patch
 
 # Serie    01XX: Clear Linux patches
 #Patch0101: 0101-msleep-warning.patch
@@ -53,10 +44,8 @@ Patch0106: 0106-pci-probe.patch
 Patch0107: 0107-cgroup.patch
 Patch0108: 0108-smpboot-reuse-timer-calibration.patch
 Patch0109: 0109-perf.patch
-Patch0110: 0110-sched-fair-tweak-the-scheduler-to-favor-CPU-0.patch
 Patch0111: 0111-pci-probe-identify-known-devices.patch
 Patch0112: 0112-init-no-wait-for-the-known-devices.patch
-Patch0113: 0113-fork-turn-mmput-into-an-async-function.patch
 Patch0114: 0114-ksm-wakeups.patch
 Patch0115: 0115-init-do_mounts-recreate-dev-root.patch
 Patch0116: 0116-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
@@ -66,11 +55,6 @@ Patch0116: 0116-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 
 # Serie    XYYY: Extra features modules
 # AUFS
-Patch1001: 1001-aufs-kbuild.patch
-Patch1002: 1002-aufs-base.patch
-Patch1003: 1003-aufs-mmap.patch
-Patch1004: 1004-aufs-standalone.patch
-Patch1005: 1005-aufs-driver-and-docs.patch
 
 %description
 The Linux kernel.
@@ -84,18 +68,10 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.6.4
+%setup -q -n linux-4.7
 
 # Serie    00XX: mainline, CVE, bugfixes patches
 
-%patch0002 -p1
-%patch0003 -p1
-%patch0004 -p1
-#%patch0005 -p1 # No x86 arch
-%patch0006 -p1
-%patch0007 -p1
-%patch0008 -p1
-%patch0009 -p1
 
 # Serie    01XX: Clear Linux patches
 # Use when needed
@@ -110,10 +86,8 @@ Linux kernel extra files
 %patch0107 -p1
 %patch0108 -p1
 %patch0109 -p1
-%patch0110 -p1
 %patch0111 -p1
 %patch0112 -p1
-%patch0113 -p1
 %patch0114 -p1
 %patch0115 -p1
 %patch0116 -p1
@@ -122,12 +96,6 @@ Linux kernel extra files
 #%patch0119 -p1
 
 # Serie    XYYY: Extra features modules
-# AUFS
-%patch1001 -p1
-%patch1002 -p1
-%patch1003 -p1
-%patch1004 -p1
-%patch1005 -p1
 
 cp %{SOURCE1} .
 
@@ -144,8 +112,7 @@ BuildKernel() {
     cp config .config
 
     make -s ARCH=$Arch oldconfig > /dev/null
-    make -s CONFIG_DEBUG_SECTION_MISMATCH=y %{?_smp_mflags} ARCH=$Arch $MakeTarget %{?sparse_mflags}
-    make -s CONFIG_DEBUG_SECTION_MISMATCH=y %{?_smp_mflags} ARCH=$Arch modules %{?sparse_mflags} || exit 1
+    make -s CONFIG_DEBUG_SECTION_MISMATCH=y %{?_smp_mflags} ARCH=$Arch  %{?sparse_mflags}
 }
 
 BuildKernel bzImage
