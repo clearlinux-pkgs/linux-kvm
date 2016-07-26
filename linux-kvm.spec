@@ -44,17 +44,16 @@ Patch0106: 0106-pci-probe.patch
 Patch0107: 0107-cgroup.patch
 Patch0108: 0108-smpboot-reuse-timer-calibration.patch
 Patch0109: 0109-perf.patch
-Patch0111: 0111-pci-probe-identify-known-devices.patch
-Patch0112: 0112-init-no-wait-for-the-known-devices.patch
-Patch0114: 0114-ksm-wakeups.patch
-Patch0115: 0115-init-do_mounts-recreate-dev-root.patch
-Patch0116: 0116-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
-#Patch0117: 0117-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
-#Patch0118: 0118-mm-shrink-caches.patch
-#Patch0119: 0119-mm-page_alloc-return-memory-to-host.patch
+Patch0110: 0110-pci-probe-identify-known-devices.patch
+Patch0111: 0111-init-no-wait-for-the-known-devices.patch
+Patch0112: 0112-ksm-wakeups.patch
+Patch0113: 0113-init-do_mounts-recreate-dev-root.patch
+Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+#Patch0115: 0115-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
+#Patch0116: 0116-mm-shrink-caches.patch
+#Patch0117: 0117-mm-page_alloc-return-memory-to-host.patch
 
 # Serie    XYYY: Extra features modules
-# AUFS
 
 %description
 The Linux kernel.
@@ -72,7 +71,6 @@ Linux kernel extra files
 
 # Serie    00XX: mainline, CVE, bugfixes patches
 
-
 # Serie    01XX: Clear Linux patches
 # Use when needed
 # Added a warning to msleep (our local patch) to catch where it is used
@@ -86,14 +84,14 @@ Linux kernel extra files
 %patch0107 -p1
 %patch0108 -p1
 %patch0109 -p1
+%patch0110 -p1
 %patch0111 -p1
 %patch0112 -p1
+%patch0113 -p1
 %patch0114 -p1
-%patch0115 -p1
-%patch0116 -p1
+#%patch0115 -p1
+#%patch0116 -p1
 #%patch0117 -p1
-#%patch0118 -p1
-#%patch0119 -p1
 
 # Serie    XYYY: Extra features modules
 

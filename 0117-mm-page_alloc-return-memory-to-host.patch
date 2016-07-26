@@ -1,7 +1,7 @@
-From af1d21a60d7ace6741a686f95950dd25ba4f7803 Mon Sep 17 00:00:00 2001
+From 576b9876a33237c2bc2e02cab8577540e2b867cd Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 30 Mar 2016 05:33:42 -0600
-Subject: [PATCH 119/119] mm: page_alloc: return memory to host
+Subject: [PATCH 117/117] mm: page_alloc: return memory to host
 
 memshrinker in the kvm kernel
 ---
@@ -9,7 +9,7 @@ memshrinker in the kvm kernel
  1 file changed, 25 insertions(+)
 
 diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index c1069ef..3094e84 100644
+index 8b3e134..dd49c90 100644
 --- a/mm/page_alloc.c
 +++ b/mm/page_alloc.c
 @@ -63,6 +63,8 @@
@@ -21,7 +21,7 @@ index c1069ef..3094e84 100644
  
  #include <asm/sections.h>
  #include <asm/tlbflush.h>
-@@ -606,6 +608,28 @@ static inline void set_page_order(struct page *page, unsigned int order)
+@@ -701,6 +703,28 @@ static inline void set_page_order(struct page *page, unsigned int order)
  	__SetPageBuddy(page);
  }
  
@@ -50,7 +50,7 @@ index c1069ef..3094e84 100644
  static inline void rmv_page_order(struct page *page)
  {
  	__ClearPageBuddy(page);
-@@ -729,6 +753,7 @@ continue_merging:
+@@ -824,6 +848,7 @@ continue_merging:
  		page = page + (combined_idx - page_idx);
  		page_idx = combined_idx;
  		order++;
@@ -59,5 +59,5 @@ index c1069ef..3094e84 100644
  	if (max_order < MAX_ORDER) {
  		/* If we are here, it means order is >= pageblock_order.
 -- 
-2.8.2
+2.9.1
 

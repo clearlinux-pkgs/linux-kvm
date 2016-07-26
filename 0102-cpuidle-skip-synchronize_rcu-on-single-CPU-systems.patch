@@ -1,7 +1,7 @@
-From cf60fecace99a03ad119d014c50c48d0278b316b Mon Sep 17 00:00:00 2001
+From 4c9eb5f7c8bcbcd877d96e611d9bb785ed6f8921 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:19:26 -0600
-Subject: [PATCH 102/119] cpuidle: skip synchronize_rcu() on single CPU systems
+Subject: [PATCH 102/117] cpuidle: skip synchronize_rcu() on single CPU systems
 
 synchronize_rcu() is pretty expensive, and on single CPU systems we don't need
 it in this specific case, so skip it.
@@ -13,7 +13,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/cpuidle/cpuidle.c b/drivers/cpuidle/cpuidle.c
-index f996efc..61750ab 100644
+index c73207a..224cefc 100644
 --- a/drivers/cpuidle/cpuidle.c
 +++ b/drivers/cpuidle/cpuidle.c
 @@ -307,8 +307,11 @@ void cpuidle_uninstall_idle_handler(void)
@@ -30,5 +30,5 @@ index f996efc..61750ab 100644
  
  /**
 -- 
-2.8.2
+2.9.1
 

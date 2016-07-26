@@ -1,4 +1,4 @@
-From a2c0245f93d0c789428eac72b5d8e60490671498 Mon Sep 17 00:00:00 2001
+From 217051cb9561baacd081410c5e2d65730a30af1f Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:53:08 -0600
 Subject: [PATCH 106/117] pci: probe
@@ -11,7 +11,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 40 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index bf8405f..441aee0 100644
+index 8e3ef72..06a544a 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
 @@ -181,6 +181,10 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
@@ -119,5 +119,5 @@ index bf8405f..441aee0 100644
  	return 0;
  }
 -- 
-2.9.0
+2.9.1
 

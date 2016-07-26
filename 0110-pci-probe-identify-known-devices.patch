@@ -1,7 +1,7 @@
-From 8006bfc34fa2b8c486d9645c81d225d59179675f Mon Sep 17 00:00:00 2001
+From 4102f0beef6dfbf7333f1eea79af71181ffc0ce8 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Sat, 14 Feb 2015 09:49:41 -0600
-Subject: [PATCH 111/117] pci: probe: identify known devices
+Subject: [PATCH 110/117] pci: probe: identify known devices
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 Modify-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
@@ -12,7 +12,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 156 insertions(+)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index 441aee0..0b93799 100644
+index 06a544a..50c9c0b 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
 @@ -162,6 +162,159 @@ static inline unsigned long decode_bar(struct pci_dev *dev, u32 bar)
@@ -186,5 +186,5 @@ index 441aee0..0b93799 100644
  
  	printk("clr: Starting probe for %s\n", res->name);
 -- 
-2.9.0
+2.9.1
 
