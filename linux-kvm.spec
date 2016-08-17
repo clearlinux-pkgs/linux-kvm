@@ -33,6 +33,7 @@ BuildRequires:  bison
 %define __strip /bin/true
 
 # Serie    00XX: mainline, CVE, bugfixes patches
+Patch0001: 0001-acpi-nfit-treat-virtual-ramdisk-SPA-as-pmem-region.patch
 
 # Serie    01XX: Clear Linux patches
 #Patch0101: 0101-msleep-warning.patch
@@ -70,6 +71,7 @@ Linux kernel extra files
 %setup -q -n linux-4.7.1
 
 # Serie    00XX: mainline, CVE, bugfixes patches
+%patch0001 -p1
 
 # Serie    01XX: Clear Linux patches
 # Use when needed
