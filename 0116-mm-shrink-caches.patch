@@ -1,4 +1,4 @@
-From 8aae35b665e57ad67dc4eda8377eace4fc89866f Mon Sep 17 00:00:00 2001
+From dca9852bb8577cb0a391f1fa4a7493abd4a62fb6 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 30 Mar 2016 05:44:00 -0600
 Subject: [PATCH 116/117] mm: shrink caches
@@ -104,5 +104,5 @@ index c4a2f45..7097c3a 100644
  /* It's optimal to keep kswapds on the same CPUs as their memory, but
     not required for correctness.  So if the last cpu in a node goes
 -- 
-2.9.1
+2.9.2
 

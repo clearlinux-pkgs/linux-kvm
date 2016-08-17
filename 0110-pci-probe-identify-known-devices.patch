@@ -1,4 +1,4 @@
-From 4102f0beef6dfbf7333f1eea79af71181ffc0ce8 Mon Sep 17 00:00:00 2001
+From 4640cdee5d4925b3901d88df9b174bfbbad1aa56 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Sat, 14 Feb 2015 09:49:41 -0600
 Subject: [PATCH 110/117] pci: probe: identify known devices
@@ -186,5 +186,5 @@ index 06a544a..50c9c0b 100644
  
  	printk("clr: Starting probe for %s\n", res->name);
 -- 
-2.9.1
+2.9.2
 
