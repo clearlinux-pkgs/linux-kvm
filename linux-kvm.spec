@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.8.11
-Release:        194
+Release:        195
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -53,6 +53,8 @@ Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 #Patch0116: 0116-mm-shrink-caches.patch
 #Patch0117: 0117-mm-page_alloc-return-memory-to-host.patch
 
+Patch0071: cve-2016-8632.patch
+
 # Serie    XYYY: Extra features modules
 
 %description
@@ -92,6 +94,8 @@ Linux kernel extra files
 #%patch0115 -p1
 #%patch0116 -p1
 #%patch0117 -p1
+
+%patch0071 -p1
 
 # Serie    XYYY: Extra features modules
 
