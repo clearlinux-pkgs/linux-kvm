@@ -54,7 +54,6 @@ Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 #Patch0117: 0117-mm-page_alloc-return-memory-to-host.patch
 
 Patch0071: cve-2016-8632.patch
-Patch0072: cve-2016-8650.patch
 Patch0073: cve-2016-9083.patch
 Patch0074: cve-2016-9084.nopatch
 
@@ -100,7 +99,6 @@ Linux kernel extra files
 #%patch0117 -p1
 
 %patch0071 -p1
-%patch0072 -p1
 %patch0073 -p1
 #%patch0074 -p1 No patch, same as 73
 
