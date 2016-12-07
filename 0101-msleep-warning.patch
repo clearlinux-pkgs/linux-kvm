@@ -1,7 +1,7 @@
-From d7cbc138f69c1aeff4272d23e7c7cbf7bab3485a Mon Sep 17 00:00:00 2001
+From 2d6e9e05faab3e87accbc3b84690726703c8dd6b Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
-Date: Wed, 30 Mar 2016 04:45:28 -0600
-Subject: [PATCH 101/117] msleep warning
+Date: Wed, 7 Dec 2016 17:23:13 -0600
+Subject: [PATCH] msleep warning
 
 ---
  arch/x86/kernel/alternative.c |  4 ++++
@@ -16,16 +16,16 @@ Subject: [PATCH 101/117] msleep warning
  9 files changed, 33 insertions(+), 5 deletions(-)
 
 diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 5cb272a..da6b82f 100644
+index 5cb272a7a5a3..d28fb7aae4ce 100644
 --- a/arch/x86/kernel/alternative.c
 +++ b/arch/x86/kernel/alternative.c
 @@ -626,7 +626,9 @@ void __init alternative_instructions(void)
  	 * patching.
  	 */
  
-+	printk("Applying alternatives\n");
++	printk("clr: Applying alternatives\n");
  	apply_alternatives(__alt_instructions, __alt_instructions_end);
-+	printk("Applying alternatives done\n");
++	printk("clr: Applying alternatives done\n");
  
  #ifdef CONFIG_SMP
  	/* Patch to UP if other cpus not imminent. */
@@ -33,16 +33,16 @@ index 5cb272a..da6b82f 100644
  					    _text, _etext);
  	}
  
-+	printk("Applying alternatives smp done\n");
++	printk("clr: Applying alternatives smp done\n");
 +
  	if (!uniproc_patched || num_possible_cpus() == 1)
  		free_init_pages("SMP alternatives",
  				(unsigned long)__smp_locks,
 diff --git a/drivers/acpi/bus.c b/drivers/acpi/bus.c
-index 262ca31..2fd4fe8 100644
+index 85b7d07fe5c8..143c2acfb58a 100644
 --- a/drivers/acpi/bus.c
 +++ b/drivers/acpi/bus.c
-@@ -1095,6 +1095,8 @@ static int __init acpi_bus_init(void)
+@@ -1163,6 +1163,8 @@ static int __init acpi_bus_init(void)
  struct kobject *acpi_kobj;
  EXPORT_SYMBOL_GPL(acpi_kobj);
  
@@ -51,7 +51,7 @@ index 262ca31..2fd4fe8 100644
  static int __init acpi_init(void)
  {
  	int result;
-@@ -1104,6 +1106,8 @@ static int __init acpi_init(void)
+@@ -1172,6 +1174,8 @@ static int __init acpi_init(void)
  		return -ENODEV;
  	}
  
@@ -60,7 +60,7 @@ index 262ca31..2fd4fe8 100644
  	acpi_kobj = kobject_create_and_add("acpi", firmware_kobj);
  	if (!acpi_kobj) {
  		printk(KERN_WARNING "%s: kset create error\n", __func__);
-@@ -1114,6 +1118,7 @@ static int __init acpi_init(void)
+@@ -1182,6 +1186,7 @@ static int __init acpi_init(void)
  	result = acpi_bus_init();
  	if (result) {
  		disable_acpi();
@@ -68,31 +68,31 @@ index 262ca31..2fd4fe8 100644
  		return result;
  	}
  
-@@ -1124,6 +1129,7 @@ static int __init acpi_init(void)
- 	acpi_sleep_proc_init();
+@@ -1193,6 +1198,7 @@ static int __init acpi_init(void)
  	acpi_wakeup_device_init();
  	acpi_debugger_init();
+ 	acpi_setup_sb_notify_handler();
 +/*	warn_on_msleep = 0;   */
  	return 0;
  }
  
 diff --git a/drivers/base/firmware_class.c b/drivers/base/firmware_class.c
-index 773fc30..3d64f3b 100644
+index 22d1760a4278..5182c13457ec 100644
 --- a/drivers/base/firmware_class.c
 +++ b/drivers/base/firmware_class.c
-@@ -1182,6 +1182,7 @@ request_firmware(const struct firmware **firmware_p, const char *name,
+@@ -1223,6 +1223,7 @@ request_firmware(const struct firmware **firmware_p, const char *name,
  {
  	int ret;
  
-+	printk("request_firmeare: %s\n", name);
++	printk("clr: request_firmware: %s\n", name);
  	/* Need to pin this module until return */
  	__module_get(THIS_MODULE);
- 	ret = _request_firmware(firmware_p, name, device,
+ 	ret = _request_firmware(firmware_p, name, device, NULL, 0,
 diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 42758b5..e0c6ab3 100644
+index 93b1aaa5ba3b..2f693b10445b 100644
 --- a/drivers/block/virtio_blk.c
 +++ b/drivers/block/virtio_blk.c
-@@ -862,7 +862,7 @@ static struct virtio_driver virtio_blk = {
+@@ -848,7 +848,7 @@ static struct virtio_driver virtio_blk = {
  #endif
  };
  
@@ -101,7 +101,7 @@ index 42758b5..e0c6ab3 100644
  {
  	int error;
  
-@@ -894,7 +894,7 @@ static void __exit fini(void)
+@@ -880,7 +880,7 @@ static void __exit fini(void)
  	unregister_blkdev(major, "virtblk");
  	destroy_workqueue(virtblk_wq);
  }
@@ -111,7 +111,7 @@ index 42758b5..e0c6ab3 100644
  
  MODULE_DEVICE_TABLE(virtio, id_table);
 diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
-index 3d9cf32..11ff5a1 100644
+index e79055c8b577..7ba550f30727 100644
 --- a/include/linux/blkdev.h
 +++ b/include/linux/blkdev.h
 @@ -39,7 +39,7 @@ struct blk_flush_queue;
@@ -124,10 +124,10 @@ index 3d9cf32..11ff5a1 100644
  /*
   * Maximum number of blkcg policies allowed to be registered concurrently.
 diff --git a/init/main.c b/init/main.c
-index eae02aa..7b4e9e6 100644
+index a8a58e2794a5..a11d79288b1f 100644
 --- a/init/main.c
 +++ b/init/main.c
-@@ -745,7 +745,7 @@ static int __init_or_module do_one_initcall_debug(initcall_t fn)
+@@ -751,7 +751,7 @@ static int __init_or_module do_one_initcall_debug(initcall_t fn)
  	unsigned long long duration;
  	int ret;
  
@@ -137,14 +137,14 @@ index eae02aa..7b4e9e6 100644
  	ret = fn();
  	rettime = ktime_get();
 diff --git a/kernel/kmod.c b/kernel/kmod.c
-index 0277d12..be4eac8 100644
+index 0277d1216f80..bbbd977441c2 100644
 --- a/kernel/kmod.c
 +++ b/kernel/kmod.c
 @@ -76,6 +76,8 @@ static int call_modprobe(char *module_name, int wait)
  		NULL
  	};
  
-+	printk("call_modprobe: %s   %i \n", module_name, wait);
++	printk("clr: call_modprobe: %s   %i \n", module_name, wait);
 +
  	char **argv = kmalloc(sizeof(char *[5]), GFP_KERNEL);
  	if (!argv)
@@ -154,7 +154,7 @@ index 0277d12..be4eac8 100644
  	commit_creds(new);
  
 +	if (sub_info->argv && sub_info->argv[0]) {
-+		printk("____call_usermodehelper %s\n", sub_info->argv[0]);
++		printk("clr: ____call_usermodehelper %s\n", sub_info->argv[0]);
 +		if (sub_info->argv[1]) {
 +			printk("   arg1 : %s\n", sub_info->argv[1]);
 +			if (sub_info->argv[2])
@@ -166,10 +166,10 @@ index 0277d12..be4eac8 100644
  			   (const char __user *const __user *)sub_info->argv,
  			   (const char __user *const __user *)sub_info->envp);
 diff --git a/kernel/time/timer.c b/kernel/time/timer.c
-index 3a95f97..c248d94f 100644
+index 96db64bdedbb..4e4a5396e7b6 100644
 --- a/kernel/time/timer.c
 +++ b/kernel/time/timer.c
-@@ -1662,6 +1662,9 @@ void __init init_timers(void)
+@@ -1881,6 +1881,9 @@ void __init init_timers(void)
  	open_softirq(TIMER_SOFTIRQ, run_timer_softirq);
  }
  
@@ -179,18 +179,18 @@ index 3a95f97..c248d94f 100644
  /**
   * msleep - sleep safely even with waitqueue interruptions
   * @msecs: Time in milliseconds to sleep for
-@@ -1670,6 +1673,9 @@ void msleep(unsigned int msecs)
+@@ -1889,6 +1892,9 @@ void msleep(unsigned int msecs)
  {
  	unsigned long timeout = msecs_to_jiffies(msecs) + 1;
  
 +/*	if (warn_on_msleep)  */
-+		WARN(1, "msleep(%i) called", msecs);
++		WARN(1, "clr: msleep(%i) called", msecs);
 +
  	while (timeout)
  		timeout = schedule_timeout_uninterruptible(timeout);
  }
 diff --git a/net/netlink/af_netlink.c b/net/netlink/af_netlink.c
-index 627f898..78e5211 100644
+index 62bea4591054..9de33dff4ff5 100644
 --- a/net/netlink/af_netlink.c
 +++ b/net/netlink/af_netlink.c
 @@ -606,7 +606,7 @@ static int netlink_create(struct net *net, struct socket *sock, int protocol,
@@ -203,5 +203,5 @@ index 627f898..78e5211 100644
  		request_module("net-pf-%d-proto-%d", PF_NETLINK, protocol);
  		netlink_lock_table();
 -- 
-2.9.2
+2.11.0
 
