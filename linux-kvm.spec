@@ -1,7 +1,7 @@
 #
 # This is a special configuration of the Linux kernel, aimed exclusively
 # for running inside a KVM virtual machine
-# This specialization allows us top optimize memory footprint and boot time.
+# This specialization allows us to optimize memory footprint and boot time.
 #
 
 Name:           linux-kvm
