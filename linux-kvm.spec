@@ -21,11 +21,11 @@ BuildRequires:  bash >= 2.03
 BuildRequires:  bc
 BuildRequires:  binutils-dev
 BuildRequires:  elfutils-dev
-BuildRequires:  kmod
 BuildRequires:  make >= 3.78
 BuildRequires:  openssl-dev
 BuildRequires:  flex
 BuildRequires:  bison
+BuildRequires:  kmod
 
 # don't strip .ko files!
 %global __os_install_post %{nil}
@@ -33,6 +33,9 @@ BuildRequires:  bison
 %define __strip /bin/true
 
 # Serie    00XX: mainline, CVE, bugfixes patches
+Patch0071: cve-2016-8632.patch
+Patch0073: cve-2016-9083.patch
+Patch0074: cve-2016-9084.nopatch
 
 # Serie    01XX: Clear Linux patches
 #Patch0101: 0101-msleep-warning.patch
@@ -52,10 +55,6 @@ Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 #Patch0115: 0115-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
 #Patch0116: 0116-mm-shrink-caches.patch
 #Patch0117: 0117-mm-page_alloc-return-memory-to-host.patch
-
-Patch0071: cve-2016-8632.patch
-Patch0073: cve-2016-9083.patch
-Patch0074: cve-2016-9084.nopatch
 
 
 # Serie    XYYY: Extra features modules
