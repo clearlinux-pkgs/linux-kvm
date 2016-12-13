@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.8.12
-Release:        199
+Release:        200
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -33,10 +33,7 @@ BuildRequires:  kmod
 %define __strip /bin/true
 
 # Serie    00XX: mainline, CVE, bugfixes patches
-Patch0071: cve-2016-8632.patch
-Patch0073: cve-2016-9083.patch
-Patch0074: cve-2016-9084.nopatch
-Patch0075: cve-2016-8655.patch
+Patch0001: cve-2016-8632.patch
 
 # Serie    01XX: Clear Linux patches
 #Patch0101: 0101-msleep-warning.patch
@@ -75,6 +72,7 @@ Linux kernel extra files
 %setup -q -n linux-4.8.12
 
 # Serie    00XX: mainline, CVE, bugfixes patches
+%patch0001 -p1
 
 # Serie    01XX: Clear Linux patches
 # Use when needed
@@ -97,11 +95,6 @@ Linux kernel extra files
 #%patch0115 -p1
 #%patch0116 -p1
 #%patch0117 -p1
-
-%patch0071 -p1
-%patch0073 -p1
-#%patch0074 -p1 No patch, same as 73
-%patch0075 -p1
 
 # Serie    XYYY: Extra features modules
 
