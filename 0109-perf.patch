@@ -1,7 +1,7 @@
-From 333059e9601b90960fb9a7a46860b577fc24a130 Mon Sep 17 00:00:00 2001
+From c8d11cdad2892d1a4f5e8bc369bdac877580df4b Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 4 Nov 2015 15:17:10 -0600
-Subject: [PATCH 109/117] perf
+Subject: [PATCH 109/114] perf
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 
@@ -11,10 +11,10 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/x86/events/intel/core.c b/arch/x86/events/intel/core.c
-index 9b4f9d3..077c46a 100644
+index cb8522290e6a..f6273a252c97 100644
 --- a/arch/x86/events/intel/core.c
 +++ b/arch/x86/events/intel/core.c
-@@ -3921,7 +3921,7 @@ __init int intel_pmu_init(void)
+@@ -4025,7 +4025,7 @@ __init int intel_pmu_init(void)
  	 */
  	if (x86_pmu.extra_regs) {
  		for (er = x86_pmu.extra_regs; er->msr; er++) {
@@ -24,5 +24,5 @@ index 9b4f9d3..077c46a 100644
  			if ((er->idx == EXTRA_REG_LBR) && !er->extra_msr_access)
  				x86_pmu.lbr_sel_map = NULL;
 -- 
-2.9.2
+2.11.0
 

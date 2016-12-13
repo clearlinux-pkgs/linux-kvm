@@ -1,7 +1,7 @@
-From 4640cdee5d4925b3901d88df9b174bfbbad1aa56 Mon Sep 17 00:00:00 2001
+From 3815fc20e3b97a003fd1ae6c5d5116ed5400baaf Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Sat, 14 Feb 2015 09:49:41 -0600
-Subject: [PATCH 110/117] pci: probe: identify known devices
+Subject: [PATCH 110/114] pci: probe: identify known devices
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 Modify-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
@@ -12,10 +12,10 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 156 insertions(+)
 
 diff --git a/drivers/pci/probe.c b/drivers/pci/probe.c
-index 06a544a..50c9c0b 100644
+index e3377cd5a632..cbe81b100d51 100644
 --- a/drivers/pci/probe.c
 +++ b/drivers/pci/probe.c
-@@ -162,6 +162,159 @@ static inline unsigned long decode_bar(struct pci_dev *dev, u32 bar)
+@@ -163,6 +163,159 @@ static inline unsigned long decode_bar(struct pci_dev *dev, u32 bar)
  
  #define PCI_COMMAND_DECODE_ENABLE	(PCI_COMMAND_MEMORY | PCI_COMMAND_IO)
  
@@ -175,7 +175,7 @@ index 06a544a..50c9c0b 100644
  /**
   * pci_read_base - read a PCI BAR
   * @dev: the PCI device
-@@ -181,6 +334,9 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
+@@ -182,6 +335,9 @@ int __pci_read_base(struct pci_dev *dev, enum pci_bar_type type,
  
  	mask = type ? PCI_ROM_ADDRESS_MASK : ~0;
  
@@ -186,5 +186,5 @@ index 06a544a..50c9c0b 100644
  
  	printk("clr: Starting probe for %s\n", res->name);
 -- 
-2.9.2
+2.11.0
 

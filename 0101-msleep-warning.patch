@@ -1,7 +1,7 @@
-From 2d6e9e05faab3e87accbc3b84690726703c8dd6b Mon Sep 17 00:00:00 2001
+From f79f39088e793a3ad33c9e41b694243745a7b289 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 7 Dec 2016 17:23:13 -0600
-Subject: [PATCH] msleep warning
+Subject: [PATCH 101/114] msleep warning
 
 ---
  arch/x86/kernel/alternative.c |  4 ++++
@@ -39,10 +39,10 @@ index 5cb272a7a5a3..d28fb7aae4ce 100644
  		free_init_pages("SMP alternatives",
  				(unsigned long)__smp_locks,
 diff --git a/drivers/acpi/bus.c b/drivers/acpi/bus.c
-index 85b7d07fe5c8..143c2acfb58a 100644
+index 56190d00fd87..b56b22fbbaf0 100644
 --- a/drivers/acpi/bus.c
 +++ b/drivers/acpi/bus.c
-@@ -1163,6 +1163,8 @@ static int __init acpi_bus_init(void)
+@@ -1166,6 +1166,8 @@ static int __init acpi_bus_init(void)
  struct kobject *acpi_kobj;
  EXPORT_SYMBOL_GPL(acpi_kobj);
  
@@ -51,7 +51,7 @@ index 85b7d07fe5c8..143c2acfb58a 100644
  static int __init acpi_init(void)
  {
  	int result;
-@@ -1172,6 +1174,8 @@ static int __init acpi_init(void)
+@@ -1175,6 +1177,8 @@ static int __init acpi_init(void)
  		return -ENODEV;
  	}
  
@@ -60,7 +60,7 @@ index 85b7d07fe5c8..143c2acfb58a 100644
  	acpi_kobj = kobject_create_and_add("acpi", firmware_kobj);
  	if (!acpi_kobj) {
  		printk(KERN_WARNING "%s: kset create error\n", __func__);
-@@ -1182,6 +1186,7 @@ static int __init acpi_init(void)
+@@ -1185,6 +1189,7 @@ static int __init acpi_init(void)
  	result = acpi_bus_init();
  	if (result) {
  		disable_acpi();
@@ -68,10 +68,10 @@ index 85b7d07fe5c8..143c2acfb58a 100644
  		return result;
  	}
  
-@@ -1193,6 +1198,7 @@ static int __init acpi_init(void)
- 	acpi_wakeup_device_init();
+@@ -1198,6 +1203,7 @@ static int __init acpi_init(void)
  	acpi_debugger_init();
  	acpi_setup_sb_notify_handler();
+ 	acpi_set_processor_mapping();
 +/*	warn_on_msleep = 0;   */
  	return 0;
  }
@@ -89,10 +89,10 @@ index 22d1760a4278..5182c13457ec 100644
  	__module_get(THIS_MODULE);
  	ret = _request_firmware(firmware_p, name, device, NULL, 0,
 diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 93b1aaa5ba3b..2f693b10445b 100644
+index 5545a679abd8..8d963ae041cb 100644
 --- a/drivers/block/virtio_blk.c
 +++ b/drivers/block/virtio_blk.c
-@@ -848,7 +848,7 @@ static struct virtio_driver virtio_blk = {
+@@ -847,7 +847,7 @@ static struct virtio_driver virtio_blk = {
  #endif
  };
  
@@ -101,7 +101,7 @@ index 93b1aaa5ba3b..2f693b10445b 100644
  {
  	int error;
  
-@@ -880,7 +880,7 @@ static void __exit fini(void)
+@@ -879,7 +879,7 @@ static void __exit fini(void)
  	unregister_blkdev(major, "virtblk");
  	destroy_workqueue(virtblk_wq);
  }
@@ -111,7 +111,7 @@ index 93b1aaa5ba3b..2f693b10445b 100644
  
  MODULE_DEVICE_TABLE(virtio, id_table);
 diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
-index e79055c8b577..7ba550f30727 100644
+index c47c358ba052..859e6e2f0340 100644
 --- a/include/linux/blkdev.h
 +++ b/include/linux/blkdev.h
 @@ -39,7 +39,7 @@ struct blk_flush_queue;
@@ -124,7 +124,7 @@ index e79055c8b577..7ba550f30727 100644
  /*
   * Maximum number of blkcg policies allowed to be registered concurrently.
 diff --git a/init/main.c b/init/main.c
-index a8a58e2794a5..a11d79288b1f 100644
+index 2858be732f6d..f1d8c3fdbf05 100644
 --- a/init/main.c
 +++ b/init/main.c
 @@ -751,7 +751,7 @@ static int __init_or_module do_one_initcall_debug(initcall_t fn)
@@ -166,7 +166,7 @@ index 0277d1216f80..bbbd977441c2 100644
  			   (const char __user *const __user *)sub_info->argv,
  			   (const char __user *const __user *)sub_info->envp);
 diff --git a/kernel/time/timer.c b/kernel/time/timer.c
-index 96db64bdedbb..4e4a5396e7b6 100644
+index c611c47de884..698a5c72352b 100644
 --- a/kernel/time/timer.c
 +++ b/kernel/time/timer.c
 @@ -1881,6 +1881,9 @@ void __init init_timers(void)
@@ -190,10 +190,10 @@ index 96db64bdedbb..4e4a5396e7b6 100644
  		timeout = schedule_timeout_uninterruptible(timeout);
  }
 diff --git a/net/netlink/af_netlink.c b/net/netlink/af_netlink.c
-index 62bea4591054..9de33dff4ff5 100644
+index 246f29d365c0..cc227e432bc3 100644
 --- a/net/netlink/af_netlink.c
 +++ b/net/netlink/af_netlink.c
-@@ -606,7 +606,7 @@ static int netlink_create(struct net *net, struct socket *sock, int protocol,
+@@ -613,7 +613,7 @@ static int netlink_create(struct net *net, struct socket *sock, int protocol,
  
  	netlink_lock_table();
  #ifdef CONFIG_MODULES
