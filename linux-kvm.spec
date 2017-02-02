@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.9.6
-Release:        204
+Version:        4.9.7
+Release:        205
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.6.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.7.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -50,9 +50,6 @@ Patch0111: 0111-init-no-wait-for-the-known-devices.patch
 Patch0112: 0112-ksm-wakeups.patch
 Patch0113: 0113-init-do_mounts-recreate-dev-root.patch
 Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
-#Patch0115: 0115-KVM-x86-Add-hypercall-KVM_HC_RETURN_MEM.patch
-#Patch0116: 0116-mm-shrink-caches.patch
-#Patch0117: 0117-mm-page_alloc-return-memory-to-host.patch
 
 
 # Serie    XYYY: Extra features modules
@@ -69,7 +66,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.9.6
+%setup -q -n linux-4.9.7
 
 # Serie    00XX: mainline, CVE, bugfixes patches
 %patch0001 -p1
@@ -92,9 +89,6 @@ Linux kernel extra files
 %patch0112 -p1
 %patch0113 -p1
 %patch0114 -p1
-#%patch0115 -p1
-#%patch0116 -p1
-#%patch0117 -p1
 
 # Serie    XYYY: Extra features modules
 
