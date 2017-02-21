@@ -1,4 +1,4 @@
-From 8e9cb8d4f1d69277a4576757e94667d1e449436a Mon Sep 17 00:00:00 2001
+From 0adc5bfd84939d11d3c172eab0a00bfab4aadb46 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Fri, 28 Aug 2015 11:00:36 -0500
 Subject: [PATCH 107/114] cgroup
@@ -13,10 +13,10 @@ Signed-off-by: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
  2 files changed, 15 insertions(+), 11 deletions(-)
 
 diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
-index 5b17de62c962..9adb98ce68fb 100644
+index 861b4677fc5b..5d3c345ee60c 100644
 --- a/include/linux/cgroup-defs.h
 +++ b/include/linux/cgroup-defs.h
-@@ -136,7 +136,7 @@ struct cgroup_subsys_state {
+@@ -137,7 +137,7 @@ struct cgroup_subsys_state {
  
  	/* percpu_ref killing and RCU release */
  	struct rcu_head rcu_head;
@@ -26,7 +26,7 @@ index 5b17de62c962..9adb98ce68fb 100644
  
  /*
 diff --git a/kernel/cgroup.c b/kernel/cgroup.c
-index 85bc9beb046d..c69f0ffc96dc 100644
+index 53bbca7c4859..6de39d8213ed 100644
 --- a/kernel/cgroup.c
 +++ b/kernel/cgroup.c
 @@ -73,7 +73,7 @@
@@ -68,7 +68,7 @@ index 85bc9beb046d..c69f0ffc96dc 100644
  	struct cgroup_subsys *ss = css->ss;
  	struct cgroup *cgrp = css->cgroup;
  
-@@ -5086,8 +5088,9 @@ static void css_release(struct percpu_ref *ref)
+@@ -5088,8 +5090,9 @@ static void css_release(struct percpu_ref *ref)
  	struct cgroup_subsys_state *css =
  		container_of(ref, struct cgroup_subsys_state, refcnt);
  
@@ -80,7 +80,7 @@ index 85bc9beb046d..c69f0ffc96dc 100644
  }
  
  static void init_and_link_css(struct cgroup_subsys_state *css,
-@@ -5369,8 +5372,9 @@ static int cgroup_mkdir(struct kernfs_node *parent_kn, const char *name,
+@@ -5371,8 +5374,9 @@ static int cgroup_mkdir(struct kernfs_node *parent_kn, const char *name,
   */
  static void css_killed_work_fn(struct work_struct *work)
  {
@@ -91,7 +91,7 @@ index 85bc9beb046d..c69f0ffc96dc 100644
  
  	mutex_lock(&cgroup_mutex);
  
-@@ -5391,8 +5395,8 @@ static void css_killed_ref_fn(struct percpu_ref *ref)
+@@ -5393,8 +5397,8 @@ static void css_killed_ref_fn(struct percpu_ref *ref)
  		container_of(ref, struct cgroup_subsys_state, refcnt);
  
  	if (atomic_dec_and_test(&css->online_cnt)) {
@@ -103,5 +103,5 @@ index 85bc9beb046d..c69f0ffc96dc 100644
  }
  
 -- 
-2.11.0
+2.11.1
 
