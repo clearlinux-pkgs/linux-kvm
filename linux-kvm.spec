@@ -33,7 +33,6 @@ BuildRequires:  kmod
 %define __strip /bin/true
 
 # Serie    00XX: mainline, CVE, bugfixes patches
-Patch0001: cve-2016-8632.patch
 
 # Serie    01XX: Clear Linux patches
 #Patch0101: 0101-msleep-warning.patch
@@ -69,7 +68,7 @@ Linux kernel extra files
 %setup -q -n linux-4.9.9
 
 # Serie    00XX: mainline, CVE, bugfixes patches
-%patch0001 -p1
+
 
 # Serie    01XX: Clear Linux patches
 # Use when needed
