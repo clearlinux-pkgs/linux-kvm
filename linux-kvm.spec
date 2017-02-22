@@ -32,7 +32,9 @@ BuildRequires:  kmod
 %define debug_package %{nil}
 %define __strip /bin/true
 
-# Serie    00XX: mainline, CVE, bugfixes patches
+#    000X: cve, bugfixes patches
+
+#    00XY: Mainline patches, upstream backports
 
 # Serie    01XX: Clear Linux patches
 #Patch0101: 0101-msleep-warning.patch
@@ -67,10 +69,11 @@ Linux kernel extra files
 %prep
 %setup -q -n linux-4.10
 
-# Serie    00XX: mainline, CVE, bugfixes patches
+#     000X  cve, bugfixes patches
 
+#     00XY  Mainline patches, upstream backports
 
-# Serie    01XX: Clear Linux patches
+#     01XX  Clear Linux patches
 # Use when needed
 # Added a warning to msleep (our local patch) to catch where it is used
 # not all uses are bug
@@ -106,7 +109,7 @@ BuildKernel() {
     cp config .config
 
     make -s ARCH=$Arch oldconfig > /dev/null
-    make -s CONFIG_DEBUG_SECTION_MISMATCH=y %{?_smp_mflags} ARCH=$Arch  %{?sparse_mflags}
+    make -s CONFIG_DEBUG_SECTION_MISMATCH=y %{?_smp_mflags} ARCH=$Arch %{?sparse_mflags}
 }
 
 BuildKernel bzImage
