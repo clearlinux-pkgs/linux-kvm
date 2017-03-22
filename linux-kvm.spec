@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.10.5
-Release:        215
+Release:        216
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -52,6 +52,11 @@ Patch0112: 0112-ksm-wakeups.patch
 Patch0113: 0113-init-do_mounts-recreate-dev-root.patch
 Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 
+# Clear Linux KVM Memory Optimization
+Patch0151: 0151-mm-Export-do_madvise.patch
+Patch0152: 0152-x86-kvm-Notify-host-to-release-pages.patch
+Patch0153: 0153-x86-Return-memory-from-guest-to-host-kernel.patch
+Patch0154: 0154-sysctl-vm-Fine-grained-cache-shrinking.patch
 
 # Serie    XYYY: Extra features modules
 
@@ -91,6 +96,12 @@ Linux kernel extra files
 %patch0112 -p1
 %patch0113 -p1
 %patch0114 -p1
+
+# Clear Linux KVM Memory Optimization
+%patch0151 -p1
+%patch0152 -p1
+%patch0153 -p1
+%patch0154 -p1
 
 # Serie    XYYY: Extra features modules
 
