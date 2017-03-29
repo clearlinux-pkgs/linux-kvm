@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.10.5 Kernel Configuration
+# Linux/x86 4.10.6 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -602,7 +602,7 @@ CONFIG_ACPI_SYSTEM_POWER_STATES_SUPPORT=y
 CONFIG_ACPI_EC_DEBUGFS=y
 # CONFIG_ACPI_AC is not set
 # CONFIG_ACPI_BATTERY is not set
-# CONFIG_ACPI_BUTTON is not set
+CONFIG_ACPI_BUTTON=m
 # CONFIG_ACPI_FAN is not set
 # CONFIG_ACPI_DOCK is not set
 CONFIG_ACPI_CPU_FREQ_PSS=y
