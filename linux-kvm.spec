@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.10.10
-Release:        223
+Release:        224
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -51,6 +51,7 @@ Patch0111: 0111-init-no-wait-for-the-known-devices.patch
 Patch0112: 0112-ksm-wakeups.patch
 Patch0113: 0113-init-do_mounts-recreate-dev-root.patch
 Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+Patch0115: cirrus-ioremap.patch
 
 # Clear Linux KVM Memory Optimization
 Patch0151: 0151-mm-Export-do_madvise.patch
@@ -96,6 +97,7 @@ Linux kernel extra files
 %patch0112 -p1
 %patch0113 -p1
 %patch0114 -p1
+%patch0115 -p1
 
 # Clear Linux KVM Memory Optimization
 %patch0151 -p1

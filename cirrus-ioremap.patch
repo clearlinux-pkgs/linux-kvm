@@ -1,0 +1,17 @@
+The cirrus driver is for KVM graphics..... no need for uncached accesses
+
+in a virtual environment, the framebuffer is going to be dram backed anyway,
+might as well use those cpu caches...
+
+
+--- linux-4.10.10/drivers/gpu/drm/cirrus/cirrus_main.c~	2017-04-12 10:43:04.000000000 +0000
++++ linux-4.10.10/drivers/gpu/drm/cirrus/cirrus_main.c	2017-04-14 13:27:26.023891166 +0000
+@@ -138,7 +138,7 @@
+ 		return -ENOMEM;
+ 	}
+ 
+-	cdev->rmmio = ioremap(cdev->rmmio_base, cdev->rmmio_size);
++	cdev->rmmio = ioremap_cache(cdev->rmmio_base, cdev->rmmio_size);
+ 
+ 	if (cdev->rmmio == NULL)
+ 		return -ENOMEM;
