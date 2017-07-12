@@ -1,44 +1,45 @@
-From 0adc5bfd84939d11d3c172eab0a00bfab4aadb46 Mon Sep 17 00:00:00 2001
+From 396a78b4db160f34769c121999b5dd500e999f3f Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Fri, 28 Aug 2015 11:00:36 -0500
-Subject: [PATCH 107/114] cgroup
+Subject: [PATCH 106/114] cgroup: delayed work
 
-Author:    Arjan van de Ven <arjan@linux.intel.com>
-
-Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
-Signed-off-by: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
 ---
  include/linux/cgroup-defs.h |  2 +-
- kernel/cgroup.c             | 24 ++++++++++++++----------
- 2 files changed, 15 insertions(+), 11 deletions(-)
+ kernel/cgroup/cgroup-v1.c   |  2 +-
+ kernel/cgroup/cgroup.c      | 21 ++++++++++++---------
+ 3 files changed, 14 insertions(+), 11 deletions(-)
 
 diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
-index 861b4677fc5b..5d3c345ee60c 100644
+index ec47101cb1bf..4827bf0809d7 100644
 --- a/include/linux/cgroup-defs.h
 +++ b/include/linux/cgroup-defs.h
-@@ -137,7 +137,7 @@ struct cgroup_subsys_state {
+@@ -136,7 +136,7 @@ struct cgroup_subsys_state {
  
  	/* percpu_ref killing and RCU release */
  	struct rcu_head rcu_head;
 -	struct work_struct destroy_work;
 +	struct delayed_work destroy_work;
- };
  
- /*
-diff --git a/kernel/cgroup.c b/kernel/cgroup.c
-index 53bbca7c4859..6de39d8213ed 100644
---- a/kernel/cgroup.c
-+++ b/kernel/cgroup.c
-@@ -73,7 +73,7 @@
+ 	/*
+ 	 * PI: the parent css.	Placed here for cache proximity to following
+diff --git a/kernel/cgroup/cgroup-v1.c b/kernel/cgroup/cgroup-v1.c
+index 85d75152402d..5a44a511878b 100644
+--- a/kernel/cgroup/cgroup-v1.c
++++ b/kernel/cgroup/cgroup-v1.c
+@@ -22,7 +22,7 @@
   * Expiring in the middle is a performance problem not a correctness one.
   * 1 sec should be enough.
   */
 -#define CGROUP_PIDLIST_DESTROY_DELAY	HZ
 +#define CGROUP_PIDLIST_DESTROY_DELAY	round_jiffies_relative(HZ)
  
- #define CGROUP_FILE_NAME_MAX		(MAX_CGROUP_TYPE_NAMELEN +	\
- 					 MAX_CFTYPE_NAME + 2)
-@@ -4986,8 +4986,9 @@ static struct cftype cgroup_legacy_base_files[] = {
+ /* Controllers blocked by the commandline in v1 */
+ static u16 cgroup_no_v1_mask;
+diff --git a/kernel/cgroup/cgroup.c b/kernel/cgroup/cgroup.c
+index 8d4e85eae42c..7c8294298983 100644
+--- a/kernel/cgroup/cgroup.c
++++ b/kernel/cgroup/cgroup.c
+@@ -3841,8 +3841,9 @@ static struct cftype cgroup_base_files[] = {
   */
  static void css_free_work_fn(struct work_struct *work)
  {
@@ -49,7 +50,7 @@ index 53bbca7c4859..6de39d8213ed 100644
  	struct cgroup_subsys *ss = css->ss;
  	struct cgroup *cgrp = css->cgroup;
  
-@@ -5036,14 +5037,15 @@ static void css_free_rcu_fn(struct rcu_head *rcu_head)
+@@ -3891,14 +3892,15 @@ static void css_free_rcu_fn(struct rcu_head *rcu_head)
  	struct cgroup_subsys_state *css =
  		container_of(rcu_head, struct cgroup_subsys_state, rcu_head);
  
@@ -68,7 +69,7 @@ index 53bbca7c4859..6de39d8213ed 100644
  	struct cgroup_subsys *ss = css->ss;
  	struct cgroup *cgrp = css->cgroup;
  
-@@ -5088,8 +5090,9 @@ static void css_release(struct percpu_ref *ref)
+@@ -3943,8 +3945,8 @@ static void css_release(struct percpu_ref *ref)
  	struct cgroup_subsys_state *css =
  		container_of(ref, struct cgroup_subsys_state, refcnt);
  
@@ -76,11 +77,10 @@ index 53bbca7c4859..6de39d8213ed 100644
 -	queue_work(cgroup_destroy_wq, &css->destroy_work);
 +	INIT_DELAYED_WORK(&css->destroy_work, css_release_work_fn);
 +	queue_delayed_work(cgroup_destroy_wq, &css->destroy_work, CGROUP_PIDLIST_DESTROY_DELAY);
-+
  }
  
  static void init_and_link_css(struct cgroup_subsys_state *css,
-@@ -5371,8 +5374,9 @@ static int cgroup_mkdir(struct kernfs_node *parent_kn, const char *name,
+@@ -4225,8 +4227,9 @@ int cgroup_mkdir(struct kernfs_node *parent_kn, const char *name, umode_t mode)
   */
  static void css_killed_work_fn(struct work_struct *work)
  {
@@ -91,7 +91,7 @@ index 53bbca7c4859..6de39d8213ed 100644
  
  	mutex_lock(&cgroup_mutex);
  
-@@ -5393,8 +5397,8 @@ static void css_killed_ref_fn(struct percpu_ref *ref)
+@@ -4247,8 +4250,8 @@ static void css_killed_ref_fn(struct percpu_ref *ref)
  		container_of(ref, struct cgroup_subsys_state, refcnt);
  
  	if (atomic_dec_and_test(&css->online_cnt)) {
@@ -103,5 +103,5 @@ index 53bbca7c4859..6de39d8213ed 100644
  }
  
 -- 
-2.11.1
+2.13.2
 

@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.10.17
-Release:        232
+Version:        4.12.1
+Release:        233
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.10.17.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.12.1.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -39,21 +39,20 @@ Requires: systemd-console
 #    00XY: Mainline patches, upstream backports
 
 # Serie    01XX: Clear Linux patches
-#Patch0101: 0101-msleep-warning.patch
-Patch0102: 0102-cpuidle-skip-synchronize_rcu-on-single-CPU-systems.patch
-Patch0103: 0103-sysrq-skip-synchronize_rcu-if-there-is-no-old-op.patch
-Patch0104: 0104-fbcon-enable-no-blink-by-default.patch
-Patch0105: 0105-vmstats-wakeups.patch
-Patch0106: 0106-pci-probe.patch
-Patch0107: 0107-cgroup.patch
-Patch0108: 0108-smpboot-reuse-timer-calibration.patch
-Patch0109: 0109-perf.patch
-Patch0110: 0110-pci-probe-identify-known-devices.patch
-Patch0111: 0111-init-no-wait-for-the-known-devices.patch
-Patch0112: 0112-ksm-wakeups.patch
-Patch0113: 0113-init-do_mounts-recreate-dev-root.patch
-Patch0114: 0114-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
-Patch0115: cirrus-ioremap.patch
+Patch0101: 0101-cpuidle-skip-synchronize_rcu-on-single-CPU-systems.patch
+Patch0102: 0102-sysrq-skip-synchronize_rcu-if-there-is-no-old-op.patch
+Patch0103: 0103-fbcon-enable-no-blink-by-default.patch
+Patch0104: 0104-mm-reduce-vmstat-wakeups.patch
+Patch0105: 0105-pci-probe.patch
+Patch0106: 0106-cgroup-delayed-work.patch
+Patch0107: 0107-smpboot-reuse-timer-calibration.patch
+Patch0108: 0108-perf.patch
+Patch0109: 0109-pci-probe-identify-known-devices.patch
+Patch0110: 0110-init-no-wait-for-the-known-devices.patch
+Patch0111: 0111-ksm-wakeups.patch
+Patch0112: 0112-init-do_mounts-recreate-dev-root.patch
+Patch0113: 0113-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+Patch0114: 0114-cirrus-set-ioremap_cache.patch
 
 # Clear Linux KVM Memory Optimization
 Patch0151: 0151-mm-Export-do_madvise.patch
@@ -75,17 +74,14 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.10.17
+%setup -q -n linux-4.12.1
 
 #     000X  cve, bugfixes patches
 
 #     00XY  Mainline patches, upstream backports
 
 #     01XX  Clear Linux patches
-# Use when needed
-# Added a warning to msleep (our local patch) to catch where it is used
-# not all uses are bug
-#%patch0101 -p1
+%patch0101 -p1
 %patch0102 -p1
 %patch0103 -p1
 %patch0104 -p1
@@ -99,7 +95,6 @@ Linux kernel extra files
 %patch0112 -p1
 %patch0113 -p1
 %patch0114 -p1
-%patch0115 -p1
 
 # Clear Linux KVM Memory Optimization
 %patch0151 -p1
