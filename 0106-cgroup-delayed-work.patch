@@ -1,13 +1,14 @@
-From 396a78b4db160f34769c121999b5dd500e999f3f Mon Sep 17 00:00:00 2001
+From f80cc54895e35a762036382c73bc48ac813e05a5 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Fri, 28 Aug 2015 11:00:36 -0500
-Subject: [PATCH 106/114] cgroup: delayed work
+Subject: [PATCH] cgroup: delayed work
 
 ---
- include/linux/cgroup-defs.h |  2 +-
- kernel/cgroup/cgroup-v1.c   |  2 +-
- kernel/cgroup/cgroup.c      | 21 ++++++++++++---------
- 3 files changed, 14 insertions(+), 11 deletions(-)
+ include/linux/cgroup-defs.h     |  2 +-
+ kernel/cgroup/cgroup-internal.h |  8 ++++++++
+ kernel/cgroup/cgroup-v1.c       |  8 --------
+ kernel/cgroup/cgroup.c          | 21 ++++++++++++---------
+ 4 files changed, 21 insertions(+), 18 deletions(-)
 
 diff --git a/include/linux/cgroup-defs.h b/include/linux/cgroup-defs.h
 index ec47101cb1bf..4827bf0809d7 100644
@@ -22,19 +23,44 @@ index ec47101cb1bf..4827bf0809d7 100644
  
  	/*
  	 * PI: the parent css.	Placed here for cache proximity to following
+diff --git a/kernel/cgroup/cgroup-internal.h b/kernel/cgroup/cgroup-internal.h
+index 00f4d6bf048f..854ef3216429 100644
+--- a/kernel/cgroup/cgroup-internal.h
++++ b/kernel/cgroup/cgroup-internal.h
+@@ -8,6 +8,14 @@
+ #include <linux/refcount.h>
+ 
+ /*
++ * pidlists linger the following amount before being destroyed.  The goal
++ * is avoiding frequent destruction in the middle of consecutive read calls
++ * Expiring in the middle is a performance problem not a correctness one.
++ * 1 sec should be enough.
++ */
++#define CGROUP_PIDLIST_DESTROY_DELAY	round_jiffies_relative(HZ)
++
++/*
+  * A cgroup can be associated with multiple css_sets as different tasks may
+  * belong to different cgroups on different hierarchies.  In the other
+  * direction, a css_set is naturally associated with multiple cgroups.
 diff --git a/kernel/cgroup/cgroup-v1.c b/kernel/cgroup/cgroup-v1.c
-index 85d75152402d..5a44a511878b 100644
+index 85d75152402d..60bb59d44d01 100644
 --- a/kernel/cgroup/cgroup-v1.c
 +++ b/kernel/cgroup/cgroup-v1.c
-@@ -22,7 +22,7 @@
-  * Expiring in the middle is a performance problem not a correctness one.
-  * 1 sec should be enough.
-  */
--#define CGROUP_PIDLIST_DESTROY_DELAY	HZ
-+#define CGROUP_PIDLIST_DESTROY_DELAY	round_jiffies_relative(HZ)
+@@ -16,14 +16,6 @@
  
+ #include <trace/events/cgroup.h>
+ 
+-/*
+- * pidlists linger the following amount before being destroyed.  The goal
+- * is avoiding frequent destruction in the middle of consecutive read calls
+- * Expiring in the middle is a performance problem not a correctness one.
+- * 1 sec should be enough.
+- */
+-#define CGROUP_PIDLIST_DESTROY_DELAY	HZ
+-
  /* Controllers blocked by the commandline in v1 */
  static u16 cgroup_no_v1_mask;
+ 
 diff --git a/kernel/cgroup/cgroup.c b/kernel/cgroup/cgroup.c
 index 8d4e85eae42c..7c8294298983 100644
 --- a/kernel/cgroup/cgroup.c
