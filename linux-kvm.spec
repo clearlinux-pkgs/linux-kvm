@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.12.1
-Release:        234
+Version:        4.12.2
+Release:        235
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.12.1.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.12.2.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -74,7 +74,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.12.1
+%setup -q -n linux-4.12.2
 
 #     000X  cve, bugfixes patches
 
