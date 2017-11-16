@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.13.1
-Release:        247
+Release:        248
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
