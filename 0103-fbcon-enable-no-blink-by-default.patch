@@ -5,14 +5,14 @@ Subject: [PATCH 103/114] fbcon: enable no blink by default
 
 Author:    Arjan van de Ven <arjan@linux.intel.com>
 ---
- drivers/video/console/fbcon.c | 2 +-
+ drivers/video/fbdev/core/fbcon.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/video/console/fbcon.c b/drivers/video/console/fbcon.c
-index 12ded23f1aaf..834d60229c33 100644
---- a/drivers/video/console/fbcon.c
-+++ b/drivers/video/console/fbcon.c
-@@ -146,7 +146,7 @@ static const struct consw fb_con;
+diff --git a/drivers/video/fbdev/core/fbcon.c b/drivers/video/fbdev/core/fbcon.c
+index 04612f9..a82cde1 100644
+--- a/drivers/video/fbdev/core/fbcon.c
++++ b/drivers/video/fbdev/core/fbcon.c
+@@ -148,7 +148,7 @@ static const struct consw fb_con;
  
  static int fbcon_set_origin(struct vc_data *);
  
@@ -22,5 +22,5 @@ index 12ded23f1aaf..834d60229c33 100644
  #define divides(a, b)	((!(a) || (b)%(a)) ? 0 : 1)
  
 -- 
-2.13.2
+2.15.1
 
