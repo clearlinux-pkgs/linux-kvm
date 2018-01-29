@@ -1,7 +1,7 @@
-From f1fa23fc10d9c478ec71abf48c945ccddd540018 Mon Sep 17 00:00:00 2001
+From b67d739ec9596ec67cc554fe3cde6a7db0fb4f79 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 17:28:14 -0600
-Subject: [PATCH 107/114] smpboot: reuse timer calibration
+Subject: [PATCH] smpboot: reuse timer calibration
 
 NO point recalibrating for known-constant tsc... saves 200ms+ of boot time.
 
@@ -9,9 +9,23 @@ Author:    Arjan van de Ven <arjan@linux.intel.com>
 
 Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
 ---
- arch/x86/kernel/tsc.c | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/x86/kernel/smpboot.c | 2 +-
+ arch/x86/kernel/tsc.c     | 3 +++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
+diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
+index ed556d50d7ed..f454223510c4 100644
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -701,7 +701,7 @@ wakeup_secondary_cpu_via_init(int phys_apicid, unsigned long start_eip)
+ 	pr_debug("Waiting for send to finish...\n");
+ 	send_status = safe_apic_wait_icr_idle();
+ 
+-	udelay(init_udelay);
++	udelay(100);
+ 
+ 	pr_debug("Deasserting INIT\n");
+ 
 diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
 index e169e85db434..359742b26526 100644
 --- a/arch/x86/kernel/tsc.c
