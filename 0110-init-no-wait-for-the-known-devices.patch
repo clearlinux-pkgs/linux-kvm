@@ -1,4 +1,4 @@
-From 33a759b3c86e05a2d3e9d201edc8caa123beb16a Mon Sep 17 00:00:00 2001
+From 237056b1f3c4e1a083b18134f8a0a5e882cb0581 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Mon, 22 Jun 2015 09:33:33 -0500
 Subject: [PATCH 110/114] init: no wait for the known devices
@@ -13,7 +13,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/init/do_mounts.c b/init/do_mounts.c
-index c2de5104aad2..40725f0f5fb3 100644
+index 7cf4f6dafd5f..354926c2a6e0 100644
 --- a/init/do_mounts.c
 +++ b/init/do_mounts.c
 @@ -28,6 +28,7 @@
@@ -24,7 +24,7 @@ index c2de5104aad2..40725f0f5fb3 100644
  
  #include <linux/nfs_fs.h>
  #include <linux/nfs_fs_sb.h>
-@@ -563,7 +564,8 @@ void __init prepare_namespace(void)
+@@ -562,7 +563,8 @@ void __init prepare_namespace(void)
  	 * For example, it is not atypical to wait 5 seconds here
  	 * for the touchpad of a laptop to initialize.
  	 */
@@ -35,5 +35,5 @@ index c2de5104aad2..40725f0f5fb3 100644
  	md_run_setup();
  
 -- 
-2.13.2
+2.16.1
 

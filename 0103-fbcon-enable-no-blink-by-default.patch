@@ -1,4 +1,4 @@
-From 63fd40ed7d52c48d4f1edef2e928692e0f2ffac2 Mon Sep 17 00:00:00 2001
+From 57211ecd55da396a703c0c8ed147f11bff6a89e3 Mon Sep 17 00:00:00 2001
 From: Jose Carlos Venegas Munoz <jos.c.venegas.munoz@intel.com>
 Date: Mon, 13 Apr 2015 11:26:36 -0500
 Subject: [PATCH 103/114] fbcon: enable no blink by default
@@ -9,7 +9,7 @@ Author:    Arjan van de Ven <arjan@linux.intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/video/fbdev/core/fbcon.c b/drivers/video/fbdev/core/fbcon.c
-index 04612f9..a82cde1 100644
+index 929ca472c524..fa5947f4d440 100644
 --- a/drivers/video/fbdev/core/fbcon.c
 +++ b/drivers/video/fbdev/core/fbcon.c
 @@ -148,7 +148,7 @@ static const struct consw fb_con;
@@ -22,5 +22,5 @@ index 04612f9..a82cde1 100644
  #define divides(a, b)	((!(a) || (b)%(a)) ? 0 : 1)
  
 -- 
-2.15.1
+2.16.1
 

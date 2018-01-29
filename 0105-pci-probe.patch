@@ -1,7 +1,7 @@
-From 26ac70f699558e939297156f1bb300393ded5702 Mon Sep 17 00:00:00 2001
+From 72b7970fd0373735a3298039e82145048a5b8f62 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 16:53:08 -0600
-Subject: [PATCH] pci: probe
+Subject: [PATCH 105/114] pci: probe
 
 ---
  drivers/pci/probe.c | 42 ++++++++++++++++++++++++++++++++++++++++--

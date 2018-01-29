@@ -1,4 +1,4 @@
-From 7cb71dfb076d5201c7cee4b4c3e85d98f9695cc3 Mon Sep 17 00:00:00 2001
+From 6c41f2c932f12ffacaf4a1f33e13650b1c729fdc Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Mon, 14 Mar 2016 11:06:46 -0600
 Subject: [PATCH 111/114] ksm-wakeups
@@ -9,10 +9,10 @@ reduce wakeups in ksm
  1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/mm/ksm.c b/mm/ksm.c
-index 216184af0e19..1e7e4e8bb5f9 100644
+index be8f4576f842..b16fb51113b9 100644
 --- a/mm/ksm.c
 +++ b/mm/ksm.c
-@@ -1767,8 +1767,12 @@ static int ksm_scan_thread(void *nothing)
+@@ -2346,8 +2346,12 @@ static int ksm_scan_thread(void *nothing)
  		try_to_freeze();
  
  		if (ksmd_should_run()) {
@@ -28,5 +28,5 @@ index 216184af0e19..1e7e4e8bb5f9 100644
  			wait_event_freezable(ksm_thread_wait,
  				ksmd_should_run() || kthread_should_stop());
 -- 
-2.13.2
+2.16.1
 

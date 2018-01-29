@@ -1,4 +1,4 @@
-From e09e490bbc40c9e10047af76577efb099eb915d1 Mon Sep 17 00:00:00 2001
+From 05e60568b375fe22a42582b2745a41a72f061307 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Mon, 1 May 2017 01:00:51 +0000
 Subject: [PATCH 104/114] mm: reduce vmstat wakeups
@@ -8,10 +8,10 @@ Subject: [PATCH 104/114] mm: reduce vmstat wakeups
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/mm/vmstat.c b/mm/vmstat.c
-index 76f73670200a..3cc9788e0be2 100644
+index 40b2db6db6b1..805cf07b83d5 100644
 --- a/mm/vmstat.c
 +++ b/mm/vmstat.c
-@@ -1562,7 +1562,7 @@ static const struct file_operations proc_vmstat_file_operations = {
+@@ -1773,7 +1773,7 @@ static const struct file_operations vmstat_file_operations = {
  
  #ifdef CONFIG_SMP
  static DEFINE_PER_CPU(struct delayed_work, vmstat_work);
@@ -21,5 +21,5 @@ index 76f73670200a..3cc9788e0be2 100644
  #ifdef CONFIG_PROC_FS
  static void refresh_vm_stats(struct work_struct *work)
 -- 
-2.13.2
+2.16.1
 
