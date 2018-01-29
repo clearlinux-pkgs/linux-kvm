@@ -15,7 +15,8 @@ Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.15.tar.xz
 Source1:        config
 Source2:        cmdline
 
-%define kversion %{version}-%{release}.kvm
+%define ktarget  kvm
+%define kversion %{version}-%{release}.%{ktarget}
 
 BuildRequires:  bash >= 2.03
 BuildRequires:  bc
@@ -132,68 +133,59 @@ cp %{SOURCE1} .
 
 %build
 BuildKernel() {
-    MakeTarget=$1
 
+    Target=$1
     Arch=x86_64
-    ExtraVer="-%{release}.kvm"
+    ExtraVer="-%{release}.${Target}"
 
     perl -p -i -e "s/^EXTRAVERSION.*/EXTRAVERSION = ${ExtraVer}/" Makefile
 
-    make -s mrproper
-    cp config .config
+    make O=${Target} -s mrproper
+    cp config ${Target}/.config
 
-    make -s ARCH=$Arch oldconfig > /dev/null
-    make -s CONFIG_DEBUG_SECTION_MISMATCH=y %{?_smp_mflags} ARCH=$Arch %{?sparse_mflags}
+    make O=${Target} -s ARCH=${Arch} olddefconfig
+    make O=${Target} -s ARCH=${Arch} CONFIG_DEBUG_SECTION_MISMATCH=y %{?_smp_mflags} %{?sparse_mflags}
 }
 
-BuildKernel bzImage
+BuildKernel %{ktarget}
 
 %install
 
 InstallKernel() {
-    KernelImage=$1
 
+    Target=$1
+    Kversion=$2
     Arch=x86_64
-    KernelVer=%{kversion}
     KernelDir=%{buildroot}/usr/lib/kernel
 
     mkdir   -p ${KernelDir}
-    install -m 644 .config    ${KernelDir}/config-${KernelVer}
-    install -m 644 System.map ${KernelDir}/System.map-${KernelVer}
-    install -m 644 %{SOURCE2} ${KernelDir}/cmdline-${KernelVer}
-    cp  $KernelImage ${KernelDir}/org.clearlinux.kvm.%{version}-%{release}
-    chmod 755 ${KernelDir}/org.clearlinux.kvm.%{version}-%{release}
+    install -m 644 ${Target}/.config    ${KernelDir}/config-${Kversion}
+    install -m 644 ${Target}/System.map ${KernelDir}/System.map-${Kversion}
+    install -m 644 ${Target}/vmlinux    ${KernelDir}/vmlinux-${Kversion}
+    install -m 644 %{SOURCE2}           ${KernelDir}/cmdline-${Kversion}
+    cp  ${Target}/arch/x86/boot/bzImage ${KernelDir}/org.clearlinux.${Target}.%{version}-%{release}
+    chmod 755 ${KernelDir}/org.clearlinux.${Target}.%{version}-%{release}
 
-    mkdir -p %{buildroot}/usr/lib/modules/$KernelVer
-    make -s ARCH=$Arch INSTALL_MOD_PATH=%{buildroot}/usr modules_install KERNELRELEASE=$KernelVer
+    mkdir -p %{buildroot}/usr/lib/modules
+    make O=${Target} -s ARCH=${Arch} INSTALL_MOD_PATH=%{buildroot}/usr modules_install
 
-    rm -f %{buildroot}/usr/lib/modules/$KernelVer/build
-    rm -f %{buildroot}/usr/lib/modules/$KernelVer/source
+    rm -f %{buildroot}/usr/lib/modules/${Kversion}/build
+    rm -f %{buildroot}/usr/lib/modules/${Kversion}/source
 
-    # Erase some modules index
-    for i in alias ccwmap dep ieee1394map inputmap isapnpmap ofmap pcimap seriomap symbols usbmap softdep devname
-    do
-        rm -f %{buildroot}/usr/lib/modules/${KernelVer}/modules.${i}*
-    done
-    rm -f %{buildroot}/usr/lib/modules/${KernelVer}/modules.*.bin
+    ln -s org.clearlinux.${Target}.%{version}-%{release} %{buildroot}/usr/lib/kernel/default-${Target}
 }
 
-InstallKernel arch/x86/boot/bzImage
+InstallKernel %{ktarget}  %{kversion}
 
 rm -rf %{buildroot}/usr/lib/firmware
-
-# Recreate modules indices
-depmod -a -b %{buildroot}/usr %{kversion}
-
-ln -s org.clearlinux.kvm.%{version}-%{release} %{buildroot}/usr/lib/kernel/default-kvm
 
 %files
 %dir /usr/lib/kernel
 %dir /usr/lib/modules/%{kversion}
 /usr/lib/kernel/config-%{kversion}
 /usr/lib/kernel/cmdline-%{kversion}
-/usr/lib/kernel/org.clearlinux.kvm.%{version}-%{release}
-/usr/lib/kernel/default-kvm
+/usr/lib/kernel/org.clearlinux.%{ktarget}.%{version}-%{release}
+/usr/lib/kernel/default-%{ktarget}
 /usr/lib/modules/%{kversion}/kernel
 /usr/lib/modules/%{kversion}/modules.*
 
