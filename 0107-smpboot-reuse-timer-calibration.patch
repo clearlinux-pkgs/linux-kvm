@@ -1,7 +1,7 @@
-From 12409839a8fcf30e6b83290f30f1187efe4a58b6 Mon Sep 17 00:00:00 2001
+From 283fcb879f66da9659f1983bcf173476bae9292b Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Wed, 11 Feb 2015 17:28:14 -0600
-Subject: [PATCH 107/114] smpboot: reuse timer calibration
+Subject: [PATCH 114/126] smpboot: reuse timer calibration
 
 NO point recalibrating for known-constant tsc... saves 200ms+ of boot time.
 
@@ -9,37 +9,23 @@ Author:    Arjan van de Ven <arjan@linux.intel.com>
 
 Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
 ---
- arch/x86/kernel/smpboot.c | 2 +-
- arch/x86/kernel/tsc.c     | 3 +++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ arch/x86/kernel/tsc.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
-index f04479a8f74f..6f41d74350ec 100644
---- a/arch/x86/kernel/smpboot.c
-+++ b/arch/x86/kernel/smpboot.c
-@@ -764,7 +764,7 @@ wakeup_secondary_cpu_via_init(int phys_apicid, unsigned long start_eip)
- 	pr_debug("Waiting for send to finish...\n");
- 	send_status = safe_apic_wait_icr_idle();
- 
--	udelay(init_udelay);
-+	udelay(100);
- 
- 	pr_debug("Deasserting INIT\n");
- 
 diff --git a/arch/x86/kernel/tsc.c b/arch/x86/kernel/tsc.c
-index 714dfba6a1e7..96cddaf0f48b 100644
+index ad2b925a808e..6aed4e79f290 100644
 --- a/arch/x86/kernel/tsc.c
 +++ b/arch/x86/kernel/tsc.c
-@@ -1438,6 +1438,9 @@ unsigned long calibrate_delay_is_known(void)
- 	if (!mask)
+@@ -1352,6 +1352,9 @@ unsigned long calibrate_delay_is_known(void)
+ 	if (tsc_disabled || !constant_tsc || !mask)
  		return 0;
  
-+	if (cpu !=0)
++	if (cpu != 0)
 +		return cpu_data(0).loops_per_jiffy;
 +
  	sibling = cpumask_any_but(mask, cpu);
  	if (sibling < nr_cpu_ids)
  		return cpu_data(sibling).loops_per_jiffy;
 -- 
-2.13.2
+2.15.0
 
