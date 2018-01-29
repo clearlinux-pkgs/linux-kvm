@@ -35,7 +35,6 @@ Requires: systemd-console
 %define __strip /bin/true
 
 #    000X: cve, bugfixes patches
-Patch0001: cve-2017-13693.patch
 
 #    00XY: Mainline patches, upstream backports
 
@@ -78,7 +77,6 @@ Linux kernel extra files
 %setup -q -n linux-4.14.12
 
 #     000X  cve, bugfixes patches
-%patch0001 -p1
 
 #     00XY  Mainline patches, upstream backports
 
