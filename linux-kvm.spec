@@ -86,14 +86,6 @@ Group:          kernel
 %description extra
 Linux kernel extra files
 
-%package clr-init
-License:        GPL-2.0
-Summary:        Symlink to clr-init file
-Group:          kernel
-
-%description clr-init
-Generates a symlink to the clr-init file to boot with encrypted root partion.
-
 %prep
 %setup -q -n linux-4.15
 
@@ -181,7 +173,6 @@ InstallKernel() {
     rm -f %{buildroot}/usr/lib/modules/${Kversion}/source
 
     ln -s org.clearlinux.${Target}.%{version}-%{release} %{buildroot}/usr/lib/kernel/default-${Target}
-    ln -s clr-init.img.gz %{buildroot}/usr/lib/kernel/initrd-org.clearlinux.${Target}.%{version}-%{release}
 }
 
 InstallKernel %{ktarget}  %{kversion}
@@ -202,8 +193,3 @@ rm -rf %{buildroot}/usr/lib/firmware
 %dir /usr/lib/kernel
 /usr/lib/kernel/System.map-%{kversion}
 /usr/lib/kernel/vmlinux-%{kversion}
-
-%files clr-init
-%dir /usr/lib/kernel
-/usr/lib/kernel/initrd-org.clearlinux.%{ktarget}.%{version}-%{release}
-
