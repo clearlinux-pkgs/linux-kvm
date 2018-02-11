@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.15.1
+Version:        4.15.2
 Release:        253
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.15.1.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.15.2.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -61,17 +61,8 @@ Patch0152: 0152-x86-kvm-Notify-host-to-release-pages.patch
 Patch0153: 0153-x86-Return-memory-from-guest-to-host-kernel.patch
 Patch0154: 0154-sysctl-vm-Fine-grained-cache-shrinking.patch
 
-# nospec
-Patch0401: 0401-Documentation-document-array_ptr.patch
-Patch0402: 0402-asm-nospec-array_ptr-sanitize-speculative-array-de-r.patch
-Patch0403: 0403-x86-implement-array_ptr_mask.patch
-Patch0404: 0404-x86-introduce-__uaccess_begin_nospec-and-ifence.patch
-Patch0405: 0405-x86-__get_user-use-__uaccess_begin_nospec.patch
-Patch0406: 0406-x86-get_user-use-pointer-masking-to-limit-speculatio.patch
-Patch0407: 0407-x86-narrow-out-of-bounds-syscalls-to-sys_read-under-.patch
-Patch0408: 0408-vfs-fdtable-prevent-bounds-check-bypass-via-speculat.patch
-Patch0409: 0409-kvm-x86-update-spectre-v1-mitigation.patch
-Patch0410: 0410-nl80211-sanitize-array-index-in-parse_txq_params.patch
+
+Patch0500: zero-regs.patch
 
 # Serie    XYYY: Extra features modules
 
@@ -87,7 +78,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.15.1
+%setup -q -n linux-4.15.2
 
 #     000X  cve, bugfixes patches
 
@@ -115,17 +106,7 @@ Linux kernel extra files
 %patch0153 -p1
 %patch0154 -p1
 
-# nospec
-%patch0401 -p1
-%patch0402 -p1
-%patch0403 -p1
-%patch0404 -p1
-%patch0405 -p1
-%patch0406 -p1
-%patch0407 -p1
-%patch0408 -p1
-%patch0409 -p1
-%patch0410 -p1
+%patch0500 -p1
 
 # Serie    XYYY: Extra features modules
 
