@@ -62,6 +62,31 @@ Patch0153: 0153-x86-Return-memory-from-guest-to-host-kernel.patch
 Patch0154: 0154-sysctl-vm-Fine-grained-cache-shrinking.patch
 
 
+Patch0201: 0001-ima-Use-i_version-only-when-filesystem-supports-it.patch
+Patch0202: 0002-lustre-don-t-set-f_version-in-ll_readdir.patch
+Patch0203: 0003-ntfs-remove-i_version-handling.patch
+Patch0204: 0004-fs-new-API-for-handling-inode-i_version.patch
+Patch0205: 0005-fs-don-t-take-the-i_lock-in-inode_inc_iversion.patch
+Patch0206: 0006-fat-convert-to-new-i_version-API.patch
+Patch0207: 0007-affs-convert-to-new-i_version-API.patch
+Patch0208: 0008-afs-convert-to-new-i_version-API.patch
+Patch0209: 0009-btrfs-convert-to-new-i_version-API.patch
+Patch0210: 0010-exofs-switch-to-new-i_version-API.patch
+Patch0211: 0011-ext2-convert-to-new-i_version-API.patch
+Patch0212: 0012-ext4-convert-to-new-i_version-API.patch
+Patch0213: 0013-nfs-convert-to-new-i_version-API.patch
+Patch0214: 0014-nfsd-convert-to-new-i_version-API.patch
+Patch0215: 0015-ocfs2-convert-to-new-i_version-API.patch
+Patch0216: 0016-ufs-use-new-i_version-API.patch
+Patch0217: 0017-xfs-convert-to-new-i_version-API.patch
+Patch0218: 0018-IMA-switch-IMA-over-to-new-i_version-API.patch
+Patch0219: 0019-fs-only-set-S_VERSION-when-updating-times-if-necessa.patch
+Patch0220: 0020-xfs-avoid-setting-XFS_ILOG_CORE-if-i_version-doesn-t.patch
+Patch0221: 0021-btrfs-only-dirty-the-inode-in-btrfs_update_time-if-s.patch
+Patch0222: 0022-fs-handle-inode-i_version-more-efficiently.patch
+patch0223: kvm-retpoline.patch
+
+
 Patch0500: zero-regs.patch
 
 # Serie    XYYY: Extra features modules
@@ -105,6 +130,31 @@ Linux kernel extra files
 %patch0152 -p1
 %patch0153 -p1
 %patch0154 -p1
+
+# upstream backports
+%patch0201 -p1
+%patch0202 -p1
+%patch0203 -p1
+%patch0204 -p1
+%patch0205 -p1
+%patch0206 -p1
+%patch0207 -p1
+%patch0208 -p1
+%patch0209 -p1
+%patch0210 -p1
+%patch0211 -p1
+%patch0212 -p1
+%patch0213 -p1
+%patch0214 -p1
+%patch0215 -p1
+%patch0216 -p1
+%patch0217 -p1
+%patch0218 -p1
+%patch0219 -p1
+%patch0220 -p1
+%patch0221 -p1
+%patch0222 -p1
+%patch0223 -p1
 
 %patch0500 -p1
 
