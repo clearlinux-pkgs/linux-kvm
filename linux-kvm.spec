@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.15.4
+Version:        4.15.5
 Release:        256
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.15.4.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.15.5.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -84,7 +84,6 @@ Patch0219: 0019-fs-only-set-S_VERSION-when-updating-times-if-necessa.patch
 Patch0220: 0020-xfs-avoid-setting-XFS_ILOG_CORE-if-i_version-doesn-t.patch
 Patch0221: 0021-btrfs-only-dirty-the-inode-in-btrfs_update_time-if-s.patch
 Patch0222: 0022-fs-handle-inode-i_version-more-efficiently.patch
-patch0223: kvm-retpoline.patch
 
 
 Patch0500: zero-regs.patch
@@ -103,7 +102,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.15.4
+%setup -q -n linux-4.15.5
 
 #     000X  cve, bugfixes patches
 
@@ -154,7 +153,6 @@ Linux kernel extra files
 %patch0220 -p1
 %patch0221 -p1
 %patch0222 -p1
-%patch0223 -p1
 
 %patch0500 -p1
 
