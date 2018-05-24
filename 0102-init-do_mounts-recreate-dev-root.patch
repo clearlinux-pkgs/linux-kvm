@@ -1,7 +1,7 @@
-From df483cbb033a07176e4edddc8e692eabfb5e4196 Mon Sep 17 00:00:00 2001
+From 105cb583a416dc68fdc4e69df4c3b8b4580e4917 Mon Sep 17 00:00:00 2001
 From: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
 Date: Fri, 20 Nov 2015 14:01:26 -0600
-Subject: [PATCH 112/114] init: do_mounts: recreate /dev/root
+Subject: [PATCH 102/126] init: do_mounts: recreate /dev/root
 
 Rootfs shows as is mounted in /dev/root, but this devices is not present in
 /dev directory.
@@ -12,7 +12,7 @@ Signed-off-by: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
  1 file changed, 8 insertions(+)
 
 diff --git a/init/do_mounts.c b/init/do_mounts.c
-index 354926c2a6e0..8a2d9bd19316 100644
+index f6d4dd764a52..9fd3875897df 100644
 --- a/init/do_mounts.c
 +++ b/init/do_mounts.c
 @@ -549,6 +549,7 @@ void __init mount_root(void)
@@ -23,7 +23,7 @@ index 354926c2a6e0..8a2d9bd19316 100644
  
  	if (root_delay) {
  		printk(KERN_INFO "Waiting %d sec before mounting root device...\n",
-@@ -603,6 +604,13 @@ void __init prepare_namespace(void)
+@@ -602,6 +603,13 @@ void __init prepare_namespace(void)
  	devtmpfs_mount("dev");
  	sys_mount(".", "/", NULL, MS_MOVE, NULL);
  	sys_chroot(".");
@@ -38,5 +38,5 @@ index 354926c2a6e0..8a2d9bd19316 100644
  
  static bool is_tmpfs;
 -- 
-2.16.1
+2.15.0
 
