@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.16.11
-Release:        261
+Release:        262
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -28,7 +28,7 @@ BuildRequires:  flex
 BuildRequires:  bison
 BuildRequires:  kmod
 
-Requires: systemd-console
+Requires: systemd-bin
 
 # don't strip .ko files!
 %global __os_install_post %{nil}
