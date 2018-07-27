@@ -2416,7 +2416,7 @@ CONFIG_FB_TILEBLITTING=y
 #
 # Frame buffer hardware drivers
 #
-# CONFIG_FB_CIRRUS is not set
+CONFIG_FB_CIRRUS=m
 # CONFIG_FB_PM2 is not set
 # CONFIG_FB_CYBER2000 is not set
 # CONFIG_FB_ARC is not set
