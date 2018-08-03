@@ -47,10 +47,10 @@ Patch0104: 0104-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0105: 0105-give-rdrand-some-credit.patch
 
 # Clear Linux KVM Memory Optimization
-Patch0151: 0151-mm-Export-do_madvise.patch
-Patch0152: 0152-x86-kvm-Notify-host-to-release-pages.patch
-Patch0153: 0153-x86-Return-memory-from-guest-to-host-kernel.patch
-Patch0154: 0154-sysctl-vm-Fine-grained-cache-shrinking.patch
+#Patch0151: 0151-mm-Export-do_madvise.patch
+#Patch0152: 0152-x86-kvm-Notify-host-to-release-pages.patch
+#Patch0153: 0153-x86-Return-memory-from-guest-to-host-kernel.patch
+#Patch0154: 0154-sysctl-vm-Fine-grained-cache-shrinking.patch
 
 Patch0500: zero-regs.patch
 
@@ -82,10 +82,10 @@ Linux kernel extra files
 %patch0105 -p1
 
 # Clear Linux KVM Memory Optimization
-%patch0151 -p1
-%patch0152 -p1
-%patch0153 -p1
-%patch0154 -p1
+#%patch0151 -p1
+#%patch0152 -p1
+#%patch0153 -p1
+#%patch0154 -p1
 
 # upstream backports
 
