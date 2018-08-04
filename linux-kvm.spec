@@ -70,7 +70,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.16.11
+%setup -q -n linux-4.17.12
 
 #     000X  cve, bugfixes patches
 
