@@ -48,6 +48,8 @@ Patch0103: 0103-ksm-wakeups.patch
 Patch0104: 0104-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0105: 0105-give-rdrand-some-credit.patch
 
+Patch0111: 0111-overload-on-wakeup.patch
+
 # Clear Linux KVM Memory Optimization
 #Patch0151: 0151-mm-Export-do_madvise.patch
 #Patch0152: 0152-x86-kvm-Notify-host-to-release-pages.patch
@@ -84,6 +86,8 @@ Linux kernel extra files
 %patch0103 -p1
 %patch0104 -p1
 %patch0105 -p1
+
+%patch0111 -p1
 
 # Clear Linux KVM Memory Optimization
 #%patch0151 -p1
