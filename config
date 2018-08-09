@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.17.12 Kernel Configuration
+# Linux/x86 4.17.14 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -3833,3 +3833,7 @@ CONFIG_ARCH_HAS_PMEM_API=y
 CONFIG_ARCH_HAS_UACCESS_FLUSHCACHE=y
 CONFIG_SBITMAP=y
 # CONFIG_STRING_SELFTEST is not set
+
+# kernel-config sources:
+# FILEVER=/usr/share/kernel-config/base-4.17-1-1
+# FILEVER=/usr/share/kernel-config/mandatory-4.17-1-1
