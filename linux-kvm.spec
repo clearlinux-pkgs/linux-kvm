@@ -48,6 +48,7 @@ Patch0102: 0102-init-do_mounts-recreate-dev-root.patch
 Patch0103: 0103-ksm-wakeups.patch
 Patch0104: 0104-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0105: 0105-give-rdrand-some-credit.patch
+Patch0106: evged.patch
 
 Patch0111: 0111-overload-on-wakeup.patch
 
@@ -87,6 +88,7 @@ Linux kernel extra files
 %patch0103 -p1
 %patch0104 -p1
 %patch0105 -p1
+%patch0106 -p1
 
 %patch0111 -p1
 
