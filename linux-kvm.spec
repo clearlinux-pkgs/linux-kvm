@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.17.14
-Release:        274
+Version:        4.18.5
+Release:        275
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.17.14.tar.xz
+Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.18.5.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -77,7 +77,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.17.14
+%setup -q -n linux-4.18.5
 
 #     000X  cve, bugfixes patches
 
@@ -100,7 +100,6 @@ Linux kernel extra files
 # Small tweaks
 #
 %patch0500 -p1
-%patch0501 -p1
 
 # Serie    XYYY: Extra features modules
 
