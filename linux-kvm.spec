@@ -40,17 +40,12 @@ Requires: systemd-bin
 
 #    00XY: Mainline patches, upstream backports
 
-Patch0011: wireguard.patch
-
 # Serie    01XX: Clear Linux patches
 Patch0101: 0101-smpboot-reuse-timer-calibration.patch
-Patch0102: 0102-init-do_mounts-recreate-dev-root.patch
-Patch0103: 0103-ksm-wakeups.patch
-Patch0104: 0104-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
-Patch0105: 0105-give-rdrand-some-credit.patch
-Patch0106: evged.patch
-
-Patch0111: 0111-overload-on-wakeup.patch
+Patch0102: 0102-ksm-wakeups.patch
+Patch0103: 0103-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+Patch0104: 0104-give-rdrand-some-credit.patch
+Patch0105: 0105-overload-on-wakeup.patch
 
 # Clear Linux KVM Memory Optimization
 #Patch0151: 0151-mm-Export-do_madvise.patch
@@ -58,9 +53,17 @@ Patch0111: 0111-overload-on-wakeup.patch
 #Patch0153: 0153-x86-Return-memory-from-guest-to-host-kernel.patch
 #Patch0154: 0154-sysctl-vm-Fine-grained-cache-shrinking.patch
 
-Patch0500: zero-regs.patch
+#
+# Small tweaks
+#
+Patch0500: 0500-zero-extra-registers.patch
 
 # Serie    XYYY: Extra features modules
+
+#
+#   400X: Wireguard
+#
+Patch4001: 4001-WireGuard-fast-modern-secure-kernel-VPN-tunnel.patch
 
 %description
 The Linux kernel.
@@ -80,17 +83,12 @@ Linux kernel extra files
 
 #     00XY  Mainline patches, upstream backports
 
-%patch0011 -p1
-
 #     01XX  Clear Linux patches
 %patch0101 -p1
 %patch0102 -p1
 %patch0103 -p1
 %patch0104 -p1
 %patch0105 -p1
-%patch0106 -p1
-
-%patch0111 -p1
 
 # Clear Linux KVM Memory Optimization
 #%patch0151 -p1
@@ -98,11 +96,19 @@ Linux kernel extra files
 #%patch0153 -p1
 #%patch0154 -p1
 
-# upstream backports
-
+#
+# Small tweaks
+#
 %patch0500 -p1
+%patch0501 -p1
 
 # Serie    XYYY: Extra features modules
+
+#
+#   400X: Wireguard
+#
+%patch4001 -p1
+
 
 cp %{SOURCE1} .
 
