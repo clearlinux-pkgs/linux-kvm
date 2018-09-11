@@ -1,0 +1,11 @@
+--- linux-4.17.12/drivers/acpi/Makefile~	2018-08-03 05:48:07.000000000 +0000
++++ linux-4.17.12/drivers/acpi/Makefile	2018-08-10 13:15:17.374890498 +0000
+@@ -47,7 +47,7 @@
+ acpi-$(CONFIG_ARM_AMBA)	+= acpi_amba.o
+ acpi-y				+= power.o
+ acpi-y				+= event.o
+-acpi-$(CONFIG_ACPI_REDUCED_HARDWARE_ONLY) += evged.o
++acpi-y				+= evged.o
+ acpi-y				+= sysfs.o
+ acpi-y				+= property.o
+ acpi-$(CONFIG_X86)		+= acpi_cmos_rtc.o
