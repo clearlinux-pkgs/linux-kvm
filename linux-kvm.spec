@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.18.7
-Release:        279
+Release:        280
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -37,6 +37,8 @@ Patch0102: 0102-ksm-wakeups.patch
 Patch0103: 0103-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0104: 0104-give-rdrand-some-credit.patch
 Patch0105: 0105-overload-on-wakeup.patch
+
+Patch0106: egd.patch
 
 # Clear Linux KVM Memory Optimization
 #Patch0151: 0151-mm-Export-do_madvise.patch
@@ -80,6 +82,7 @@ Linux kernel extra files
 %patch0103 -p1
 %patch0104 -p1
 %patch0105 -p1
+%patch0106 -p1
 
 # Clear Linux KVM Memory Optimization
 #%patch0151 -p1
