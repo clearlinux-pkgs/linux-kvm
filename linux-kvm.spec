@@ -38,7 +38,7 @@ Patch0103: 0103-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0104: 0104-give-rdrand-some-credit.patch
 Patch0105: 0105-overload-on-wakeup.patch
 
-Patch0106: egd.patch
+Patch0106: evged.patch
 
 # Clear Linux KVM Memory Optimization
 #Patch0151: 0151-mm-Export-do_madvise.patch
