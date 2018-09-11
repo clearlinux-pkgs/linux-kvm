@@ -1,7 +1,14 @@
 .*~
 *~
 *.swp
+.repo-index
+*.log
+build.log.round*
+*.tar.*
+*.tgz
+!*.tar.*.*
+*.zip
 results
-*xz
-*gz
-
+commitmsg
+results/
+rpms/
