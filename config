@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Clear Linux OS for Intel Architecture) 8.2.1 20180907
+# Compiler: gcc (Clear Linux OS for Intel Architecture) 8.2.1 20180502
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -1368,7 +1368,7 @@ CONFIG_NET_9P=m
 CONFIG_NET_9P_VIRTIO=m
 # CONFIG_NET_9P_DEBUG is not set
 # CONFIG_CAIF is not set
-CONFIG_CEPH_LIB=m
+CONFIG_CEPH_LIB=y
 # CONFIG_CEPH_LIB_PRETTYDEBUG is not set
 # CONFIG_CEPH_LIB_USE_DNS_RESOLVER is not set
 # CONFIG_NFC is not set
@@ -1451,7 +1451,7 @@ CONFIG_BLK_DEV_RAM_SIZE=16384
 # CONFIG_ATA_OVER_ETH is not set
 CONFIG_VIRTIO_BLK=y
 CONFIG_VIRTIO_BLK_SCSI=y
-# CONFIG_BLK_DEV_RBD is not set
+CONFIG_BLK_DEV_RBD=y
 # CONFIG_BLK_DEV_RSXX is not set
 
 #
@@ -3899,3 +3899,7 @@ CONFIG_ARCH_HAS_PMEM_API=y
 CONFIG_ARCH_HAS_UACCESS_FLUSHCACHE=y
 CONFIG_SBITMAP=y
 # CONFIG_STRING_SELFTEST is not set
+
+# kernel-config sources:
+# FILEVER=/usr/share/kernel-config/base-4.18-3-8
+# FILEVER=/usr/share/kernel-config/mandatory-4.18-3-8
