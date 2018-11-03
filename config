@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.18.12 Kernel Configuration
+# Linux/x86 4.18.16 Kernel Configuration
 #
 
 #
@@ -1761,7 +1761,7 @@ CONFIG_E1000E=m
 # CONFIG_IXGBE is not set
 # CONFIG_IXGBEVF is not set
 # CONFIG_I40E is not set
-# CONFIG_I40EVF is not set
+CONFIG_I40EVF=m
 CONFIG_ICE=m
 # CONFIG_FM10K is not set
 # CONFIG_NET_VENDOR_EXAR is not set
@@ -3165,7 +3165,7 @@ CONFIG_AUTOFS4_FS=y
 CONFIG_AUTOFS_FS=y
 CONFIG_FUSE_FS=m
 # CONFIG_CUSE is not set
-CONFIG_OVERLAY_FS=y
+CONFIG_OVERLAY_FS=m
 CONFIG_OVERLAY_FS_REDIRECT_DIR=y
 CONFIG_OVERLAY_FS_REDIRECT_ALWAYS_FOLLOW=y
 CONFIG_OVERLAY_FS_INDEX=y
@@ -3901,5 +3901,5 @@ CONFIG_SBITMAP=y
 # CONFIG_STRING_SELFTEST is not set
 
 # kernel-config sources:
-# FILEVER=/usr/share/kernel-config/base-4.18-3-8
-# FILEVER=/usr/share/kernel-config/mandatory-4.18-3-8
+# FILEVER=/usr/share/kernel-config/base-4.18-3-11
+# FILEVER=/usr/share/kernel-config/mandatory-4.18-3-11
