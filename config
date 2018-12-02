@@ -1841,6 +1841,7 @@ CONFIG_DM_THIN_PROVISIONING=m
 # CONFIG_FIREWIRE_NOSY is not set
 # CONFIG_MACINTOSH_DRIVERS is not set
 CONFIG_NETDEVICES=y
+CONFIG_MII=y
 CONFIG_NET_CORE=y
 # CONFIG_BONDING is not set
 CONFIG_DUMMY=m
@@ -1881,7 +1882,10 @@ CONFIG_ETHERNET=y
 # CONFIG_NET_VENDOR_ALTEON is not set
 # CONFIG_ALTERA_TSE is not set
 # CONFIG_NET_VENDOR_AMAZON is not set
-# CONFIG_NET_VENDOR_AMD is not set
+CONFIG_NET_VENDOR_AMD=y
+# CONFIG_AMD8111_ETH is not set
+CONFIG_PCNET32=y
+# CONFIG_AMD_XGBE is not set
 # CONFIG_NET_VENDOR_AQUANTIA is not set
 # CONFIG_NET_VENDOR_ARC is not set
 # CONFIG_NET_VENDOR_ATHEROS is not set
@@ -4021,5 +4025,5 @@ CONFIG_UNWINDER_ORC=y
 # CONFIG_UNWINDER_GUESS is not set
 
 # kernel-config sources:
-# FILEVER=/usr/share/kernel-config/base-4.19-3-12
-# FILEVER=/usr/share/kernel-config/mandatory-4.19-3-12
+# FILEVER=/usr/share/kernel-config/base-4.19-3-13
+# FILEVER=/usr/share/kernel-config/mandatory-4.19-3-13
