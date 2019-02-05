@@ -1,11 +1,11 @@
-From 55f3f71dcc0f5d97545f4caaa240ae619f8fdb66 Mon Sep 17 00:00:00 2001
+From d79ab45aa5805c365a04a01d4842cd80f6edaffd Mon Sep 17 00:00:00 2001
 From: jplozi <jplozi@unice.fr>
 Date: Fri, 11 Mar 2016 15:18:06 +0100
-Subject: [PATCH 105/105] overload on wakeup
+Subject: [PATCH 106/111] overload on wakeup
 
 source https://github.com/jplozi/wastedcores
 
-as an experiment, apply the learnings from the wasted-cores paper
+As an experiment, apply the learning's from the wasted-cores paper
 and see how the performance works out. With the data from this we should
 be able to work with Peter and the rest of the scheduler folks on
 a more permanent/elegant solution.
@@ -14,19 +14,19 @@ a more permanent/elegant solution.
  1 file changed, 26 insertions(+)
 
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index 9c219f7b0970..9f8b7492520b 100644
+index e8f191ba3fe5..327d60125d1b 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
-@@ -6598,6 +6598,8 @@ static int wake_cap(struct task_struct *p, int cpu, int prev_cpu)
- 	return min_cap * 1024 < task_util(p) * capacity_margin;
+@@ -6331,6 +6331,8 @@ static int wake_cap(struct task_struct *p, int cpu, int prev_cpu)
+ 	return !task_fits_capacity(p, min_cap);
  }
  
-+
 +static unsigned int once_in_a_while;
++
  /*
   * select_task_rq_fair: Select target runqueue for the waking task in domains
   * that have the 'sd_flag' flag set. In practice, this is SD_BALANCE_WAKE,
-@@ -6626,6 +6628,30 @@ select_task_rq_fair(struct task_struct *p, int prev_cpu, int sd_flag, int wake_f
+@@ -6359,6 +6361,30 @@ select_task_rq_fair(struct task_struct *p, int prev_cpu, int sd_flag, int wake_f
  	}
  
  	rcu_read_lock();
@@ -58,5 +58,5 @@ index 9c219f7b0970..9f8b7492520b 100644
  		if (!(tmp->flags & SD_LOAD_BALANCE))
  			break;
 -- 
-2.18.0
+2.20.1
 
