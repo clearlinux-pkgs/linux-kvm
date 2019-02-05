@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.19.5
-Release:        298
+Version:        4.20.6
+Release:        299
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.19.5.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.20.6.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -28,16 +28,24 @@ Requires: systemd-bin
 %define __strip /bin/true
 
 #    000X: cve, bugfixes patches
+Patch0001: CVE-2018-16880.patch
+Patch0002: CVE-2019-3819.patch
 
 #    00XY: Mainline patches, upstream backports
 
-# Serie    01XX: Clear Linux patches
+#Serie.clr 01XX: Clear Linux patches
 Patch0101: 0101-smpboot-reuse-timer-calibration.patch
 Patch0102: 0102-ksm-wakeups.patch
 Patch0103: 0103-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0104: 0104-give-rdrand-some-credit.patch
-Patch0105: 0105-overload-on-wakeup.patch
-Patch0106: 0106-Compile-in-evged-always.patch
+Patch0105: 0105-Compile-in-evged-always.patch
+Patch0106: 0106-overload-on-wakeup.patch
+Patch0107: 0107-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch
+Patch0108: 0108-use-lfence-instead-of-rep-and-nop.patch
+Patch0109: 0109-do-accept-in-LIFO-order-for-cache-efficiency.patch
+Patch0110: 0110-zero-extra-registers.patch
+Patch0111: 0111-locking-rwsem-spin-faster.patch
+#Serie.clr.end
 
 # Clear Linux KVM Memory Optimization
 #Patch0151: 0151-mm-Export-do_madvise.patch
@@ -45,17 +53,11 @@ Patch0106: 0106-Compile-in-evged-always.patch
 #Patch0153: 0153-x86-Return-memory-from-guest-to-host-kernel.patch
 #Patch0154: 0154-sysctl-vm-Fine-grained-cache-shrinking.patch
 
-#
-# Small tweaks
-#
-Patch0500: 0500-zero-extra-registers.patch
-
-# Serie    XYYY: Extra features modules
-
-#
-#   400X: Wireguard
-#
-Patch4001: 4001-WireGuard-fast-modern-secure-kernel-VPN-tunnel.patch
+#Serie1.name WireGuard
+#Serie1.git  https://git.zx2c4.com/WireGuard
+#Serie1.tag  00bf4f8c8c0ec006633a48fd9ee746b30bb9df17
+Patch1001: 1001-WireGuard-fast-modern-secure-kernel-VPN-tunnel.patch
+#Serie1.end
 
 %description
 The Linux kernel.
@@ -69,9 +71,11 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.19.5
+%setup -q -n linux-4.20.6
 
 #     000X  cve, bugfixes patches
+%patch0001 -p1
+%patch0002 -p1
 
 #     00XY  Mainline patches, upstream backports
 
@@ -82,6 +86,11 @@ Linux kernel extra files
 %patch0104 -p1
 %patch0105 -p1
 %patch0106 -p1
+%patch0107 -p1
+%patch0108 -p1
+%patch0109 -p1
+%patch0110 -p1
+%patch0111 -p1
 
 # Clear Linux KVM Memory Optimization
 #%patch0151 -p1
@@ -89,18 +98,9 @@ Linux kernel extra files
 #%patch0153 -p1
 #%patch0154 -p1
 
-#
-# Small tweaks
-#
-%patch0500 -p1
-
-# Serie    XYYY: Extra features modules
-
-#
-#   400X: Wireguard
-#
-%patch4001 -p1
-
+#Serie1.patch.start
+%patch1001 -p1
+#Serie1.patch.end
 
 cp %{SOURCE1} .
 
@@ -145,10 +145,11 @@ InstallKernel() {
     rm -f %{buildroot}/usr/lib/modules/${Kversion}/build
     rm -f %{buildroot}/usr/lib/modules/${Kversion}/source
 
+    # Kernel default target link
     ln -s org.clearlinux.${Target}.%{version}-%{release} %{buildroot}/usr/lib/kernel/default-${Target}
 }
 
-InstallKernel %{ktarget}  %{kversion}
+InstallKernel %{ktarget} %{kversion}
 
 rm -rf %{buildroot}/usr/lib/firmware
 
