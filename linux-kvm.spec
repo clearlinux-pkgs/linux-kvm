@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        4.20.11
-Release:        305
+Release:        306
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -28,6 +28,7 @@ Requires: systemd-bin
 %define __strip /bin/true
 
 #    000X: cve, bugfixes patches
+Patch0001: CVE-2019-8912.patch
 
 #    00XY: Mainline patches, upstream backports
 
@@ -72,6 +73,7 @@ Linux kernel extra files
 %setup -q -n linux-4.20.11
 
 #     000X  cve, bugfixes patches
+%patch0001 -p1
 
 #     00XY  Mainline patches, upstream backports
 
