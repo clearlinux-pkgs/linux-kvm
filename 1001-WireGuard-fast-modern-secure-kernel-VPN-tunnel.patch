@@ -1,4 +1,4 @@
-From 8bbcad73a1114a54c8e891e3f0b4be7823f80666 Mon Sep 17 00:00:00 2001
+From f39fc4133aee544dd66f63a5838542eda0e10f18 Mon Sep 17 00:00:00 2001
 From: "Jason A. Donenfeld" <Jason@zx2c4.com>
 Date: Fri, 1 Feb 2019 15:52:09 -0600
 Subject: [PATCH] WireGuard - fast, modern, secure kernel VPN tunnel

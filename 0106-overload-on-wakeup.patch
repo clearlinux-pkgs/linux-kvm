@@ -1,7 +1,7 @@
-From d79ab45aa5805c365a04a01d4842cd80f6edaffd Mon Sep 17 00:00:00 2001
+From 095d6c859a1f719686ce86a2d7d371fba5040d49 Mon Sep 17 00:00:00 2001
 From: jplozi <jplozi@unice.fr>
 Date: Fri, 11 Mar 2016 15:18:06 +0100
-Subject: [PATCH 106/111] overload on wakeup
+Subject: [PATCH] overload on wakeup
 
 source https://github.com/jplozi/wastedcores
 
@@ -57,3 +57,6 @@ index 310d0637fe4b..ec7334ed61f1 100644
  	for_each_domain(cpu, tmp) {
  		if (!(tmp->flags & SD_LOAD_BALANCE))
  			break;
+-- 
+2.20.1
+
