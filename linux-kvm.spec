@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        4.20.13
+Version:        5.0.1
 Release:        310
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.20.13.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.0.1.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -69,7 +69,7 @@ Group:          kernel
 Linux kernel extra files
 
 %prep
-%setup -q -n linux-4.20.13
+%setup -q -n linux-5.0.1
 
 #     000X  cve, bugfixes patches
 
