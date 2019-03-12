@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        5.0.1
-Release:        310
+Release:        311
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -21,6 +21,7 @@ Source2:        cmdline
 BuildRequires:  buildreq-kernel
 
 Requires: systemd-bin
+Requires: %{name}-license = %{version}-%{release}
 
 # don't strip .ko files!
 %global __os_install_post %{nil}
@@ -64,9 +65,17 @@ The Linux kernel.
 License:        GPL-2.0
 Summary:        The Linux kernel kvm extra files
 Group:          kernel
+Requires:       %{name}-license = %{version}-%{release}
 
 %description extra
 Linux kernel extra files
+
+%package license
+Summary: license components for the linux package.
+Group: Default
+
+%description license
+license components for the linux package.
 
 %prep
 %setup -q -n linux-5.0.1
@@ -148,6 +157,10 @@ InstallKernel() {
 InstallKernel %{ktarget} %{kversion}
 
 rm -rf %{buildroot}/usr/lib/firmware
+
+mkdir -p %{buildroot}/usr/share/package-licenses/%{name}
+cp COPYING %{buildroot}/usr/share/package-licenses/%{name}/COPYING
+cp -a LICENSES/* %{buildroot}/usr/share/package-licenses/%{name}
 
 %files
 %dir /usr/lib/kernel
