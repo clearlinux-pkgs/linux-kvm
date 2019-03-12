@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        5.0.1
-Release:        311
+Release:        312
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -176,3 +176,7 @@ cp -a LICENSES/* %{buildroot}/usr/share/package-licenses/%{name}
 %dir /usr/lib/kernel
 /usr/lib/kernel/System.map-%{kversion}
 /usr/lib/kernel/vmlinux-%{kversion}
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/%{name}
