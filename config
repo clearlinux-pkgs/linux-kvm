@@ -1,10 +1,10 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.0.1 Kernel Configuration
+# Linux/x86 5.0.3 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Clear Linux OS for Intel Architecture) 8.3.1 20190308 gcc-8-branch@269475
+# Compiler: gcc (Clear Linux OS for Intel Architecture) 8.3.1 20190321 gcc-8-branch@269830
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=80301
@@ -4053,3 +4053,8 @@ CONFIG_DEBUG_BOOT_PARAMS=y
 CONFIG_UNWINDER_ORC=y
 # CONFIG_UNWINDER_FRAME_POINTER is not set
 # CONFIG_UNWINDER_GUESS is not set
+
+
+# kernel-config sources:
+# FILEVER=/usr/share/kernel-config/base-5.0-3-22
+# FILEVER=/usr/share/kernel-config/mandatory-5.0-3-22
