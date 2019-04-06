@@ -45,6 +45,7 @@ Patch0108: 0108-use-lfence-instead-of-rep-and-nop.patch
 Patch0109: 0109-do-accept-in-LIFO-order-for-cache-efficiency.patch
 Patch0110: 0110-zero-extra-registers.patch
 Patch0111: 0111-locking-rwsem-spin-faster.patch
+Patch0117: 0117-init-wait-for-partition-and-retry-scan.patch
 #Serie.clr.end
 
 # Clear Linux KVM Memory Optimization
@@ -98,6 +99,7 @@ license components for the linux package.
 %patch0109 -p1
 %patch0110 -p1
 %patch0111 -p1
+%patch0117 -p1
 
 # Clear Linux KVM Memory Optimization
 #%patch0151 -p1
