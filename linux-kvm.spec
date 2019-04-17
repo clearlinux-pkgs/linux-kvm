@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        5.0.7
-Release:        323
+Version:        5.0.8
+Release:        324
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.0.7.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.0.8.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -82,7 +82,7 @@ Group: Default
 license components for the linux package.
 
 %prep
-%setup -q -n linux-5.0.7
+%setup -q -n linux-5.0.8
 
 #     000X  cve, bugfixes patches
 %patch0001 -p1
