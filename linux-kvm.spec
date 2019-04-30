@@ -28,12 +28,14 @@ Requires: %{name}-license = %{version}-%{release}
 %define debug_package %{nil}
 %define __strip /bin/true
 
-#    000X: cve, bugfixes patches
+#cve.start cve patches from 0001 to 009
 Patch0001: CVE-2019-11487.patch
 Patch0002: CVE-2019-3882.patch
 Patch0003: CVE-2019-9500.patch
+#cve.end
 
-#    00XY: Mainline patches, upstream backports
+#mainline: Mainline patches, upstream backport and fixes from 0010 to 0099
+#mainline.end
 
 #Serie.clr 01XX: Clear Linux patches
 Patch0101: 0101-smpboot-reuse-timer-calibration.patch
@@ -48,7 +50,7 @@ Patch0109: 0109-do-accept-in-LIFO-order-for-cache-efficiency.patch
 Patch0110: 0110-zero-extra-registers.patch
 Patch0111: 0111-locking-rwsem-spin-faster.patch
 Patch0117: 0117-init-wait-for-partition-and-retry-scan.patch
-#Serie.clr.end
+#Serie.end
 
 # Clear Linux KVM Memory Optimization
 #Patch0151: 0151-mm-Export-do_madvise.patch
@@ -85,14 +87,16 @@ license components for the linux package.
 %prep
 %setup -q -n linux-5.0.10
 
-#     000X  cve, bugfixes patches
+#cve.patch.start cve patches
 %patch0001 -p1
 %patch0002 -p1
 %patch0003 -p1
+#cve.patch.end
 
-#     00XY  Mainline patches, upstream backports
+#mainline.patch.start Mainline patches, upstream backport and fixes
+#mainline.patch.end
 
-#     01XX  Clear Linux patches
+#Serie.patch.start Clear Linux patches
 %patch0101 -p1
 %patch0102 -p1
 %patch0103 -p1
@@ -105,6 +109,7 @@ license components for the linux package.
 #%patch0110 -p1
 %patch0111 -p1
 %patch0117 -p1
+#Serie.patch.end
 
 # Clear Linux KVM Memory Optimization
 #%patch0151 -p1
