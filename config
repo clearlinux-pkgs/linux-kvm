@@ -1,13 +1,13 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.0.10 Kernel Configuration
+# Linux/x86 5.0.17 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.0.1 20190430 (prerelease) gcc-8-branch@270702
+# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.1.1 20190520 gcc-9-branch@271393
 #
 CONFIG_CC_IS_GCC=y
-CONFIG_GCC_VERSION=90001
+CONFIG_GCC_VERSION=90101
 CONFIG_CLANG_VERSION=0
 CONFIG_CC_HAS_ASM_GOTO=y
 CONFIG_IRQ_WORK=y
@@ -259,7 +259,7 @@ CONFIG_HAVE_INTEL_TXT=y
 CONFIG_X86_64_SMP=y
 CONFIG_ARCH_SUPPORTS_UPROBES=y
 CONFIG_FIX_EARLYCON_MEM=y
-CONFIG_PGTABLE_LEVELS=4
+CONFIG_PGTABLE_LEVELS=5
 CONFIG_CC_HAS_SANE_STACKPROTECTOR=y
 
 #
@@ -338,7 +338,7 @@ CONFIG_X86_VSYSCALL_EMULATION=y
 # CONFIG_MICROCODE is not set
 CONFIG_X86_MSR=y
 CONFIG_X86_CPUID=y
-# CONFIG_X86_5LEVEL is not set
+CONFIG_X86_5LEVEL=y
 CONFIG_X86_DIRECT_GBPAGES=y
 # CONFIG_X86_CPA_STATISTICS is not set
 CONFIG_ARCH_HAS_MEM_ENCRYPT=y
@@ -4056,5 +4056,5 @@ CONFIG_UNWINDER_ORC=y
 
 
 # kernel-config sources:
-# FILEVER=/usr/share/kernel-config/base-5.0-3-25
-# FILEVER=/usr/share/kernel-config/mandatory-5.0-3-25
+# FILEVER=/usr/share/kernel-config/base-5.0-4-26
+# FILEVER=/usr/share/kernel-config/mandatory-5.0-4-26
