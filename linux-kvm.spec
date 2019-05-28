@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        5.0.18
+Version:        5.1.5
 Release:        347
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.0.18.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.1.5.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -21,7 +21,7 @@ Source2:        cmdline
 BuildRequires:  buildreq-kernel
 
 Requires: systemd-bin
-Requires: %{name}-license = %{version}-%{release}
+Requires: linux-kvm-license = %{version}-%{release}
 
 # don't strip .ko files!
 %global __os_install_post %{nil}
@@ -35,18 +35,18 @@ Requires: %{name}-license = %{version}-%{release}
 #mainline.end
 
 #Serie.clr 01XX: Clear Linux patches
-Patch0101: 0101-smpboot-reuse-timer-calibration.patch
-Patch0102: 0102-ksm-wakeups.patch
-Patch0103: 0103-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
-Patch0104: 0104-give-rdrand-some-credit.patch
-Patch0105: 0105-Compile-in-evged-always.patch
-Patch0106: 0106-overload-on-wakeup.patch
-Patch0107: 0107-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch
+Patch0101: 0101-do-accept-in-LIFO-order-for-cache-efficiency.patch
+Patch0102: 0102-give-rdrand-some-credit.patch
+Patch0103: 0103-init-wait-for-partition-and-retry-scan.patch
+Patch0104: 0104-ksm-wakeups.patch
+Patch0105: 0105-locking-rwsem-spin-faster.patch
+Patch0106: 0106-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch
+Patch0107: 0107-smpboot-reuse-timer-calibration.patch
 Patch0108: 0108-use-lfence-instead-of-rep-and-nop.patch
-Patch0109: 0109-do-accept-in-LIFO-order-for-cache-efficiency.patch
+Patch0109: 0109-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0110: 0110-zero-extra-registers.patch
-Patch0111: 0111-locking-rwsem-spin-faster.patch
-Patch0117: 0117-init-wait-for-partition-and-retry-scan.patch
+Patch0111: 0111-Compile-in-evged-always.patch
+Patch0112: 0112-overload-on-wakeup.patch
 #Serie.end
 
 # Clear Linux KVM Memory Optimization
@@ -69,7 +69,7 @@ The Linux kernel.
 License:        GPL-2.0
 Summary:        The Linux kernel kvm extra files
 Group:          kernel
-Requires:       %{name}-license = %{version}-%{release}
+Requires:       linux-kvm-license = %{version}-%{release}
 
 %description extra
 Linux kernel extra files
@@ -82,11 +82,9 @@ Group: Default
 license components for the linux package.
 
 %prep
-%setup -q -n linux-5.0.18
+%setup -q -n linux-5.1.5
 
 #cve.patch.start cve patches
-%patch0001 -p1
-%patch0002 -p1
 #cve.patch.end
 
 #mainline.patch.start Mainline patches, upstream backport and fixes
@@ -104,7 +102,7 @@ license components for the linux package.
 %patch0109 -p1
 %patch0110 -p1
 %patch0111 -p1
-%patch0117 -p1
+%patch0112 -p1
 #Serie.patch.end
 
 # Clear Linux KVM Memory Optimization
