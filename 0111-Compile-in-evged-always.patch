@@ -1,4 +1,4 @@
-From 4b6bd842423351d764dfc49d02b157d791637152 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
 Date: Fri, 10 Aug 2018 13:22:08 +0000
 Subject: [PATCH] Compile in evged always
@@ -25,5 +25,5 @@ index bb857421c2e8..18d1c82abe1d 100644
  acpi-y				+= property.o
  acpi-$(CONFIG_X86)		+= acpi_cmos_rtc.o
 -- 
-2.20.1
+https://clearlinux.org
 
