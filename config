@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.1.1 20190524 gcc-9-branch@271587
+# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.1.1 20190528 gcc-9-branch@271676
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90101
@@ -2613,7 +2613,7 @@ CONFIG_DRM_I915_GVT=y
 CONFIG_DRM_CIRRUS_QEMU=y
 CONFIG_DRM_QXL=y
 CONFIG_DRM_BOCHS=y
-# CONFIG_DRM_VIRTIO_GPU is not set
+CONFIG_DRM_VIRTIO_GPU=m
 CONFIG_DRM_PANEL=y
 
 #
@@ -3103,7 +3103,7 @@ CONFIG_VIRTIO_MENU=y
 CONFIG_VIRTIO_PCI=y
 CONFIG_VIRTIO_PCI_LEGACY=y
 CONFIG_VIRTIO_BALLOON=y
-# CONFIG_VIRTIO_INPUT is not set
+CONFIG_VIRTIO_INPUT=m
 CONFIG_VIRTIO_MMIO=y
 CONFIG_VIRTIO_MMIO_CMDLINE_DEVICES=y
 
@@ -4077,3 +4077,8 @@ CONFIG_DEBUG_BOOT_PARAMS=y
 CONFIG_UNWINDER_ORC=y
 # CONFIG_UNWINDER_FRAME_POINTER is not set
 # CONFIG_UNWINDER_GUESS is not set
+
+
+# kernel-config sources:
+# FILEVER=/usr/share/kernel-config/base-5.1-4-27
+# FILEVER=/usr/share/kernel-config/mandatory-5.1-4-27
