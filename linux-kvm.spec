@@ -29,8 +29,6 @@ Requires: %{name}-license = %{version}-%{release}
 %define __strip /bin/true
 
 #cve.start cve patches from 0001 to 009
-Patch0001: CVE-2019-9500.patch
-Patch0002: CVE-2019-9503.patch
 #cve.end
 
 #mainline: Mainline patches, upstream backport and fixes from 0010 to 0099
