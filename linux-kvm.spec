@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        5.1.7
-Release:        351
+Release:        352
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -37,6 +37,7 @@ Patch0005: CVE-2019-12378.patch
 Patch0006: CVE-2019-12454.patch
 Patch0007: CVE-2019-12455.patch
 Patch0008: CVE-2019-12456.patch
+Patch0009: CVE-2019-10126.patch
 #cve.end
 
 #mainline: Mainline patches, upstream backport and fixes from 0010 to 0099
@@ -101,6 +102,7 @@ license components for the linux package.
 %patch0006 -p1
 %patch0007 -p1
 %patch0008 -p1
+%patch0009 -p1
 #cve.patch.end
 
 #mainline.patch.start Mainline patches, upstream backport and fixes
