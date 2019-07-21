@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        5.1.18
-Release:        364
+Version:        5.2.1
+Release:        365
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.1.18.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.2.1.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -30,14 +30,10 @@ Requires: linux-kvm-license = %{version}-%{release}
 
 #cve.start cve patches from 0001 to 009
 Patch0001: CVE-2019-12379.patch
-Patch0002: CVE-2019-12380.patch
-Patch0003: CVE-2019-12381.patch
-Patch0004: CVE-2019-12382.patch
-Patch0005: CVE-2019-12378.patch
-Patch0006: CVE-2019-12454.patch
-Patch0007: CVE-2019-12455.patch
-Patch0008: CVE-2019-12456.patch
-Patch0009: CVE-2019-10126.patch
+Patch0002: CVE-2019-12382.patch
+Patch0003: CVE-2019-12454.patch
+Patch0004: CVE-2019-12455.patch
+Patch0005: CVE-2019-12456.patch
 #cve.end
 
 #mainline: Mainline patches, upstream backport and fixes from 0010 to 0099
@@ -91,7 +87,7 @@ Group: Default
 license components for the linux package.
 
 %prep
-%setup -q -n linux-5.1.18
+%setup -q -n linux-5.2.1
 
 #cve.patch.start cve patches
 %patch0001 -p1
@@ -99,10 +95,6 @@ license components for the linux package.
 %patch0003 -p1
 %patch0004 -p1
 %patch0005 -p1
-%patch0006 -p1
-%patch0007 -p1
-%patch0008 -p1
-%patch0009 -p1
 #cve.patch.end
 
 #mainline.patch.start Mainline patches, upstream backport and fixes
