@@ -14,10 +14,10 @@ a more permanent/elegant solution.
  1 file changed, 26 insertions(+)
 
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index 35f3ea375084..c4d0d5eb5553 100644
+index f35930f5e528..a208a50a3c80 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
-@@ -6658,6 +6658,8 @@ static int find_energy_efficient_cpu(struct task_struct *p, int prev_cpu)
+@@ -6657,6 +6657,8 @@ static int find_energy_efficient_cpu(struct task_struct *p, int prev_cpu)
  	return -1;
  }
  
@@ -26,7 +26,7 @@ index 35f3ea375084..c4d0d5eb5553 100644
  /*
   * select_task_rq_fair: Select target runqueue for the waking task in domains
   * that have the 'sd_flag' flag set. In practice, this is SD_BALANCE_WAKE,
-@@ -6694,6 +6696,30 @@ select_task_rq_fair(struct task_struct *p, int prev_cpu, int sd_flag, int wake_f
+@@ -6693,6 +6695,30 @@ select_task_rq_fair(struct task_struct *p, int prev_cpu, int sd_flag, int wake_f
  	}
  
  	rcu_read_lock();
