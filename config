@@ -1,10 +1,10 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.2.1 Kernel Configuration
+# Linux/x86 5.2.2 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.1.1 20190718 gcc-9-branch@273561
+# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.1.1 20190723 gcc-9-branch@273734
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=90101
@@ -3743,7 +3743,7 @@ CONFIG_KEYS_COMPAT=y
 # CONFIG_TRUSTED_KEYS is not set
 CONFIG_ENCRYPTED_KEYS=m
 # CONFIG_KEY_DH_OPERATIONS is not set
-# CONFIG_SECURITY_DMESG_RESTRICT is not set
+CONFIG_SECURITY_DMESG_RESTRICT=y
 CONFIG_SECURITY=y
 CONFIG_SECURITYFS=y
 # CONFIG_SECURITY_NETWORK is not set
@@ -4298,3 +4298,8 @@ CONFIG_UNWINDER_ORC=y
 # CONFIG_UNWINDER_FRAME_POINTER is not set
 # CONFIG_UNWINDER_GUESS is not set
 # end of Kernel hacking
+
+
+# kernel-config sources:
+# FILEVER=/usr/share/kernel-config/base-5.2-4-32
+# FILEVER=/usr/share/kernel-config/mandatory-5.2-4-32
