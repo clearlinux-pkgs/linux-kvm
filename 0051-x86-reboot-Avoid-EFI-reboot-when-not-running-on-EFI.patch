@@ -1,0 +1,38 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Rob Bradford <robert.bradford@intel.com>
+Date: Thu, 29 Aug 2019 11:11:18 +0100
+Subject: [PATCH] x86/reboot: Avoid EFI reboot when not running on EFI
+
+Replace the check using efi_runtime_disabled() which only checks if EFI
+runtime was disabled on the kernel command line with a call to
+efi_enabled(EFI_RUNTIME_SERVICES) to check if EFI runtime services are
+available.
+
+In the situation where the kernel was booted without an EFI environment
+then only efi_enabled(EFI_RUNTIME_SERVICES) correctly represents that no
+EFI is available. Setting "noefi" or "efi=noruntime" on the commandline
+continue to have the same effect as efi_enabled(EFI_RUNTIME_SERVICES)
+will return false.
+
+Signed-off-by: Rob Bradford <robert.bradford@intel.com>
+Link: https://lore.kernel.org/lkml/20190829101119.7345-1-robert.bradford@intel.com
+---
+ arch/x86/kernel/reboot.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/kernel/reboot.c b/arch/x86/kernel/reboot.c
+index 09d6bded3c1e..0b0a7fccdb00 100644
+--- a/arch/x86/kernel/reboot.c
++++ b/arch/x86/kernel/reboot.c
+@@ -500,7 +500,7 @@ static int __init reboot_init(void)
+ 	 */
+ 	rv = dmi_check_system(reboot_dmi_table);
+ 
+-	if (!rv && efi_reboot_required() && !efi_runtime_disabled())
++	if (!rv && efi_reboot_required() && efi_enabled(EFI_RUNTIME_SERVICES))
+ 		reboot_type = BOOT_EFI;
+ 
+ 	return 0;
+-- 
+https://clearlinux.org
+
