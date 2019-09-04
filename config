@@ -1,13 +1,13 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.2.2 Kernel Configuration
+# Linux/x86 5.2.11 Kernel Configuration
 #
 
 #
-# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.1.1 20190724 gcc-9-branch@273755
+# Compiler: gcc (Clear Linux OS for Intel Architecture) 9.2.1 20190903 gcc-9-branch@275327
 #
 CONFIG_CC_IS_GCC=y
-CONFIG_GCC_VERSION=90101
+CONFIG_GCC_VERSION=90201
 CONFIG_CLANG_VERSION=0
 CONFIG_CC_HAS_ASM_GOTO=y
 CONFIG_CC_HAS_WARN_MAYBE_UNINITIALIZED=y
@@ -559,7 +559,7 @@ CONFIG_FIRMWARE_MEMMAP=y
 CONFIG_DMIID=y
 CONFIG_DMI_SYSFS=y
 CONFIG_DMI_SCAN_MACHINE_NON_EFI_FALLBACK=y
-# CONFIG_ISCSI_IBFT_FIND is not set
+# CONFIG_ISCSI_IBFT is not set
 CONFIG_FW_CFG_SYSFS=m
 # CONFIG_FW_CFG_SYSFS_CMDLINE is not set
 # CONFIG_GOOGLE_FIRMWARE is not set
@@ -3638,10 +3638,9 @@ CONFIG_AUTOFS_FS=y
 CONFIG_FUSE_FS=m
 # CONFIG_CUSE is not set
 CONFIG_OVERLAY_FS=m
-CONFIG_OVERLAY_FS_REDIRECT_DIR=y
-CONFIG_OVERLAY_FS_REDIRECT_ALWAYS_FOLLOW=y
-CONFIG_OVERLAY_FS_INDEX=y
-CONFIG_OVERLAY_FS_NFS_EXPORT=y
+# CONFIG_OVERLAY_FS_REDIRECT_DIR is not set
+# CONFIG_OVERLAY_FS_REDIRECT_ALWAYS_FOLLOW is not set
+# CONFIG_OVERLAY_FS_INDEX is not set
 # CONFIG_OVERLAY_FS_XINO_AUTO is not set
 # CONFIG_OVERLAY_FS_METACOPY is not set
 
@@ -3886,16 +3885,14 @@ CONFIG_LSM="yama,loadpin,safesetid,integrity"
 #
 # Kernel hardening options
 #
-CONFIG_GCC_PLUGIN_STRUCTLEAK=y
 
 #
 # Memory initialization
 #
-# CONFIG_INIT_STACK_NONE is not set
+CONFIG_INIT_STACK_NONE=y
 # CONFIG_GCC_PLUGIN_STRUCTLEAK_USER is not set
 # CONFIG_GCC_PLUGIN_STRUCTLEAK_BYREF is not set
-CONFIG_GCC_PLUGIN_STRUCTLEAK_BYREF_ALL=y
-CONFIG_GCC_PLUGIN_STRUCTLEAK_VERBOSE=y
+# CONFIG_GCC_PLUGIN_STRUCTLEAK_BYREF_ALL is not set
 # CONFIG_GCC_PLUGIN_STACKLEAK is not set
 # end of Memory initialization
 # end of Kernel hardening options
@@ -4467,5 +4464,5 @@ CONFIG_UNWINDER_ORC=y
 
 
 # kernel-config sources:
-# FILEVER=/usr/share/kernel-config/base-5.2-4-32
-# FILEVER=/usr/share/kernel-config/mandatory-5.2-4-32
+# FILEVER=/usr/share/kernel-config/base-5.2-4-35
+# FILEVER=/usr/share/kernel-config/mandatory-5.2-4-35
