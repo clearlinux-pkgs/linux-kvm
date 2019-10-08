@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        5.2.20
-Release:        392
+Version:        5.3.5
+Release:        393
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.2.20.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.3.5.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -28,11 +28,8 @@ Requires: linux-kvm-license = %{version}-%{release}
 %define debug_package %{nil}
 %define __strip /bin/true
 
-#cve.start cve patches from 0001 to 009
+#cve.start cve patches from 0001 to 050
 Patch0001: CVE-2019-12379.patch
-Patch0002: CVE-2019-12454.patch
-Patch0003: CVE-2019-12455.patch
-Patch0004: CVE-2019-12456.patch
 #cve.end
 
 #mainline: Mainline patches, upstream backport and fixes from 0051 to 0099
@@ -87,13 +84,10 @@ Group: Default
 license components for the linux package.
 
 %prep
-%setup -q -n linux-5.2.20
+%setup -q -n linux-5.3.5
 
 #cve.patch.start cve patches
 %patch0001 -p1
-%patch0002 -p1
-%patch0003 -p1
-%patch0004 -p1
 #cve.patch.end
 
 #mainline.patch.start Mainline patches, upstream backport and fixes
