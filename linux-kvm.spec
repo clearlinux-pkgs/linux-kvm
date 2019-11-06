@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        5.3.9
-Release:        399
+Release:        400
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -49,6 +49,7 @@ Patch0109: 0109-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
 Patch0110: 0110-zero-extra-registers.patch
 Patch0111: 0111-Compile-in-evged-always.patch
 Patch0112: 0112-overload-on-wakeup.patch
+Patch0113: 0113-add-workaround-for-binutils-optimization.patch
 #Serie.end
 
 # Clear Linux KVM Memory Optimization
@@ -107,6 +108,7 @@ license components for the linux package.
 %patch0110 -p1
 %patch0111 -p1
 %patch0112 -p1
+%patch0113 -p1
 #Serie.patch.end
 
 # Clear Linux KVM Memory Optimization
