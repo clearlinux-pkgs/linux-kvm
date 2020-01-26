@@ -6,7 +6,7 @@
 
 Name:           linux-kvm
 Version:        5.4.15
-Release:        420
+Release:        421
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
@@ -30,8 +30,7 @@ Requires: linux-kvm-license = %{version}-%{release}
 
 #cve.start cve patches from 0001 to 050
 Patch001: CVE-2019-12379.patch
-Patch002: CVE-2019-19046.patch
-Patch003: CVE-2019-19054.patch
+Patch002: CVE-2019-19054.patch
 #cve.end
 
 #mainline: Mainline patches, upstream backport and fixes from 0051 to 0099
@@ -92,7 +91,6 @@ license components for the linux package.
 #cve.patch.start cve patches
 %patch0001 -p1
 %patch0002 -p1
-%patch0003 -p1
 #cve.patch.end
 
 #mainline.patch.start Mainline patches, upstream backport and fixes
