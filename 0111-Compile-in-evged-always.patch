@@ -12,7 +12,7 @@ regular systems, and hardware reduced is really a runtime choice.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/acpi/Makefile b/drivers/acpi/Makefile
-index 5d361e4e3..ef1ac4d12 100644
+index 5d361e4..ef1ac4d 100644
 --- a/drivers/acpi/Makefile
 +++ b/drivers/acpi/Makefile
 @@ -48,7 +48,7 @@ acpi-y				+= acpi_pnp.o
