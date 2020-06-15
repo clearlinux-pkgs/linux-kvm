@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Clear Linux OS for Intel Architecture) 10.1.1 20200610 releases/gcc-10.1.0-162-g5bb75908cb
+# Compiler: gcc (Clear Linux OS for Intel Architecture) 10.1.1 20200615 releases/gcc-10.1.0-200-g8a3453786c
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=100101
@@ -4591,5 +4591,5 @@ CONFIG_CC_HAS_SANCOV_TRACE_PC=y
 
 
 # kernel-config sources:
-# FILEVER=/usr/share/kernel-config/base-5.6-4-44
-# FILEVER=/usr/share/kernel-config/mandatory-5.6-4-44
+# FILEVER=/usr/share/kernel-config/base-5.7-4-44
+# FILEVER=/usr/share/kernel-config/mandatory-5.7-4-44
