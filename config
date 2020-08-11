@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 5.7.14 Kernel Configuration
+# Linux/x86 5.7.15 Kernel Configuration
 #
 
 #
@@ -4603,3 +4603,8 @@ CONFIG_CC_HAS_SANCOV_TRACE_PC=y
 # CONFIG_MEMTEST is not set
 # end of Kernel Testing and Coverage
 # end of Kernel hacking
+
+
+# kernel-config sources:
+# FILEVER=/usr/share/kernel-config/base-5.7-4-44
+# FILEVER=/usr/share/kernel-config/mandatory-5.7-4-44
