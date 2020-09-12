@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        5.7.19
-Release:        483
+Version:        5.8.8
+Release:        484
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.7.19.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.8.8.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -32,6 +32,7 @@ Requires: linux-kvm-license = %{version}-%{release}
 #cve.end
 
 #mainline: Mainline patches, upstream backport and fixes from 0051 to 0099
+Patch0051: 0051-x86-reboot-Avoid-EFI-reboot-when-not-running-on-EFI.patch
 #mainline.end
 
 #Serie.clr 01XX: Clear Linux patches
@@ -74,12 +75,13 @@ Group: Default
 license components for the linux package.
 
 %prep
-%setup -q -n linux-5.7.19
+%setup -q -n linux-5.8.8
 
 #cve.patch.start cve patches
 #cve.patch.end
 
 #mainline.patch.start Mainline patches, upstream backport and fixes
+%patch0051 -p1
 #mainline.patch.end
 
 #Serie.patch.start Clear Linux patches
