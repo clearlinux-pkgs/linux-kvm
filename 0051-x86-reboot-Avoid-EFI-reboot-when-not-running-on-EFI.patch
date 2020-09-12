@@ -21,7 +21,7 @@ Link: https://lore.kernel.org/lkml/20190829101119.7345-1-robert.bradford@intel.c
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/x86/kernel/reboot.c b/arch/x86/kernel/reboot.c
-index 0ec7ced72..b5cabfcd3 100644
+index 0ec7ced..b5cabfc 100644
 --- a/arch/x86/kernel/reboot.c
 +++ b/arch/x86/kernel/reboot.c
 @@ -508,7 +508,7 @@ static int __init reboot_init(void)
