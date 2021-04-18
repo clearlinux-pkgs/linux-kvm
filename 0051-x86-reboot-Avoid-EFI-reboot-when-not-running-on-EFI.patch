@@ -21,10 +21,10 @@ Link: https://lore.kernel.org/lkml/20190829101119.7345-1-robert.bradford@intel.c
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/x86/kernel/reboot.c b/arch/x86/kernel/reboot.c
-index a515e2d230b7..7bf48675d9fc 100644
+index b29657b76e3f..1f9364501b93 100644
 --- a/arch/x86/kernel/reboot.c
 +++ b/arch/x86/kernel/reboot.c
-@@ -508,7 +508,7 @@ static int __init reboot_init(void)
+@@ -517,7 +517,7 @@ static int __init reboot_init(void)
  	 */
  	rv = dmi_check_system(reboot_dmi_table);
  
