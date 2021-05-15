@@ -14,10 +14,10 @@ a more permanent/elegant solution.
  1 file changed, 14 insertions(+)
 
 diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-index f217e5251fb2..25a284ec2c08 100644
+index d078767f677f..80ecf7942f3b 100644
 --- a/kernel/sched/fair.c
 +++ b/kernel/sched/fair.c
-@@ -6774,6 +6774,20 @@ select_task_rq_fair(struct task_struct *p, int prev_cpu, int wake_flags)
+@@ -6794,6 +6794,20 @@ select_task_rq_fair(struct task_struct *p, int prev_cpu, int wake_flags)
  	}
  
  	rcu_read_lock();
