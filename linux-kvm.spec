@@ -5,13 +5,13 @@
 #
 
 Name:           linux-kvm
-Version:        5.11.21
-Release:        514
+Version:        5.12.4
+Release:        515
 License:        GPL-2.0
 Summary:        The Linux kernel optimized for running inside KVM
 Url:            http://www.kernel.org/
 Group:          kernel
-Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.11.21.tar.xz
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.12.4.tar.xz
 Source1:        config
 Source2:        cmdline
 
@@ -75,7 +75,7 @@ Group: Default
 license components for the linux package.
 
 %prep
-%setup -q -n linux-5.11.21
+%setup -q -n linux-5.12.4
 
 #cve.patch.start cve patches
 #cve.patch.end
